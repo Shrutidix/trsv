@@ -1,0 +1,70 @@
+#root {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .hero-gradient {
+    background: linear-gradient(102.3deg, rgba(147,39,143,1) 5.9%, rgba(234,172,232,1) 64%, rgba(246,219,245,1) 89%);
+  }
+  
+  .sunset-gradient {
+    background: linear-gradient(111.4deg, rgba(238,113,113,1) 1%, rgba(246,215,148,1) 58%);
+  }
+  
+  .tropical-gradient {
+    background: linear-gradient(to right, #ffc3a0 0%, #ffafbd 100%);
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  
+  .card-hover-effect {
+    transition: all 0.3s ease;
+  }
+  
+  .card-hover-effect:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  .form-control-hover {
+    transition: all 0.2s ease;
+  }
+  
+  .form-control-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  .booking-card {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .booking-card:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.07);
+    transform: translateY(-4px);
+  }
+  
+  .btn-gradient {
+    background-size: 200% auto;
+    transition: 0.5s;
+  }
+  
+  .btn-gradient:hover {
+    background-position: right center;
+  }
+  
