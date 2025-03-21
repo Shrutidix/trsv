@@ -12,6 +12,7 @@ import {
 import { Link } from 'react-router-dom';
 import { DatePickerWithOccasions } from '@/components/DatePickerWithOccasions';
 import RouteDetails from '@/components/RouteDetails';
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
 
 // Add useInView hook at the top of the file
 const useInView = (options = {}) => {
@@ -641,40 +642,6 @@ const Index = () => {
                   </div>
                 </div>
 
-                {/* Date Picker */}
-                <div className="col-span-1">
-                  <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
-                    <Calendar className="h-5 w-5 mr-2 text-primary" /> Date
-                  </label>
-                  <div className="relative">
-                    <DatePickerWithOccasions 
-                      className="block w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80" 
-                    />
-                  </div>
-                </div>
-
-                {/* Passenger Count */}
-                <div className="col-span-1 md:col-span-3">
-                  <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
-                    <Users className="h-5 w-5 mr-2 text-primary" /> Passengers
-                  </label>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    {["1-3", "4-6", "7-12", "13+"].map((count) => (
-                      <div 
-                        key={count}
-                        onClick={() => setPassengerCount(count)}
-                        className={`cursor-pointer h-16 rounded-2xl flex items-center justify-center border-2 transition-all ${
-                          passengerCount === count 
-                            ? "border-primary-500 bg-primary-50/70 backdrop-blur-sm text-primary-700" 
-                            : "border-gray-100 bg-white/60 backdrop-blur-sm text-gray-600 hover:bg-white/80"
-                        }`}
-                      >
-                        <span className="font-medium">{count} {count === "1-3" ? "Person" : "People"}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
                 {/* Duration */}
                 <div className="col-span-1">
                   <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
@@ -689,9 +656,39 @@ const Index = () => {
                   </div>
                 </div>
 
+                {/* Date Picker */}
+                <div className="col-span-1">
+                  <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
+                    <Calendar className="h-5 w-5 mr-2 text-primary" /> Date
+                  </label>
+                  <div className="relative">
+                    <DatePickerWithOccasions 
+                      className="block w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80" 
+                    />
+                  </div>
+                </div>
+
+                {/* Passenger Count */}
+                <div className="col-span-1 md:col-span-2">
+                  <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
+                    <Users className="h-5 w-5 mr-2 text-primary" /> Passengers
+                  </label>
+                  <Select value={passengerCount} onValueChange={setPassengerCount}>
+                    <SelectTrigger className="w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80">
+                      <SelectValue placeholder="Select passengers" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1-3">1-3 Passengers</SelectItem>
+                      <SelectItem value="4-6">4-6 Passengers</SelectItem>
+                      <SelectItem value="7-12">7-12 Passengers</SelectItem>
+                      <SelectItem value="13+">13+ Passengers</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
                 {/* Search Button */}
-                <div className="col-span-1 flex items-end">
-                  <button className="w-full h-16 text-white font-bold bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 rounded-2xl py-3 px-6 shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 text-lg transform hover:-translate-y-1">
+                <div className="col-span-1 md:col-span-3 flex justify-center">
+                  <button className="w-full md:w-auto px-12 h-16 text-white font-bold bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 rounded-2xl py-3 shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 text-lg transform hover:-translate-y-1">
                     <Car className="h-6 w-6 mr-2" />
                     SEARCH TAXIS
                   </button>

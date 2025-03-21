@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { motion } from "framer-motion";
 import { Shield, Droplet, UserCheck, Star } from "lucide-react";
 
@@ -64,6 +65,7 @@ const TaxiView3D: React.FC<TaxiView3DProps> = ({ carType }) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const controlsRef = useRef<OrbitControls | null>(null);
   const [showSpecs, setShowSpecs] = useState(true);
+  const [modelLoaded, setModelLoaded] = useState(false);
   
   const specs = carSpecifications[carType];
   
@@ -81,7 +83,7 @@ const TaxiView3D: React.FC<TaxiView3DProps> = ({ carType }) => {
       0.1, 
       1000
     );
-    camera.position.set(5, 3, 5);
+    camera.position.set(8, 5, 8);
     
     // Set up renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -90,7 +92,7 @@ const TaxiView3D: React.FC<TaxiView3DProps> = ({ carType }) => {
     mountRef.current.appendChild(renderer.domElement);
     
     // Add lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
     scene.add(ambientLight);
     
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
@@ -101,113 +103,57 @@ const TaxiView3D: React.FC<TaxiView3DProps> = ({ carType }) => {
     // Add ground
     const groundGeometry = new THREE.PlaneGeometry(20, 20);
     const groundMaterial = new THREE.MeshStandardMaterial({ 
-      color: 0xaaaaaa,
-      roughness: 0.8
+      color: 0x333333,
+      roughness: 0.9,
+      metalness: 0.1
     });
     const ground = new THREE.Mesh(groundGeometry, groundMaterial);
     ground.rotation.x = -Math.PI / 2;
     ground.receiveShadow = true;
     scene.add(ground);
-    
-    // Car model based on type
-    let carGeometry;
-    let carColor;
-    
-    switch(carType) {
-      case 'sedan':
-        carGeometry = new THREE.BoxGeometry(3, 1, 1.5);
-        carColor = 0x3366ff;
-        break;
-      case 'suv':
-        carGeometry = new THREE.BoxGeometry(3.2, 1.6, 1.8);
-        carColor = 0x336633;
-        break;
-      case 'luxury':
-        carGeometry = new THREE.BoxGeometry(3.5, 1.1, 1.7);
-        carColor = 0x000000;
-        break;
-      case 'tempo':
-        carGeometry = new THREE.BoxGeometry(4, 2, 2);
-        carColor = 0xffaa00;
-        break;
-      default:
-        carGeometry = new THREE.BoxGeometry(3, 1, 1.5);
-        carColor = 0x3366ff;
-    }
-    
-    // Load car texture for more realism
-    const textureLoader = new THREE.TextureLoader();
-    const carTexture = textureLoader.load(carImages[carType as keyof typeof carImages]);
-    
-    const carMaterial = new THREE.MeshStandardMaterial({ 
-      map: carTexture,
-      metalness: 0.6,
-      roughness: 0.2
-    });
-    
-    const car = new THREE.Mesh(carGeometry, carMaterial);
-    car.position.y = carGeometry.parameters.height / 2;
-    car.castShadow = true;
-    scene.add(car);
-    
-    // Add wheels
-    const wheelGeometry = new THREE.CylinderGeometry(0.4, 0.4, 0.2, 32);
-    const wheelMaterial = new THREE.MeshStandardMaterial({ 
-      color: 0x222222,
-      roughness: 0.7
-    });
-    
-    // Position for the wheels will depend on car type
-    const wheelOffsetX = carGeometry.parameters.width / 2 - 0.5;
-    const wheelOffsetZ = carGeometry.parameters.depth / 2 + 0.1;
-    const wheelY = 0.4;
-    
-    // Front-left wheel
-    const wheelFL = new THREE.Mesh(wheelGeometry, wheelMaterial);
-    wheelFL.position.set(-wheelOffsetX, wheelY, -wheelOffsetZ);
-    wheelFL.rotation.z = Math.PI / 2;
-    wheelFL.castShadow = true;
-    scene.add(wheelFL);
-    
-    // Front-right wheel
-    const wheelFR = new THREE.Mesh(wheelGeometry, wheelMaterial);
-    wheelFR.position.set(-wheelOffsetX, wheelY, wheelOffsetZ);
-    wheelFR.rotation.z = Math.PI / 2;
-    wheelFR.castShadow = true;
-    scene.add(wheelFR);
-    
-    // Back-left wheel
-    const wheelBL = new THREE.Mesh(wheelGeometry, wheelMaterial);
-    wheelBL.position.set(wheelOffsetX, wheelY, -wheelOffsetZ);
-    wheelBL.rotation.z = Math.PI / 2;
-    wheelBL.castShadow = true;
-    scene.add(wheelBL);
-    
-    // Back-right wheel
-    const wheelBR = new THREE.Mesh(wheelGeometry, wheelMaterial);
-    wheelBR.position.set(wheelOffsetX, wheelY, wheelOffsetZ);
-    wheelBR.rotation.z = Math.PI / 2;
-    wheelBR.castShadow = true;
-    scene.add(wheelBR);
-    
-    // Add windshield and windows
-    const windshieldGeometry = new THREE.BoxGeometry(1, 0.7, 1.3);
-    const glassMaterial = new THREE.MeshStandardMaterial({
-      color: 0xaaccff,
-      transparent: true,
-      opacity: 0.5,
-      metalness: 0.9,
-      roughness: 0.1
-    });
-    
-    const windshield = new THREE.Mesh(windshieldGeometry, glassMaterial);
-    windshield.position.set(-0.8, 1.0, 0);
-    scene.add(windshield);
+
+    // Load the 3D model
+    const gltfLoader = new GLTFLoader();
+    let car: THREE.Group | null = null;
+
+    gltfLoader.load(
+      '/models/Alto/Alto.gltf',
+      (gltf) => {
+        car = gltf.scene;
+        
+        // Center the model
+        const box = new THREE.Box3().setFromObject(car);
+        const center = box.getCenter(new THREE.Vector3());
+        car.position.sub(center);
+        
+        // Scale the model if needed
+        const size = box.getSize(new THREE.Vector3());
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const scale = 3 / maxDim;
+        car.scale.multiplyScalar(scale);
+        
+        // Position the car on the ground
+        const bottom = box.min.y * scale;
+        car.position.y = -bottom; // This will place the bottom of the car at ground level
+        
+        scene.add(car);
+        setModelLoaded(true);
+      },
+      (progress) => {
+        console.log('Loading progress:', (progress.loaded / progress.total * 100) + '%');
+      },
+      (error) => {
+        console.error('Error loading model:', error);
+      }
+    );
     
     // Controls
     controlsRef.current = new OrbitControls(camera, renderer.domElement);
     controlsRef.current.enableDamping = true;
     controlsRef.current.dampingFactor = 0.05;
+    controlsRef.current.minDistance = 5;
+    controlsRef.current.maxDistance = 15;
+    controlsRef.current.maxPolarAngle = Math.PI / 2;
     
     // Animation loop
     const animate = () => {
@@ -217,7 +163,9 @@ const TaxiView3D: React.FC<TaxiView3DProps> = ({ carType }) => {
         controlsRef.current.update();
       }
       
-      car.rotation.y += 0.003;
+      if (car) {
+        car.rotation.y += 0.003;
+      }
       
       renderer.render(scene, camera);
     };
