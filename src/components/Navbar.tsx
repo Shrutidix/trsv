@@ -58,10 +58,10 @@ const Navbar = () => {
                 <MapPin className="h-4 w-4" />
                 <span>Track Booking</span>
               </a>
-              <Link to="/login" className="hidden md:flex items-center gap-1 text-sm text-gray-600 hover:text-primary-500">
+             {/*<Link to="/login" className="hidden md:flex items-center gap-1 text-sm text-gray-600 hover:text-primary-500">
                 <User className="h-4 w-4" />
                 <span>Login</span>
-              </Link>
+              </Link>*/}
             </div>
           </div>
         </div>

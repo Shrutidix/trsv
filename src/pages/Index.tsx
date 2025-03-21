@@ -57,7 +57,7 @@ const Index = () => {
     {
       id: 'shimla',
       name: 'Shimla',
-      image: 'https://images.unsplash.com/photo-1626621934657-30a927b31aad?q=80&w=2070&auto=format&fit=crop',
+      image: 'https://images.pexels.com/photos/31216843/pexels-photo-31216843/free-photo-of-colorful-architecture-of-shimla-hillside.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       location: 'Himachal Pradesh',
       description: 'Experience the charm of the colonial hill station with panoramic views of the Himalayan peaks.',
     },
@@ -71,14 +71,14 @@ const Index = () => {
     {
       id: 'dharamshala',
       name: 'Dharamshala',
-      image: 'https://images.unsplash.com/photo-1606467848663-d79b02e0afb2?q=80&w=2071&auto=format&fit=crop',
+      image: 'https://images.pexels.com/photos/4340537/pexels-photo-4340537.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       location: 'Himachal Pradesh',
       description: 'Home to the Dalai Lama, this hill station offers stunning views and a unique blend of Indian and Tibetan culture.',
     },
     {
       id: 'nainital',
       name: 'Nainital',
-      image: 'https://images.unsplash.com/photo-1598091400561-7e6e9c698e06?q=80&w=2070&auto=format&fit=crop',
+      image: 'https://images.pexels.com/photos/19194412/pexels-photo-19194412/free-photo-of-kainchi-dham-in-india.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       location: 'Uttarakhand',
       description: 'A charming lake town surrounded by mountains, offering boating and scenic treks.',
     },
@@ -168,7 +168,7 @@ const Index = () => {
       distance: "35",
       duration: 1.5,
       description: "A scenic hill station journey with panoramic views of the Himalayas",
-      image: "/images/mussoorie.jpg",
+      image: "https://images.pexels.com/photos/2070307/pexels-photo-2070307.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       stops: ["Dehradun", "Mussoorie Mall Road", "Kempty Falls", "Company Garden"],
       attractions: ["Mall Road", "Kempty Falls", "Gun Hill", "Company Garden", "Cloud's End"],
       vehicles: {
@@ -197,7 +197,7 @@ const Index = () => {
       distance: "52",
       duration: 1.5,
       description: "Sacred city journey to witness the holy Ganga Aarti",
-      image: "/images/haridwar.jpg",
+      image: "https://images.pexels.com/photos/10783023/pexels-photo-10783023.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       stops: ["Dehradun", "Har Ki Pauri", "Mansa Devi Temple"],
       attractions: ["Har Ki Pauri", "Mansa Devi Temple", "Chandi Devi Temple", "Ganga Aarti"],
       vehicles: {
@@ -226,7 +226,7 @@ const Index = () => {
       distance: "43",
       duration: 1.25,
       description: "Adventure capital with spiritual essence and river rafting",
-      image: "/images/rishikesh.jpg",
+      image: "https://images.pexels.com/photos/13473095/pexels-photo-13473095.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       stops: ["Dehradun", "Laxman Jhula", "Ram Jhula", "Triveni Ghat"],
       attractions: ["River Rafting", "Laxman Jhula", "Ram Jhula", "Beatles Ashram", "Triveni Ghat"],
       vehicles: {
