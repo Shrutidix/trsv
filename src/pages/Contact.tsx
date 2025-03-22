@@ -23,16 +23,22 @@ const Contact = () => {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       
-      <div className="bg-gradient-to-b from-primary-500 to-primary-600 py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center text-white mb-10">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
-            <p className="text-xl max-w-3xl mx-auto">
-              Have questions or need assistance? We're here to help plan your perfect journey.
-            </p>
-          </div>
-        </div>
-      </div>
+       <section className="bg-gradient-to-r from-primary-600 to-primary-300 py-20 text-white text-center">
+              <motion.div 
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="container mx-auto px-4 relative z-10"
+              >
+                <div className="text-center text-white-800 mb-10">
+                  <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
+                  <p className="text-xl max-w-3xl mx-auto">
+                  Have questions or need assistance? We're here to help plan your perfect journey.
+                  </p>
+                </div>
+              </motion.div>
+            </section>
+      
 
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">

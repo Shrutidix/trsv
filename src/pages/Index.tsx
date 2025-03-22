@@ -1002,7 +1002,7 @@ const Index = () => {
       </section>
 
       {/* Our Services */}
-      <section className="py-16 bg-gradient-to-r from-primary-600 to-primary-400 text-white" ref={servicesRef}>
+      <section className="py-16 bg-gradient-to-r from-primary-400 to-primary-200 text-white" ref={servicesRef}>
         <div className={`container ${servicesInView ? 'scale-up-enter-active' : 'scale-up-enter'}`}>
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Our Services</h2>

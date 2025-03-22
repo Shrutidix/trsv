@@ -19,6 +19,7 @@ import { popularRoutes } from '@/data/routes';
 import type { Route } from '@/data/routes';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { motion } from "framer-motion";
 
 const RoutesPage = () => {
   const [selectedRoute, setSelectedRoute] = useState<Route | null>(null);
@@ -27,15 +28,24 @@ const RoutesPage = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
+      <section className="bg-gradient-to-r from-primary-600 to-primary-300 py-20 text-white text-center">
+  <motion.div 
+    initial={{ y: 20, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ duration: 0.5 }}
+    className="container mx-auto px-4 relative z-10"
+  >
+    <div className="text-center text-white-800 mb-10">
+      <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Popular Routes from Dehradun</h1>
+      <p className="text-xl max-w-3xl mx-auto">
+        Explore our most popular taxi routes from Dehradun to various destinations across Uttarakhand and beyond. Choose from our fleet of comfortable vehicles and experienced drivers.
+      </p>
+    </div>
+  </motion.div>
+</section>
       <div className="flex-grow bg-gray-50">
         <div className="container mx-auto px-4 py-16">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Our Popular Routes from Dehradun</h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Explore our most popular taxi routes from Dehradun to various destinations across Uttarakhand and beyond. 
-              Choose from our fleet of comfortable vehicles and experienced drivers.
-            </p>
-          </div>
+          
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {popularRoutes.map((route) => (

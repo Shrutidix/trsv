@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { motion } from "framer-motion";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -10,29 +11,40 @@ const About = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary-600 to-primary-400 py-20 text-white text-center">
-        <h1 className="text-5xl font-bold">About Us</h1>
-        <p className="text-xl max-w-3xl mx-auto mt-4">
-          Discover the best travel experiences with us. We offer expert-guided tours and hassle-free transportation across North India.
-        </p>
+      <section className="bg-gradient-to-r from-primary-600 to-primary-300 py-20 text-white text-center">
+        <motion.div 
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="container mx-auto px-4 relative z-10"
+        >
+          <div className="text-center text-white-800 mb-10">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">About Us</h1>
+            <p className="text-xl max-w-3xl mx-auto">
+              Discover the best travel experiences with us. We offer expert-guided tours and hassle-free transportation across North India.
+            </p>
+          </div>
+        </motion.div>
       </section>
+     
       
       <main className="flex-grow container mx-auto px-4 py-12">
         
         {/* Owner Section */}
-        <div className="flex flex-col md:flex-row items-center bg-white shadow-lg rounded-lg p-6 mb-12">
-          <img
-            src="https://via.placeholder.com/200"
-            alt="Owner"
-            className="w-40 h-40 rounded-full object-cover border-4 border-primary-500"
-          />
-          <div className="md:ml-6 text-center md:text-left">
-            <h2 className="text-2xl font-bold text-primary-800">[Owner's Name]</h2>
-            <p className="text-gray-600 mt-2">
-              Founder & CEO of [Company Name]. Passionate about delivering the best travel experiences across Himachal Pradesh and Uttarakhand.
-            </p>
-          </div>
-        </div>
+        <div className="flex flex-col md:flex-row items-center bg-white shadow-lg rounded-lg p-8 mb-12">
+  <img
+    src="https://via.placeholder.com/350"
+    alt="Owner"
+    className="w-72 h-72 rounded-full object-cover border-4 border-primary-500 shadow-lg"
+  />
+  <div className="md:ml-8 text-center md:text-left">
+    <h2 className="text-3xl font-bold text-primary-800">[Owner's Name]</h2>
+    <p className="text-lg text-gray-600 mt-4">
+      Founder & CEO of [Company Name]. Passionate about delivering the best travel experiences across Himachal Pradesh and Uttarakhand.
+    </p>
+  </div>
+</div>
+
 
         {/* Our Services */}
         <section className="mb-12">
