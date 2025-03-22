@@ -590,7 +590,7 @@ const Index = () => {
     {
       id: 'rishikesh',
       name: 'Rishikesh',
-      image: 'https://images.unsplash.com/photo-1591018653367-16fd74b6f6ca?q=80&w=2070&auto=format&fit=crop',
+      image: 'https://campinginrishikesh.in/wp-content/uploads/2020/03/camp-crossfire-river-view.jpg',
       location: 'Uttarakhand',
       description: 'World Capital of Yoga, famous for spiritual enlightenment and adventure sports.',
       activities: ['River Rafting', 'Yoga', 'Camping']
@@ -598,7 +598,7 @@ const Index = () => {
     {
       id: 'mussoorie',
       name: 'Mussoorie',
-      image: 'https://images.unsplash.com/photo-1626621934657-30a927b31aad?q=80&w=2070&auto=format&fit=crop',
+      image: 'https://www.namasteindiatrip.com/wp-content/uploads/2019/09/Mussoorie-Travel-HD.jpg',
       location: 'Uttarakhand',
       description: 'Queen of Hills with panoramic views of the Himalayas and colonial charm.',
       activities: ['Cable Car', 'Mall Road', 'Trekking']
@@ -606,7 +606,7 @@ const Index = () => {
     {
       id: 'haridwar',
       name: 'Haridwar',
-      image: 'https://images.unsplash.com/photo-1590766940554-103e1949ba2a?q=80&w=2070&auto=format&fit=crop',
+      image: 'https://cdn.britannica.com/43/155643-050-E9989FB0/bathing-ghat-Har-ki-pauri-Haridwar-India-Uttarakhand.jpg',
       location: 'Uttarakhand',
       description: 'Holy city on the banks of River Ganges, famous for Ganga Aarti.',
       activities: ['Ganga Aarti', 'Temple Visit', 'Holy Dip']
