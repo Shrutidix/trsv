@@ -177,19 +177,23 @@ const Index = () => {
       attractions: ["Mall Road", "Kempty Falls", "Gun Hill", "Company Garden", "Cloud's End"],
       vehicles: {
         sedan: {
-          price: 1500,
+          price: 1200,
+          negotiable: true,
           description: "Comfortable sedan for up to 4 passengers"
         },
         suv: {
-          price: 2000,
+          price: 1800,
+          negotiable: true,
           description: "Spacious SUV for up to 6 passengers"
         },
         luxury: {
-          price: 3500,
+          price: 2500,
+          negotiable: false,
           description: "Premium luxury car for a superior experience"
         },
         tempo: {
-          price: 2500,
+          price: 2200,
+          negotiable: true,
           description: "Tempo traveller for groups up to 12 passengers"
         }
       }
@@ -206,19 +210,23 @@ const Index = () => {
       attractions: ["Har Ki Pauri", "Mansa Devi Temple", "Chandi Devi Temple", "Ganga Aarti"],
       vehicles: {
         sedan: {
-          price: 1800,
+          price: 1400,
+          negotiable: true,
           description: "Comfortable sedan for up to 4 passengers"
         },
         suv: {
-          price: 2200,
+          price: 2000,
+          negotiable: true,
           description: "Spacious SUV for up to 6 passengers"
         },
         luxury: {
-          price: 3800,
+          price: 2500,
+          negotiable: false,
           description: "Premium luxury car for a superior experience"
         },
         tempo: {
-          price: 2800,
+          price: 2300,
+          negotiable: true,
           description: "Tempo traveller for groups up to 12 passengers"
         }
       }
@@ -235,24 +243,29 @@ const Index = () => {
       attractions: ["River Rafting", "Laxman Jhula", "Ram Jhula", "Beatles Ashram", "Triveni Ghat"],
       vehicles: {
         sedan: {
-          price: 1600,
+          price: 1300,
+          negotiable: true,
           description: "Comfortable sedan for up to 4 passengers"
         },
         suv: {
-          price: 2100,
+          price: 1900,
+          negotiable: true,
           description: "Spacious SUV for up to 6 passengers"
         },
         luxury: {
-          price: 3600,
+          price: 2500,
+          negotiable: false,
           description: "Premium luxury car for a superior experience"
         },
         tempo: {
-          price: 2600,
+          price: 2100,
+          negotiable: true,
           description: "Tempo traveller for groups up to 12 passengers"
         }
       }
     }
   ];
+
 
   // Vehicle information
   const vehicleInfo = {
@@ -613,7 +626,7 @@ const Index = () => {
       <Navbar />
       
       {/* Hero Section - Professional redesign with realistic car animations */}
-      <section className="relative overflow-hidden bg-[url('https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?q=80&w=2069&auto=format&fit=crop')] bg-cover bg-center bg-fixed py-8 before:absolute before:inset-0 before:bg-gradient-to-br before:from-purple-900/80 before:via-blue-900/70 before:to-indigo-900/60 before:backdrop-blur-[2px]">
+      <section className="relative overflow-hidden bg-[url('https://dynamic.tourtravelworld.com/package-images/photo-big/dir_48/1430243/367404.jpg')] bg-cover bg-center bg-fixed py-8 before:absolute before:inset-0 before:bg-gradient-to-br before:from-purple-900/80 before:via-blue-900/70 before:to-indigo-900/60 before:backdrop-blur-[2px]">
         {/* Car Animation Container - Will change based on selection */}
         <div className="absolute inset-0 overflow-hidden">
           {/* SVG Car Animation - Moving from left to right */}
@@ -885,7 +898,7 @@ const Index = () => {
         }
       `}</style>
 
-      {/* Quick Stats Section */}
+      {/* Quick Stats Section 
       <section className="py-12 bg-white" ref={statsRef}>
         <div className={`container px-4 ${statsInView ? 'stagger-enter-active' : 'stagger-enter'}`}>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
@@ -907,7 +920,7 @@ const Index = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section>*/}
 
       {/* Why Choose Us Section */}
       <section className="py-16 bg-secondary mt-16" ref={whyChooseRef}>
@@ -989,7 +1002,7 @@ const Index = () => {
       </section>
 
       {/* Our Services */}
-      <section className="py-16 bg-tropical-gradient text-white" ref={servicesRef}>
+      <section className="py-16 bg-gradient-to-r from-primary-600 to-primary-400 text-white" ref={servicesRef}>
         <div className={`container ${servicesInView ? 'scale-up-enter-active' : 'scale-up-enter'}`}>
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Our Services</h2>
@@ -1027,31 +1040,32 @@ const Index = () => {
             </div>
             
             <div className="glass-card p-8">
-              <Mountain className="h-10 w-10 mb-4" />
-              <h3 className="text-xl font-bold mb-3">Tour Packages</h3>
-              <p className="mb-4 opacity-90">
-                Curated tour packages covering the most beautiful destinations in North India, complete with accommodations.
-              </p>
-              <ul className="space-y-2">
-                <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2" />
-                  <span>Hill Station Tours</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2" />
-                  <span>Adventure Packages</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2" />
-                  <span>Honeymoon Specials</span>
-                </li>
-              </ul>
-              <Link to="/packages">
-                <Button className="mt-6 bg-white/90 text-primary-600 hover:bg-white">
-                  Explore Packages
-                </Button>
-              </Link>
-            </div>
+  <Car className="h-10 w-10 mb-4" />
+  <h3 className="text-xl font-bold mb-3">Taxi Service & Local Guide Charges</h3>
+  <p className="mb-4 opacity-90">
+    Reliable taxi services with experienced drivers and knowledgeable local guides to make your journey smooth and informative.
+  </p>
+  <ul className="space-y-2">
+    <li className="flex items-center">
+      <CheckCircle className="h-4 w-4 mr-2" />
+      <span>Airport & City Transfers</span>
+    </li>
+    <li className="flex items-center">
+      <CheckCircle className="h-4 w-4 mr-2" />
+      <span>Full-Day Sightseeing Cabs</span>
+    </li>
+    <li className="flex items-center">
+      <CheckCircle className="h-4 w-4 mr-2" />
+      <span>Professional Local Guides</span>
+    </li>
+  </ul>
+  <Link to="/taxi-service">
+    <Button className="mt-6 bg-white/90 text-primary-600 hover:bg-white">
+      Explore Services
+    </Button>
+  </Link>
+</div>
+
             
             <div className="glass-card p-8">
               <Award className="h-10 w-10 mb-4" />
@@ -1156,7 +1170,7 @@ const Index = () => {
       )}
 
       {/* CTA Section */}
-      <section className="py-16 bg-sunset-gradient text-white">
+      <section className="py-16 bg-gradient-to-r from-primary-600 to-primary-400 text-white">
         <div className="container text-center">
           <h2 className="text-3xl font-bold mb-4">Ready for Your North India Adventure?</h2>
           <p className="max-w-2xl mx-auto mb-8">
