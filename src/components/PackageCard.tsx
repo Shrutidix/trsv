@@ -1,104 +1,79 @@
-import React, { useState } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Link } from 'react-router-dom';
-import { Calendar, Clock, Users, Car, Hotel, MapPin, Star, Mountain } from 'lucide-react';
+import React from "react";
+import { PackageCard, PackageCardProps } from "./PackageCard";
 
-export interface PackageCardProps {
-  id?: string;
-  title: string;
-  name?: string;
-  description: string;
-  image: string;
-  location: string;
-  destination?: string;
-  duration: string;
-  price: number;
-  rating?: number;
-  features?: string[];
-  isPopular?: boolean;
-}
+const tourPackages: PackageCardProps[] = [
+  {
+    id: "1",
+    title: "Manali Adventure Trip",
+    description: "Enjoy the scenic beauty and adventure sports in Manali.",
+    image: "/images/manali.jpg",
+    location: "Manali, Himachal Pradesh",
+    duration: "5 Days / 4 Nights",
+    price: 14999,
+    rating: 4.7,
+    features: ["Meals", "Transport", "Hotel Stay"],
+    isPopular: true,
+  },
+  {
+    id: "2",
+    title: "Jaipur Royal Tour",
+    description: "Experience the royal heritage and vibrant culture of Jaipur.",
+    image: "/images/jaipur.jpg",
+    location: "Jaipur, Rajasthan",
+    duration: "3 Days / 2 Nights",
+    price: 9999,
+    rating: 4.5,
+    features: ["Guide", "Meals", "Hotel Stay"],
+  },
+];
 
-const PackageCard: React.FC<PackageCardProps> = ({
-  id,
-  title,
-  name,
-  description,
-  image,
-  location,
-  destination,
-  duration,
-  price,
-  rating = 4.5,
-  features = ["Meals", "Transport"],
-  isPopular = false,
-}) => {
-  const [imageError, setImageError] = useState(false);
-  const displayName = name || title;
-  const displayDestination = destination || location;
+const carPackages: PackageCardProps[] = [
+  {
+    id: "3",
+    title: "SUV Rental for Uttarakhand",
+    description: "Spacious and comfortable SUVs for your Uttarakhand journey.",
+    image: "/images/suv.jpg",
+    location: "Dehradun, Uttarakhand",
+    duration: "Per Day Basis",
+    price: 3500,
+    rating: 4.8,
+    features: ["Driver", "AC", "Fuel Included"],
+  },
+  {
+    id: "4",
+    title: "Luxury Sedan for City Tour",
+    description: "Explore the city in comfort and style with our luxury sedan.",
+    image: "/images/sedan.jpg",
+    location: "Delhi NCR",
+    duration: "Per Day Basis",
+    price: 4500,
+    rating: 4.6,
+    features: ["Chauffeur", "AC", "Music System"],
+  },
+];
 
-  const handleImageError = () => {
-    setImageError(true);
-  };
-  
+const PackagesPage: React.FC = () => {
   return (
-    <Card className="overflow-hidden border-0 shadow-lg transition-all duration-200 hover:shadow-xl rounded-xl">
-      <div className="relative h-48 overflow-hidden rounded-t-xl">
-        {imageError ? (
-          <div className="w-full h-full bg-primary-100 flex items-center justify-center">
-            <Mountain className="h-16 w-16 text-primary-300" />
-          </div>
-        ) : (
-          <img
-            src={image}
-            alt={displayName}
-            className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-110"
-            onError={handleImageError}
-          />
-        )}
-        {isPopular && (
-          <Badge className="absolute top-2 right-2 bg-primary hover:bg-primary-600">
-            Popular
-          </Badge>
-        )}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
-          <div className="flex items-center">
-            <div className="bg-yellow-400 rounded-md p-1 flex items-center text-sm font-bold mr-2">
-              <Star className="h-3 w-3 fill-current mr-1" />
-              {rating}
-            </div>
-            <span className="text-white text-sm">{features.join(" • ")}</span>
-          </div>
-        </div>
+    <div className="container mx-auto p-6">
+      <h1 className="text-3xl font-bold text-center text-primary-800 mb-6">
+        Tour & Travel Packages
+      </h1>
+
+      <h2 className="text-2xl font-semibold text-primary-700 mb-4">Tour Packages</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {tourPackages.map((pkg) => (
+          <PackageCard key={pkg.id} {...pkg} />
+        ))}
       </div>
-      <CardContent className="p-4">
-        <h3 className="text-lg font-bold text-primary-800">{displayName}</h3>
-        <div className="flex items-center text-sm text-gray-500 mb-2">
-          <MapPin className="h-3.5 w-3.5 mr-1 text-primary-400" />
-          <span>{displayDestination}</span>
-        </div>
-        
-        <p className="text-sm text-gray-600 mb-3 line-clamp-2">{description}</p>
-        
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center text-sm text-gray-600">
-            <Clock className="h-3.5 w-3.5 mr-1 text-primary-400" />
-            <span>{duration}</span>
-          </div>
-          <div className="text-primary-600 font-bold">
-            ₹{price.toLocaleString()} <span className="text-xs font-normal text-gray-500">per person</span>
-          </div>
-        </div>
-        
-        <Link to={`/packages/${id || '1'}`}>
-          <Button className="w-full bg-primary hover:bg-primary-600 rounded-full">
-            View Details
-          </Button>
-        </Link>
-      </CardContent>
-    </Card>
+
+      <h2 className="text-2xl font-semibold text-primary-700 mt-10 mb-4">Car Rental Packages</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {carPackages.map((pkg) => (
+          <PackageCard key={pkg.id} {...pkg} />
+        ))}
+      </div>
+    </div>
   );
 };
 
-export default PackageCard;
+export default PackagesPage;

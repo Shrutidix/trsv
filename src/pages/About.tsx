@@ -44,8 +44,7 @@ const About = () => {
     </p>
   </div>
 </div>
-
-
+ 
         {/* Our Services */}
         <section className="mb-12">
           <h2 className="text-3xl font-bold text-primary-700 text-center mb-6">Our Services</h2>
@@ -66,30 +65,7 @@ const About = () => {
           </div>
         </section>
         
-       {/* Meet Our Team */}
-       <section className="mb-12 text-center">
-  <h2 className="text-3xl font-bold text-primary-700 mb-6">Meet Our Team</h2>
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 mx-auto max-w-4xl">
-    {[
-      { name: "John Doe", img: "https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png" }, 
-      { name: "Jane Smith", img: "https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png" }, 
-      { name: "Michael Lee", img: "https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png" },
-      { name: "Emma Brown", img: "https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png" },
-      { name: "Chris Johnson", img: "https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png" },
-      { name: "Chris Johnson", img: "https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png" }
-    ].map((member, index) => (
-      <div key={index} className="bg-white shadow-lg rounded-lg p-6 text-center">
-        <img 
-          src={member.img} 
-          alt={member.name} 
-          className="w-32 h-32 object-cover mx-auto  border-primary-500 shadow-md"
-        />
-        <p className="mt-4 font-semibold text-gray-700">{member.name}</p>
-      </div>
-    ))}
-  </div>
-</section>
-
+      s
 
 
         
@@ -114,6 +90,16 @@ const About = () => {
             ))}
           </div>
         </section>
+         {/* Company Information */}
+  <section className="mt-12 text-center">
+          <h2 className="text-3xl font-bold text-primary-700 mb-4"> Our Company</h2>
+          <p className="text-lg text-gray-600 max-w-4xl mx-auto">
+          Uttarakhand Road Trip is a private limited company based in the beautiful state of Uttarakhand, providing top-notch travel services since 2012. We specialize in offering smooth and memorable road trips across Uttarakhand, with a team of trained professionals dedicated to delivering the best travel experience. Over the years, we have managed numerous tours, both big and small, ensuring customer satisfaction at every step.
+
+With a strong network in key cities like Nainital, Mussoorie, Dehradun, and Rishikesh, we cater to the needs of both local and international travelers. Our commitment is to provide comfortable, safe, and reliable taxi services, making every journey unforgettable. Client satisfaction remains our top priority, and we constantly strive to exceed expectations with each trip.
+          </p>
+        </section>
+
       </main>
       
       <Footer />

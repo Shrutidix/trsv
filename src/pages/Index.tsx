@@ -701,21 +701,17 @@ const Index = () => {
                   <div className="relative">
                     <select className="block w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80">
                       <option>Select pickup point</option>
-                      <option>Delhi</option>
-                      <option>Mumbai</option>
-                      <option>Bangalore</option>
-                      <option>Kolkata</option>
-                      <option>Chennai</option>
-                      <option>Hyderabad</option>
-                      <option>Jaipur</option>
-                      <option>Shimla</option>
-                      <option>Manali</option>
-                      <option>Chandigarh</option>
-                      <option>Dehradun</option>
-                      <option>Lucknow</option>
-                      <option>Agra</option>
-                      <option>Varanasi</option>
-                      <option>Amritsar</option>
+                      <option>Haridwar</option>
+<option>Rishikesh</option>
+<option>Mussoorie</option>
+<option>Dhanaulti</option>
+<option>Nainital</option>
+<option>Jim Corbett</option>
+<option>Paonta Sahib</option>
+<option>Delhi</option>
+<option>Manali</option>
+<option>Shimla</option>
+
                     </select>
                   </div>
                 </div>
@@ -728,25 +724,16 @@ const Index = () => {
                   <div className="relative">
                     <select className="block w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80">
                       <option>Select destination</option>
-                      <option>Manali</option>
-                      <option>Shimla</option>
-                      <option>Dharamshala</option>
-                      <option>Dalhousie</option>
-                      <option>Kasol</option>
-                      <option>Mussoorie</option>
-                      <option>Nainital</option>
-                      <option>Rishikesh</option>
                       <option>Haridwar</option>
-                      <option>Kedarnath</option>
-                      <option>Badrinath</option>
-                      <option>Valley of Flowers</option>
-                      <option>Jim Corbett</option>
-                      <option>Lansdowne</option>
-                      <option>Auli</option>
-                      <option>Chopta</option>
-                      <option>Kasauli</option>
-                      <option>McLeodganj</option>
-                      <option>Spiti Valley</option>
+<option>Rishikesh</option>
+<option>Mussoorie</option>
+<option>Dhanaulti</option>
+<option>Nainital</option>
+<option>Jim Corbett</option>
+<option>Paonta Sahib</option>
+<option>Delhi</option>
+<option>Manali</option>
+<option>Shimla</option>
                     </select>
                   </div>
                 </div>
@@ -816,7 +803,16 @@ const Index = () => {
                     </SelectContent>
                   </Select>
                 </div>
-
+                <div className="col-span-1">
+  <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
+    <Phone className="h-5 w-5 mr-2 text-primary" /> Contact Number
+  </label>
+  <input 
+    type="tel" 
+    placeholder="Enter contact number" 
+    className="w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80"
+  />
+</div>
                 {/* Search Button */}
                 <div className="col-span-1 md:col-span-3 flex justify-center">
                   <button className="w-full md:w-auto px-12 h-16 text-white font-bold bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 rounded-2xl py-3 shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 text-lg transform hover:-translate-y-1">
