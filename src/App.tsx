@@ -9,6 +9,8 @@ import Taxi from "./pages/Taxi";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import RoutesPage from './pages/Routes';
+import  Policy from "./pages/policy";
+import Terms from "./pages/terms";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +28,10 @@ const App = () => (
           <Route path="/routes" element={<RoutesPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
+
+
+          <Route path="/privacy" element={< Policy/>}/>
+          <Route path="/terms" element={< Terms/>}/>
         </Routes>
       </Router>
     </TooltipProvider>

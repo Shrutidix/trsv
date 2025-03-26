@@ -40,7 +40,7 @@ const About = () => {
   <div className="md:ml-8 text-center md:text-left">
     <h2 className="text-3xl font-bold text-primary-800">[Owner's Name]</h2>
     <p className="text-lg text-gray-600 mt-4">
-      Founder & CEO of [Company Name]. Passionate about delivering the best travel experiences across Himachal Pradesh and Uttarakhand.
+      Founder & CEO of [ Uttarakhand Road Trip Pvt Ltd]. Passionate about delivering the best travel experiences across Dehradun and Uttarakhand.
     </p>
   </div>
 </div>
