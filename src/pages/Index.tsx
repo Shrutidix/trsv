@@ -5,6 +5,7 @@ import SearchTabs from '@/components/SearchTabs';
 import DestinationCard from '@/components/DestinationCard';
 import PackageCard from '@/components/PackageCard';
 import TestimonialCard from '@/components/TestimonialCard';
+import VacationBanner from '@/components/VacationBanner';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -622,7 +623,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="min-h-screen">
       <Navbar />
       
       {/* Hero Section - Professional redesign with realistic car animations */}
@@ -873,6 +874,9 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Vacation Banner Section */}
+      <VacationBanner />
+
       {/* Update animation keyframes */}
       <style>{`
         @keyframes roadMove {
@@ -1036,31 +1040,31 @@ const Index = () => {
             </div>
             
             <div className="glass-card p-8">
-  <Car className="h-10 w-10 mb-4" />
-  <h3 className="text-xl font-bold mb-3">Taxi Service & Local Guide Charges</h3>
-  <p className="mb-4 opacity-90">
-    Reliable taxi services with experienced drivers and knowledgeable local guides to make your journey smooth and informative.
-  </p>
-  <ul className="space-y-2">
-    <li className="flex items-center">
-      <CheckCircle className="h-4 w-4 mr-2" />
-      <span>Airport & City Transfers</span>
-    </li>
-    <li className="flex items-center">
-      <CheckCircle className="h-4 w-4 mr-2" />
-      <span>Full-Day Sightseeing Cabs</span>
-    </li>
-    <li className="flex items-center">
-      <CheckCircle className="h-4 w-4 mr-2" />
-      <span>Professional Local Guides</span>
-    </li>
-  </ul>
-  <Link to="/taxi-service">
-    <Button className="mt-6 bg-white/90 text-primary-600 hover:bg-white">
-      Explore Services
-    </Button>
-  </Link>
-</div>
+              <Car className="h-10 w-10 mb-4" />
+              <h3 className="text-xl font-bold mb-3">Taxi Service & Local Guide Charges</h3>
+              <p className="mb-4 opacity-90">
+                Reliable taxi services with experienced drivers and knowledgeable local guides to make your journey smooth and informative.
+              </p>
+              <ul className="space-y-2">
+                <li className="flex items-center">
+                  <CheckCircle className="h-4 w-4 mr-2" />
+                  <span>Airport & City Transfers</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="h-4 w-4 mr-2" />
+                  <span>Full-Day Sightseeing Cabs</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="h-4 w-4 mr-2" />
+                  <span>Professional Local Guides</span>
+                </li>
+              </ul>
+              <Link to="/packages">
+                <Button className="mt-6 bg-white/90 text-primary-600 hover:bg-white">
+                  Explore Services
+                </Button>
+              </Link>
+            </div>
 
             
             <div className="glass-card p-8">
