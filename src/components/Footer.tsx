@@ -13,7 +13,7 @@ const Footer = () => {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <MapPin className="h-6 w-6 text-primary-300" />
-                <span className="font-bold text-xl">HimalayaJoy</span>
+                <span className="font-bold text-xl">Uttarakhand Road Trip</span>
               </div>
               <p className="text-gray-400 mb-4">Your trusted partner for unforgettable adventures across North India. Explore the majestic Himalayas with our expert guides and comfortable transportation.</p>
               <div className="flex gap-4">

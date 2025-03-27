@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Phone, MessageCircle, Star, Snowflake, Users, Briefcase, Music, Zap, ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import Header from './Header';
 
 interface CarSpecs {
   name: string;
@@ -132,23 +133,8 @@ const TaxiTypeSelector: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Header onCallClick={handleCall} onWhatsAppClick={handleWhatsApp} />
       <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-center gap-4 mb-8">
-          <Button 
-            onClick={handleCall}
-            className="bg-green-600 hover:bg-green-700 text-white px-6 py-2"
-          >
-            <Phone className="h-4 w-4 mr-2" />
-            Call us
-          </Button>
-          <Button 
-            onClick={handleWhatsApp}
-            className="bg-[#25D366] hover:bg-[#128C7E] text-white px-6 py-2"
-          >
-            <MessageCircle className="h-4 w-4 mr-2" />
-            Whatsapp
-          </Button>
-        </div>
         <h2 className="text-2xl font-bold text-center mb-6">Our Fleet</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {cars.map((car, index) => (

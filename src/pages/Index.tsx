@@ -162,7 +162,7 @@ const Index = () => {
       name: 'Priya Sharma',
       avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop',
       rating: 5,
-      text: 'My trip to Manali was flawless. HimalayaJoy arranged everything perfectly from hotel to taxi. Our driver was very knowledgeable and friendly!',
+      text: 'My trip to Manali was flawless. Uttarakhand Road Trip arranged everything perfectly from hotel to taxi. Our driver was very knowledgeable and friendly!',
       destination: 'Manali Trip',
     },
     {
@@ -928,7 +928,7 @@ const Index = () => {
       <section className="py-16 bg-secondary" ref={whyChooseRef}>
         <div className={`container ${whyChooseInView ? 'fade-up-enter-active' : 'fade-up-enter'}`}>
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4 text-primary-800">Why Choose HimalayaJoy</h2>
+            <h2 className="text-3xl font-bold mb-4 text-primary-800">Why Choose Uttarakhand Road Trip</h2>
             <p className="text-gray-600 max-w-3xl mx-auto">
               We are committed to providing exceptional travel experiences in North India with reliable services and local expertise.
             </p>
@@ -1212,82 +1212,84 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Popular Places in Uttarakhand Section */}
-      <section className="py-16 bg-gradient-to-br from-blue-50 to-primary-50" id="uttarakhand-places">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4 text-primary-800 relative inline-block animate-slide-down">
-              Popular Places in Uttarakhand
-              <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-blue-500"></div>
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto animate-slide-up">
-              Explore the divine beauty of Devbhoomi Uttarakhand, from spiritual havens to adventure destinations
-            </p>
-          </div>
+      {/* Popular Places in Uttarakhand Section - Temporarily Disabled */}
+      {false && (
+        <section className="py-16 bg-gradient-to-br from-blue-50 to-primary-50" id="uttarakhand-places">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4 text-primary-800 relative inline-block animate-slide-down">
+                Popular Places in Uttarakhand
+                <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-blue-500"></div>
+              </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto animate-slide-up">
+                Explore the divine beauty of Devbhoomi Uttarakhand, from spiritual havens to adventure destinations
+              </p>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {uttarakhandDestinations.map((destination, index) => (
-              <div 
-                key={destination.id}
-                className="destination-card group relative bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
-                style={{
-                  animation: `slideIn 0.5s ease-out forwards ${index * 0.1}s`,
-                  opacity: 0,
-                  transform: 'translateY(20px)'
-                }}
-              >
-                {/* Image Container with Overlay */}
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={destination.image}
-                    alt={destination.name}
-                    className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-primary-800 mb-2 transform transition-all duration-300 group-hover:translate-x-1">{destination.name}</h3>
-                  <p className="text-gray-600 text-sm mb-4">{destination.description}</p>
-                  
-                  {/* Activities */}
-                  <div className="space-y-2">
-                    {destination.activities.map((activity, idx) => (
-                      <div 
-                        key={idx} 
-                        className="activity-item flex items-center text-sm text-gray-600"
-                        style={{
-                          animation: `fadeIn 0.5s ease-out forwards ${index * 0.1 + idx * 0.1}s`,
-                          opacity: 0
-                        }}
-                      >
-                        <CheckCircle className="h-4 w-4 mr-2 text-primary-500" />
-                        {activity}
-                      </div>
-                    ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {uttarakhandDestinations.map((destination) => (
+                <div 
+                  key={destination.id}
+                  className="destination-card group relative bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
+                  style={{
+                    animation: `slideIn 0.5s ease-out forwards ${index * 0.1}s`,
+                    opacity: 0,
+                    transform: 'translateY(20px)'
+                  }}
+                >
+                  {/* Image Container with Overlay */}
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={destination.image}
+                      alt={destination.name}
+                      className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   </div>
 
-                  {/* Explore Button */}
-                  <button 
-                    className="mt-4 w-full bg-primary-600 text-white py-2 rounded-lg transform transition-all duration-300 hover:bg-primary-700 hover:scale-105 hover:shadow-lg"
-                    onClick={() => {
-                      window.location.href = '/contact ';
-                    }}
-                  >
-                    Explore More
-                  </button>
-                </div>
+                  {/* Content */}
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-primary-800 mb-2 transform transition-all duration-300 group-hover:translate-x-1">{destination.name}</h3>
+                    <p className="text-gray-600 text-sm mb-4">{destination.description}</p>
+                    
+                    {/* Activities */}
+                    <div className="space-y-2">
+                      {destination.activities.map((activity, idx) => (
+                        <div 
+                          key={idx} 
+                          className="activity-item flex items-center text-sm text-gray-600"
+                          style={{
+                            animation: `fadeIn 0.5s ease-out forwards ${index * 0.1 + idx * 0.1}s`,
+                            opacity: 0
+                          }}
+                        >
+                          <CheckCircle className="h-4 w-4 mr-2 text-primary-500" />
+                          {activity}
+                        </div>
+                      ))}
+                    </div>
 
-                {/* Floating Location Badge */}
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium text-primary-600 shadow-lg">
-                  {destination.location}
+                    {/* Explore Button */}
+                    <button 
+                      className="mt-4 w-full bg-primary-600 text-white py-2 rounded-lg transform transition-all duration-300 hover:bg-primary-700 hover:scale-105 hover:shadow-lg"
+                      onClick={() => {
+                        window.location.href = '/contact ';
+                      }}
+                    >
+                      Explore More
+                    </button>
+                  </div>
+
+                  {/* Floating Location Badge */}
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium text-primary-600 shadow-lg">
+                    {destination.location}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Add these new animation keyframes */}
       <style>
