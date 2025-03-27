@@ -27,7 +27,7 @@ const cars: CarSpecs[] = [
     rate: "₹12/km",
     nightCharges: "Rs 600",
     ac: true,
-    image: "https://imgd.aeplcdn.com/664x374/n/cw/ec/130591/front-view-130.jpeg?isig=0&q=80",
+    image: "https://i0.wp.com/cargayan.com/wp-content/uploads/2023/05/2-1.png",
     specs: {
       description: "Compact and fuel-efficient sedan perfect for city rides and comfortable journeys.",
       safety: 4.5,
@@ -43,7 +43,7 @@ const cars: CarSpecs[] = [
     rate: "₹14/km",
     nightCharges: "Rs 600",
     ac: true,
-    image: "https://imgd.aeplcdn.com/664x374/n/cw/ec/39015/front-view-130.jpeg?isig=0&q=80",
+    image: "https://www.motorworldindia.com/wp-content/uploads/2016/08/Toyota-Etios-Liva-Platinum-Facelift-Brazil-5.jpg",
     specs: {
       description: "Reliable and spacious sedan with excellent comfort for long journeys.",
       safety: 4.6,
@@ -59,7 +59,7 @@ const cars: CarSpecs[] = [
     rate: "₹15/km",
     nightCharges: "Rs 600",
     ac: true,
-    image: "https://imgd.aeplcdn.com/664x374/n/cw/ec/39015/front-view-130.jpeg?isig=0&q=80",
+    image: "https://stat.overdrive.in/wp-content/odgallery/2018/11/48773_Maruti_Suzuki_Ertiga_2019_043.JPG",
     specs: {
       description: "Versatile MUV perfect for family trips and group travel.",
       safety: 4.7,
@@ -75,7 +75,7 @@ const cars: CarSpecs[] = [
     rate: "₹17/km",
     nightCharges: "Rs 600",
     ac: true,
-    image: "https://imgd.aeplcdn.com/664x374/n/cw/ec/39015/front-view-130.jpeg?isig=0&q=80",
+    image: "https://imgd.aeplcdn.com/1056x594/cw/ec/20623/Toyota-Innova-Crysta-Exterior-123846.jpg?wm=0&q=80",
     specs: {
       description: "Premium MUV with superior comfort and reliability for long journeys.",
       safety: 4.8,
@@ -91,7 +91,7 @@ const cars: CarSpecs[] = [
     rate: "₹20/km",
     nightCharges: "Rs 600",
     ac: true,
-    image: "https://imgd.aeplcdn.com/664x374/n/cw/ec/39015/front-view-130.jpeg?isig=0&q=80",
+    image: "https://stat.overdrive.in/wp-content/odgallery/2016/05/30083_INNOVA_CRYSTA_front.jpg",
     specs: {
       description: "Luxury MUV with premium features and exceptional comfort.",
       safety: 4.9,
@@ -107,7 +107,7 @@ const cars: CarSpecs[] = [
     rate: "₹22/km",
     nightCharges: "Rs 600",
     ac: true,
-    image: "https://imgd.aeplcdn.com/664x374/n/cw/ec/39015/front-view-130.jpeg?isig=0&q=80",
+    image: "https://th.bing.com/th/id/OIP.tpT_fY686U1ZoNWHKR3nowHaD3?rs=1&pid=ImgDetMain",
     specs: {
       description: "Spacious SUV with excellent ground clearance for hill stations and rough terrain.",
       safety: 4.7,

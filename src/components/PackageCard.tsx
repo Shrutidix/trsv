@@ -57,9 +57,9 @@ export const PackageCard: React.FC<PackageCardProps> = ({
             <p className="text-gray-500 text-xs">{duration}</p>
             <p className="text-primary-600 font-bold">₹{price.toLocaleString()}</p>
           </div>
-          <button className="bg-primary-500 hover:bg-primary-600 text-white px-3 py-1 rounded text-sm">
+         {/* <button className="bg-primary-500 hover:bg-primary-600 text-white px-3 py-1 rounded text-sm">
             View Details
-          </button>
+          </button>*/}
         </div>
       </div>
     </div>
