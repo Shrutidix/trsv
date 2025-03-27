@@ -1186,7 +1186,7 @@ const Index = () => {
               </Button>
             </Link>
             <Link to="/contact">
-              <Button size="lg" variant="outline" className="text-white border-white hover:bg-primary-600/20">
+              <Button size="lg" variant="outline" className="bg-white text-primary-600 hover:bg-gray-100">
                 Contact Us
               </Button>
             </Link>
@@ -1272,7 +1272,7 @@ const Index = () => {
                   <button 
                     className="mt-4 w-full bg-primary-600 text-white py-2 rounded-lg transform transition-all duration-300 hover:bg-primary-700 hover:scale-105 hover:shadow-lg"
                     onClick={() => {
-                      window.location.href = '/destinations';
+                      window.location.href = '/contact ';
                     }}
                   >
                     Explore More

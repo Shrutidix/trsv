@@ -27,48 +27,58 @@ const About = () => {
         </motion.div>
       </section>
      
-      
       <main className="flex-grow container mx-auto px-4 py-12">
         
-        {/* Owner Section */}
-        <div className="flex flex-col md:flex-row items-center bg-white shadow-lg rounded-lg p-8 mb-12">
-  <img
-    src="https://via.placeholder.com/350"
-    alt="Owner"
-    className="w-72 h-72 rounded-full object-cover border-4 border-primary-500 shadow-lg"
-  />
-  <div className="md:ml-8 text-center md:text-left">
-    <h2 className="text-3xl font-bold text-primary-800">[Owner's Name]</h2>
-    <p className="text-lg text-gray-600 mt-4">
-      Founder & CEO of [ Uttarakhand Road Trip Pvt Ltd]. Passionate about delivering the best travel experiences across Dehradun and Uttarakhand.
-    </p>
-  </div>
-</div>
- 
-        {/* Our Services */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-primary-700 text-center mb-6">Our Services</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[  
-              { title: "Adventure & Trekking Tours", desc: "Experience thrilling trekking adventures in the Himalayas with expert guides." },
-              { title: "Pilgrimage Trips", desc: "Visit sacred destinations like Kedarnath, Badrinath, and Vaishno Devi with comfort and safety." },
-              { title: "Local Guide Services", desc: "Explore hidden gems with our experienced local guides." },
-              { title: "Transportation Arrangements", desc: "Book comfortable taxis, tempo travelers, and buses for your journey." },
-              { title: "Customized Tour Packages", desc: "Plan personalized travel experiences tailored to your preferences." },
-              { title: "Hotel & Homestay Booking", desc: "Stay in hand-picked accommodations for a memorable trip." },
-            ].map((service, index) => (
-              <div key={index} className="p-6 bg-white shadow-md rounded-lg text-center">
-                <h3 className="text-xl font-semibold text-gray-800">{service.title}</h3>
-                <p className="text-gray-600 mt-2">{service.desc}</p>
-              </div>
-            ))}
+        {/* Owners Section */}
+        <div className="grid md:grid-cols-2 gap-8 items-center bg-white shadow-lg rounded-lg p-8 mb-12">
+          <div className="text-center">
+            <img
+              src="src\assets\WhatsApp Image 2025-03-27 at 2.20.18 PM.jpeg"
+              alt="Sachin Choudhary"
+              className="w-72 h-72 rounded-full object-cover border-4 border-primary-500 shadow-lg mx-auto"
+            />
+            <h2 className="text-3xl font-bold text-primary-800 mt-4">Sachin Choudhary</h2>
+            <p className="text-lg text-gray-600 mt-2">
+              Founder & CEO of Uttarakhand Road Trip Pvt Ltd. Passionate about delivering the best travel experiences across Dehradun and Uttarakhand.
+            </p>
           </div>
-        </section>
+          <div className="text-center">
+            <img
+              src="src\assets\WhatsApp Image 2025-03-27 at 2.20.17 PM.jpeg"
+              alt="[Shubham panwar]"
+              className="w-72 h-72 rounded-full object-cover border-4 border-primary-500 shadow-lg mx-auto"
+            />
+            <h2 className="text-3xl font-bold text-primary-800 mt-4">Shubham panwar</h2>
+            <p className="text-lg text-gray-600 mt-2">
+              Co-Founder & Managing Director of Uttarakhand Road Trip Pvt Ltd. Committed to providing exceptional travel experiences and seamless logistics.
+            </p>
+          </div>
+        </div>
         
-      s
+        {/* Our Services */}
+        <section className="mb-12 bg-white py-12">
+  <h2 className="text-3xl font-bold text-primary-700 text-center mb-6">Our Services</h2>
+  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-8">
+    {[
+      { title: "Adventure & Trekking Tours", desc: "Experience thrilling trekking adventures in the Himalayas with expert guides." },
+      { title: "Pilgrimage Trips", desc: "Visit sacred destinations like Kedarnath, Badrinath, and Vaishno Devi with comfort and safety." },
+      { title: "Local Guide Services", desc: "Explore hidden gems with our experienced local guides." },
+      { title: "Transportation Arrangements", desc: "Book comfortable taxis, tempo travelers, and buses for your journey." },
+      { title: "Customized Tour Packages", desc: "Plan personalized travel experiences tailored to your preferences." },
+      { title: "Hotel & Homestay Booking", desc: "Stay in hand-picked accommodations for a memorable trip." },
+    ].map((service, index) => (
+      <div 
+        key={index} 
+        className="p-6 bg-gradient-to-r from-purple-200 to-purple-400 text-white shadow-xl rounded-xl text-center transform hover:scale-105 transition duration-300"
+      >
+        <h3 className="text-xl font-semibold">{service.title}</h3>
+        <p className="mt-2">{service.desc}</p>
+      </div>
+    ))}
+  </div>
+</section>
 
 
-        
         {/* Testimonials */}
         <section>
           <h2 className="text-3xl font-bold text-primary-700 text-center mb-6">Testimonials</h2>
@@ -90,13 +100,14 @@ const About = () => {
             ))}
           </div>
         </section>
-         {/* Company Information */}
-  <section className="mt-12 text-center">
+        
+        {/* Company Information */}
+        <section className="mt-12 text-center">
           <h2 className="text-3xl font-bold text-primary-700 mb-4"> Our Company</h2>
           <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-          Uttarakhand Road Trip is a private limited company based in the beautiful state of Uttarakhand, providing top-notch travel services since 2012. We specialize in offering smooth and memorable road trips across Uttarakhand, with a team of trained professionals dedicated to delivering the best travel experience. Over the years, we have managed numerous tours, both big and small, ensuring customer satisfaction at every step.
-
-With a strong network in key cities like Nainital, Mussoorie, Dehradun, and Rishikesh, we cater to the needs of both local and international travelers. Our commitment is to provide comfortable, safe, and reliable taxi services, making every journey unforgettable. Client satisfaction remains our top priority, and we constantly strive to exceed expectations with each trip.
+            Uttarakhand Road Trip is a private limited company based in the beautiful state of Uttarakhand, providing top-notch travel services since 2012. We specialize in offering smooth and memorable road trips across Uttarakhand, with a team of trained professionals dedicated to delivering the best travel experience. Over the years, we have managed numerous tours, both big and small, ensuring customer satisfaction at every step.
+            <br /><br />
+            With a strong network in key cities like Nainital, Mussoorie, Dehradun, and Rishikesh, we cater to the needs of both local and international travelers. Our commitment is to provide comfortable, safe, and reliable taxi services, making every journey unforgettable. Client satisfaction remains our top priority, and we constantly strive to exceed expectations with each trip.
           </p>
         </section>
 

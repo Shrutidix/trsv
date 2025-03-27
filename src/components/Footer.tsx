@@ -33,7 +33,7 @@ const Footer = () => {
             <div>
               <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
               <ul className="space-y-2">
-                <li><Link to="/" className="text-gray-400 hover:text-primary-300 transition-colors">Home</Link></li>
+                <li><Link to="/gallery" className="text-gray-400 hover:text-primary-300 transition-colors">Gallery</Link></li>
                 <li><Link to="/destinations" className="text-gray-400 hover:text-primary-300 transition-colors">Destinations</Link></li>
                 <li><Link to="/routes" className="text-gray-400 hover:text-primary-300 transition-colors">Routes</Link></li>
                 <li><Link to="/taxi" className="text-gray-400 hover:text-primary-300 transition-colors">Taxi Services</Link></li>
@@ -65,7 +65,7 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="h-5 w-5 text-primary-300" />
-                  <span className="text-gray-400">+91 9876543210</span>
+                  <span className="text-gray-400">+91 8077757674</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="h-5 w-5 text-primary-300" />
@@ -89,7 +89,7 @@ const Footer = () => {
 
       {/* Floating Action Buttons */}
       <div className="fixed bottom-6 right-6 flex flex-col gap-4">
-        <a href="tel:+91 9876543210" className="bg-red-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition">
+        <a href="tel:+91 8077757674" className="bg-red-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition">
           <FaPhoneAlt size={20} />
         </a>
         <a href="https://wa.me/+91 9876543210" className="bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition">
