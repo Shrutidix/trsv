@@ -39,7 +39,7 @@ const taxiTypes = [
     icon: <Bus className="h-6 w-6" />,
     description: "Group travel for up to 12 passengers",
     priceRange: "₹30-40/km",
-    image: "https://images.unsplash.com/photo-1609152959935-163cc3048e2c?q=80&w=1074&auto=format&fit=crop"
+    image: "https://th.bing.com/th/id/OIP.zIxpcrfkGWQB4-OxnhpdtAAAAA?rs=1&pid=ImgDetMain"
   }
 ];
 

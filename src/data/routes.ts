@@ -40,7 +40,7 @@ export const popularRoutes: Route[] = [
     distance: "35 km",
     duration: "1.5 hours",
     basePrice: 1200,
-    image: "https://images.unsplash.com/photo-1600508537761-f401bf09e1d1?q=80&w=2070&auto=format&fit=crop",
+    image: "https://images.pexels.com/photos/27178287/pexels-photo-27178287/free-photo-of-town-on-hill-on-monsoon-day.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     stops: [
       {
         name: "Dehradun",
@@ -70,12 +70,12 @@ export const popularRoutes: Route[] = [
       {
         name: "Kempty Falls",
         description: "Famous waterfall with a stunning drop of 40 feet",
-        image: "https://images.unsplash.com/photo-1598091383021-15ddce4610ad?q=80&w=2070&auto=format&fit=crop"
+        image: "https://im.indiatimes.in/content/2021/Jul/2_60e691aa710e7.JPG?w=725&h=433"
       },
       {
         name: "Gun Hill",
         description: "Second highest point in Mussoorie offering panoramic views",
-        image: "https://images.unsplash.com/photo-1599661046289-e3acc5425d79?q=80&w=2070&auto=format&fit=crop"
+        image: "https://www.chardhamtours.in/gallery/cityImage/1462249998_gun%20hill.jpg"
       }
     ],
     vehicles: [
@@ -106,7 +106,7 @@ export const popularRoutes: Route[] = [
     distance: "52 km",
     duration: "2 hours",
     basePrice: 1500,
-    image: "https://images.unsplash.com/photo-1566903026052-36e4ded7f105?q=80&w=2036&auto=format&fit=crop",
+    image: "https://images.pexels.com/photos/19010052/pexels-photo-19010052/free-photo-of-figure-of-lakshmi-goddess.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     stops: [
       {
         name: "Dehradun",
@@ -136,12 +136,12 @@ export const popularRoutes: Route[] = [
       {
         name: "Har Ki Pauri",
         description: "Sacred ghat where the evening Ganga Aarti takes place",
-        image: "https://images.unsplash.com/photo-1602579177632-26568be60e51?q=80&w=2070&auto=format&fit=crop"
+        image: "https://th.bing.com/th/id/OIP.x2HIpa6IH7pNAXmV1RvgjwHaFR?rs=1&pid=ImgDetMain"
       },
       {
         name: "Mansa Devi Temple",
         description: "Ancient temple offering panoramic views of Haridwar",
-        image: "https://images.unsplash.com/photo-1624367171718-14026220ee3d?q=80&w=2059&auto=format&fit=crop"
+        image: "https://www.tripsavvy.com/thmb/e0N3S9ZUthIXnU2oMPpRbNMPmmw=/3481x2321/filters:fill(auto,1)/GettyImages-943681362-b14111ffae644aebabb0659d7e479ed7.jpg"
       }
     ],
     vehicles: [
@@ -202,12 +202,12 @@ export const popularRoutes: Route[] = [
       {
         name: "Laxman Jhula",
         description: "Iconic suspension bridge across the Ganges",
-        image: "https://images.unsplash.com/photo-1595830770273-b4139c3bc272?q=80&w=2069&auto=format&fit=crop"
+        image: "https://indiano.travel/wp-content/uploads/2022/06/Beautiful-Ram-Jhula-Bridge-and-Ganga-river-taken-in-Rishikesh-India.jpg"
       },
       {
         name: "Triveni Ghat",
         description: "Sacred bathing spot and site of evening Ganga Aarti",
-        image: "https://images.unsplash.com/photo-1601891010034-a8dd6fcdd235?q=80&w=2070&auto=format&fit=crop"
+        image: "https://rishikeshdaytour.com/blog/wp-content/uploads/2022/01/Triveni-Ghat-in-Rishikesh-Uttarakhand.jpg"
       }
     ],
     vehicles: [
@@ -274,12 +274,12 @@ export const popularRoutes: Route[] = [
       {
         name: "Auli Ropeway",
         description: "Asia's longest cable car offering spectacular mountain views",
-        image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=2069&auto=format&fit=crop"
+        image: "https://th.bing.com/th/id/OIP.8-25CfcU1F3buBH-gnC4SwHaE7?rs=1&pid=ImgDetMain"
       },
       {
         name: "Gurso Bugyal",
         description: "Beautiful meadow perfect for trekking and photography",
-        image: "https://images.unsplash.com/photo-1569498217323-538d9f7bc065?q=80&w=2070&auto=format&fit=crop"
+        image: "https://th.bing.com/th/id/OIP.p88ZNAO2VDgGIxBSlLTG7AHaEK?rs=1&pid=ImgDetMain"
       }
     ],
     vehicles: [
@@ -304,7 +304,7 @@ export const popularRoutes: Route[] = [
     distance: "297 km",
     duration: "8-9 hours",
     basePrice: 6500,
-    image: "https://images.unsplash.com/photo-1598091398598-7f0287daba84?q=80&w=2071&auto=format&fit=crop",
+    image: "https://images.pexels.com/photos/2443872/pexels-photo-2443872.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     stops: [
       {
         name: "Dehradun",
@@ -340,12 +340,12 @@ export const popularRoutes: Route[] = [
       {
         name: "Naini Lake",
         description: "Heart-shaped lake surrounded by seven hills",
-        image: "https://images.unsplash.com/photo-1598091400561-7e6e9c698e06?q=80&w=2070&auto=format&fit=crop"
+        image: "https://hblimg.mmtcdn.com/content/hubble/img/nainital/mmt/activities/m_activities_naini_lake_2_l_546_820.jpg"
       },
       {
         name: "Snow View Point",
         description: "Panoramic views of Himalayan peaks",
-        image: "https://images.unsplash.com/photo-1517782522277-171e2e62222e?q=80&w=2070&auto=format&fit=crop"
+        image: "https://nainitaltourism.org.in/images/tourist-places/snow-view-point-nainital/snow-view-point-nainital-indian-tourism-history.jpg"
       }
     ],
     vehicles: [
@@ -406,12 +406,12 @@ export const popularRoutes: Route[] = [
       {
         name: "India Gate",
         description: "Historic war memorial and landmark",
-        image: "https://images.unsplash.com/photo-1585135497289-860ae28679d4?q=80&w=2069&auto=format&fit=crop"
+        image: "https://th.bing.com/th/id/OIP.sfgsYpKaI0gLZEf2RpXUkwHaE8?rs=1&pid=ImgDetMain"
       },
       {
         name: "Qutub Minar",
         description: "UNESCO World Heritage site and architectural marvel",
-        image: "https://images.unsplash.com/photo-1586183189334-1ad3cd238e49?q=80&w=2069&auto=format&fit=crop"
+        image: "https://exploreyourway.in/wp-content/uploads/2023/04/marvin-castelino-z4GzALvJ8xs-unsplash-scaled.jpg"
       }
     ],
     vehicles: [
@@ -442,7 +442,7 @@ export const popularRoutes: Route[] = [
     distance: "20 km",
     duration: "45 minutes",
     basePrice: 800,
-    image: "/images/routes/doiwala.jpg",
+    image: "https://images.pexels.com/photos/1186847/pexels-photo-1186847.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     stops: [
       {
         name: "Dehradun",
@@ -466,7 +466,7 @@ export const popularRoutes: Route[] = [
       {
         name: "Local Markets",
         description: "Traditional bazaars and local shopping",
-        image: "/images/attractions/doiwala-market.jpg"
+        image: "https://www.explorewithecokats.com/wp-content/uploads/2021/04/1024px-Paltan_Bazar_Dehradun_04.jpg"
       }
     ],
     vehicles: [
@@ -491,7 +491,7 @@ export const popularRoutes: Route[] = [
     distance: "68 km",
     duration: "2.5 hours",
     basePrice: 2000,
-    image: "/images/routes/roorkee.jpg",
+    image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/34/38/1a/sun-dial.jpg?w=1000&h=500&s=1",
     stops: [
       {
         name: "Dehradun",
@@ -521,12 +521,12 @@ export const popularRoutes: Route[] = [
       {
         name: "IIT Roorkee",
         description: "Historic engineering institution established in 1847",
-        image: "/images/attractions/iit-roorkee.jpg"
+        image: "https://bl-i.thgim.com/public/news/xe4vo3/article66182896.ece/alternates/LANDSCAPE_1200/IIT%20Roorkee%20Campus.jpeg"
       },
       {
         name: "Roorkee Canal",
         description: "Historic Ganges Canal and engineering marvel",
-        image: "/images/attractions/roorkee-canal.jpg"
+        image: "https://i.ytimg.com/vi/v0wIfANznus/maxresdefault.jpg"
       }
     ],
     vehicles: [
@@ -551,7 +551,7 @@ export const popularRoutes: Route[] = [
     distance: "162 km",
     duration: "5-6 hours",
     basePrice: 4000,
-    image: "/images/routes/rudraprayag.jpg",
+    image: "https://th.bing.com/th/id/OIP.Uww92B_l_l0Yeonbagt2KwHaEV?rs=1&pid=ImgDetMain",
     stops: [
       {
         name: "Dehradun",
@@ -587,12 +587,12 @@ export const popularRoutes: Route[] = [
       {
         name: "Rudranath Temple",
         description: "Ancient temple at the confluence of rivers",
-        image: "/images/attractions/rudranath-temple.jpg"
+        image: "https://daajupahadi.com/wp-content/uploads/2022/07/Rudranath-edited-1.jpg"
       },
       {
         name: "River Confluence",
         description: "Sacred confluence of Alaknanda and Mandakini",
-        image: "/images/attractions/rudraprayag-confluence.jpg"
+        image: "https://procaffenation.com/wp-content/uploads/2017/04/1200px-Karnali_river-1024x683.jpg"
       }
     ],
     vehicles: [
@@ -617,7 +617,7 @@ export const popularRoutes: Route[] = [
     distance: "115 km",
     duration: "3-4 hours",
     basePrice: 3000,
-    image: "/images/routes/kotdwar.jpg",
+    image: "https://www.nativeplanet.com/img/2018/09/stjoesphchurchkotdwar-1537959389.jpg",
     stops: [
       {
         name: "Dehradun",
@@ -647,12 +647,12 @@ export const popularRoutes: Route[] = [
       {
         name: "Durga Devi Temple",
         description: "Ancient temple with historical significance",
-        image: "/images/attractions/durga-devi-temple.jpg"
+        image: "https://th.bing.com/th/id/OIP.fJIz_Px9Cg8dKjYXpm36VgHaFj?rs=1&pid=ImgDetMain"
       },
       {
         name: "Sidhbali Temple",
         description: "Popular pilgrimage site near Kotdwar",
-        image: "/images/attractions/sidhbali-temple.jpg"
+        image: "https://th.bing.com/th/id/OIP.FQBiFTUCi_Ef4jxPDRn6IwHaEC?rs=1&pid=ImgDetMain"
       }
     ],
     vehicles: [
@@ -677,7 +677,7 @@ export const popularRoutes: Route[] = [
     distance: "105 km",
     duration: "4 hours",
     basePrice: 3500,
-    image: "/images/routes/devprayag.jpg",
+    image: "https://www.epicyatra.com/wp-content/uploads/2023/03/devpryag-2.webp",
     stops: [
       {
         name: "Dehradun",
@@ -707,12 +707,12 @@ export const popularRoutes: Route[] = [
       {
         name: "Sangam Point",
         description: "Sacred confluence of Alaknanda and Bhagirathi",
-        image: "/images/attractions/devprayag-sangam.jpg"
+        image: "https://vargiskhan.com/log/wp-content/uploads/2020/12/sangam-point-ladakh.jpg"
       },
       {
         name: "Raghunath Temple",
         description: "Ancient temple complex overlooking the confluence",
-        image: "/images/attractions/raghunath-temple.jpg"
+        image: "https://www.gosahin.com/go/p/f/1541703246_Raghunath-temple-jammu3.jpg"
       }
     ],
     vehicles: [
@@ -737,7 +737,7 @@ export const popularRoutes: Route[] = [
     distance: "155 km",
     duration: "5-6 hours",
     basePrice: 4500,
-    image: "/images/routes/ghansali.jpg",
+    image: "https://th.bing.com/th/id/OIP.rvdyOl7U-HqGQwPRjGXyeAHaEK?rs=1&pid=ImgDetMain",
     stops: [
       {
         name: "Dehradun",
@@ -767,12 +767,12 @@ export const popularRoutes: Route[] = [
       {
         name: "Chandrabadni Temple",
         description: "Ancient temple with panoramic valley views",
-        image: "/images/attractions/chandrabadni-temple.jpg"
+        image: "https://th.bing.com/th/id/OIP.v60bHNRt24W0bKb8SU6L4wHaD8?rs=1&pid=ImgDetMain"
       },
       {
         name: "Tehri Lake",
         description: "Beautiful artificial lake offering water sports",
-        image: "/images/attractions/tehri-lake.jpg"
+        image: "https://kanatalheights.com/wp-content/uploads/2022/06/tehriiii.jpeg"
       }
     ],
     vehicles: [
@@ -797,7 +797,7 @@ export const popularRoutes: Route[] = [
     distance: "190 km",
     duration: "6-7 hours",
     basePrice: 5000,
-    image: "/images/routes/karnaprayag.jpg",
+    image: "https://th.bing.com/th/id/OIP.r0fQlKhdYJ5INlWVxFQ2zwHaE0?rs=1&pid=ImgDetMain",
     stops: [
       {
         name: "Dehradun",
@@ -827,12 +827,12 @@ export const popularRoutes: Route[] = [
       {
         name: "Karna Temple",
         description: "Ancient temple dedicated to Karna of Mahabharata",
-        image: "/images/attractions/karna-temple.jpg"
+        image: "https://www.chardhamtours.in/gallery/cityImage/1595759236_uma_devi_temple.jpg"
       },
       {
         name: "River Confluence",
         description: "Sacred meeting point of Alaknanda and Pindar rivers",
-        image: "/images/attractions/karnaprayag-confluence.jpg"
+        image: "https://twistedsifter.com/wp-content/uploads/2012/04/osijek-croatia-drava-and-danube-rivers-confluence.jpg"
       }
     ],
     vehicles: [
@@ -857,7 +857,7 @@ export const popularRoutes: Route[] = [
     distance: "220 km",
     duration: "7-8 hours",
     basePrice: 5500,
-    image: "/images/routes/sonprayag.jpg",
+    image: "https://th.bing.com/th/id/OIP.c06ZbKu_uzAV0sSQE0GX3AHaEn?w=768&h=478&rs=1&pid=ImgDetMain",
     stops: [
       {
         name: "Dehradun",
@@ -887,12 +887,12 @@ export const popularRoutes: Route[] = [
       {
         name: "Triyuginarayan Temple",
         description: "Ancient temple where Lord Shiva and Parvati were married",
-        image: "/images/attractions/triyuginarayan-temple.jpg"
+        image: "https://kedarresorts.com/wp-content/uploads/2021/03/trijuginarayan-large.png"
       },
       {
         name: "Mandakini River",
         description: "Holy river and starting point of Kedarnath trek",
-        image: "/images/attractions/mandakini-river.jpg"
+        image: "https://i.pinimg.com/originals/e3/39/41/e3394125f77dfb5db118c2a05a60e663.jpg"
       }
     ],
     vehicles: [
@@ -917,7 +917,7 @@ export const popularRoutes: Route[] = [
     distance: "100 km",
     duration: "3.5 hours",
     basePrice: 2500,
-    image: "/images/routes/new-tehri.jpg",
+    image: "https://th.bing.com/th/id/OIP.yFLpBWEJpSqeemaNzVHlWAHaEH?rs=1&pid=ImgDetMain",
     stops: [
       {
         name: "Dehradun",
@@ -947,17 +947,17 @@ export const popularRoutes: Route[] = [
       {
         name: "Tehri Dam",
         description: "One of the tallest dams in India with impressive reservoir",
-        image: "/images/attractions/tehri-dam.jpg"
+        image: "https://th.bing.com/th/id/OIP.7jJaNaiEeX8uD-R3ghu4eQHaE8?rs=1&pid=ImgDetMain"
       },
       {
         name: "Tehri Lake",
         description: "Perfect for water sports and boating activities",
-        image: "/images/attractions/tehri-lake.jpg"
+        image: "https://thumbs.dreamstime.com/b/tehri-lake-uttarakhand-india-artificial-dam-reservoir-tallest-asia-s-largest-man-made-255016313.jpg"
       },
       {
         name: "Adventure Sports Complex",
         description: "Offers activities like kayaking, jet skiing, and banana boat rides",
-        image: "/images/attractions/tehri-adventure.jpg"
+        image: "https://th.bing.com/th/id/OIP.WCbfTZ346apz862bd1Wn_gAAAA?rs=1&pid=ImgDetMain"
       }
     ],
     vehicles: [

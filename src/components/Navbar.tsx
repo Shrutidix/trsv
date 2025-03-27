@@ -1,23 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Phone, Mail, MapPin, User, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 import Logo from './Logo';
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const Navbar = () => {
   const isMobile = useIsMobile();
+  const location = useLocation();
+
+  // Scroll to top when route changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   const navItems = [
     { name: 'Home', path: '/' },
-    { name: 'Destinations', path: '/destinations' },
     { name: 'Routes', path: '/routes' },
     { name: 'Taxi Services', path: '/taxi' },
+    { name: 'Destinations', path: '/destinations' },
+    { name: 'Packages', path: '/packages' },
     { name: 'About Us', path: '/about' },
     { name: 'Contact', path: '/contact' },
   ];
@@ -46,11 +49,11 @@ const Navbar = () => {
             <div className="flex items-center gap-4">
               <a href="tel:+1234567890" className="flex items-center gap-1 text-sm text-gray-600 hover:text-primary-500">
                 <Phone className="h-4 w-4" />
-                <span>+1 (234) 567-890</span>
+                <span>+91 8077757674</span>
               </a>
               <a href="mailto:info@himalayajoy.com" className="hidden md:flex items-center gap-1 text-sm text-gray-600 hover:text-primary-500">
                 <Mail className="h-4 w-4" />
-                <span>info@himalayajoy.com</span>
+                <span>uttrakhandroadtrip@gmail.com</span>
               </a>
             </div>
             <div className="flex items-center gap-4">
@@ -58,10 +61,6 @@ const Navbar = () => {
                 <MapPin className="h-4 w-4" />
                 <span>Track Booking</span>
               </a>
-              <Link to="/login" className="hidden md:flex items-center gap-1 text-sm text-gray-600 hover:text-primary-500">
-                <User className="h-4 w-4" />
-                <span>Login</span>
-              </Link>
             </div>
           </div>
         </div>

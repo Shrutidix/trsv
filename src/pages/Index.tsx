@@ -5,12 +5,17 @@ import SearchTabs from '@/components/SearchTabs';
 import DestinationCard from '@/components/DestinationCard';
 import PackageCard from '@/components/PackageCard';
 import TestimonialCard from '@/components/TestimonialCard';
+import VacationBanner from '@/components/VacationBanner';
 import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
+import { cn } from '@/lib/utils';
+import { format } from 'date-fns';
 import { 
-  Car, Phone, CheckCircle, Award, Shield, Mountain, MapPin, Tent, Calendar, Clock, Users 
+  Car, Phone, CheckCircle, Award, Shield, Mountain, MapPin, Tent, Calendar as CalendarIcon, Clock, Users 
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { DatePickerWithOccasions } from '@/components/DatePickerWithOccasions';
+import { Link, useSearchParams } from 'react-router-dom';
 import RouteDetails from '@/components/RouteDetails';
 
 // Add useInView hook at the top of the file
@@ -39,9 +44,27 @@ const useInView = (options = {}) => {
 };
 
 const Index = () => {
+  // Get URL parameters
+  const [searchParams] = useSearchParams();
+  const fromParam = searchParams.get('from');
+  const toParam = searchParams.get('to');
+
   const [selectedDate, setSelectedDate] = useState<Date>();
   const [selectedRoute, setSelectedRoute] = useState<typeof popularRoutes[0] | null>(null);
   const [passengerCount, setPassengerCount] = useState("1-3");
+  const [selectedCarType, setSelectedCarType] = useState("sedan");
+  const [fromLocation, setFromLocation] = useState(fromParam || "");
+  const [toLocation, setToLocation] = useState(toParam || "");
+  
+  // Scroll to booking form if URL parameters are present
+  useEffect(() => {
+    if (fromParam || toParam) {
+      const bookingFormElement = document.getElementById('booking-form');
+      if (bookingFormElement) {
+        bookingFormElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [fromParam, toParam]);
   
   // Create refs for each section
   const [statsRef, statsInView] = useInView();
@@ -56,7 +79,7 @@ const Index = () => {
     {
       id: 'shimla',
       name: 'Shimla',
-      image: 'https://images.unsplash.com/photo-1626621934657-30a927b31aad?q=80&w=2070&auto=format&fit=crop',
+      image: 'https://images.pexels.com/photos/31216843/pexels-photo-31216843/free-photo-of-colorful-architecture-of-shimla-hillside.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       location: 'Himachal Pradesh',
       description: 'Experience the charm of the colonial hill station with panoramic views of the Himalayan peaks.',
     },
@@ -70,14 +93,14 @@ const Index = () => {
     {
       id: 'dharamshala',
       name: 'Dharamshala',
-      image: 'https://images.unsplash.com/photo-1606467848663-d79b02e0afb2?q=80&w=2071&auto=format&fit=crop',
+      image: 'https://images.pexels.com/photos/4340537/pexels-photo-4340537.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       location: 'Himachal Pradesh',
       description: 'Home to the Dalai Lama, this hill station offers stunning views and a unique blend of Indian and Tibetan culture.',
     },
     {
       id: 'nainital',
       name: 'Nainital',
-      image: 'https://images.unsplash.com/photo-1598091400561-7e6e9c698e06?q=80&w=2070&auto=format&fit=crop',
+      image: 'https://images.pexels.com/photos/19194412/pexels-photo-19194412/free-photo-of-kainchi-dham-in-india.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       location: 'Uttarakhand',
       description: 'A charming lake town surrounded by mountains, offering boating and scenic treks.',
     },
@@ -167,24 +190,28 @@ const Index = () => {
       distance: "35",
       duration: 1.5,
       description: "A scenic hill station journey with panoramic views of the Himalayas",
-      image: "/images/mussoorie.jpg",
+      image: "https://images.pexels.com/photos/2070307/pexels-photo-2070307.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       stops: ["Dehradun", "Mussoorie Mall Road", "Kempty Falls", "Company Garden"],
       attractions: ["Mall Road", "Kempty Falls", "Gun Hill", "Company Garden", "Cloud's End"],
       vehicles: {
         sedan: {
-          price: 1500,
+          price: 1200,
+          negotiable: true,
           description: "Comfortable sedan for up to 4 passengers"
         },
         suv: {
-          price: 2000,
+          price: 1800,
+          negotiable: true,
           description: "Spacious SUV for up to 6 passengers"
         },
         luxury: {
-          price: 3500,
+          price: 2500,
+          negotiable: false,
           description: "Premium luxury car for a superior experience"
         },
         tempo: {
-          price: 2500,
+          price: 2200,
+          negotiable: true,
           description: "Tempo traveller for groups up to 12 passengers"
         }
       }
@@ -196,24 +223,28 @@ const Index = () => {
       distance: "52",
       duration: 1.5,
       description: "Sacred city journey to witness the holy Ganga Aarti",
-      image: "/images/haridwar.jpg",
+      image: "https://images.pexels.com/photos/10783023/pexels-photo-10783023.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       stops: ["Dehradun", "Har Ki Pauri", "Mansa Devi Temple"],
       attractions: ["Har Ki Pauri", "Mansa Devi Temple", "Chandi Devi Temple", "Ganga Aarti"],
       vehicles: {
         sedan: {
-          price: 1800,
+          price: 1400,
+          negotiable: true,
           description: "Comfortable sedan for up to 4 passengers"
         },
         suv: {
-          price: 2200,
+          price: 2000,
+          negotiable: true,
           description: "Spacious SUV for up to 6 passengers"
         },
         luxury: {
-          price: 3800,
+          price: 2500,
+          negotiable: false,
           description: "Premium luxury car for a superior experience"
         },
         tempo: {
-          price: 2800,
+          price: 2300,
+          negotiable: true,
           description: "Tempo traveller for groups up to 12 passengers"
         }
       }
@@ -225,29 +256,90 @@ const Index = () => {
       distance: "43",
       duration: 1.25,
       description: "Adventure capital with spiritual essence and river rafting",
-      image: "/images/rishikesh.jpg",
+      image: "https://images.pexels.com/photos/13473095/pexels-photo-13473095.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       stops: ["Dehradun", "Laxman Jhula", "Ram Jhula", "Triveni Ghat"],
       attractions: ["River Rafting", "Laxman Jhula", "Ram Jhula", "Beatles Ashram", "Triveni Ghat"],
       vehicles: {
         sedan: {
-          price: 1600,
+          price: 1300,
+          negotiable: true,
           description: "Comfortable sedan for up to 4 passengers"
         },
         suv: {
-          price: 2100,
+          price: 1900,
+          negotiable: true,
           description: "Spacious SUV for up to 6 passengers"
         },
         luxury: {
-          price: 3600,
+          price: 2500,
+          negotiable: false,
           description: "Premium luxury car for a superior experience"
         },
         tempo: {
-          price: 2600,
+          price: 2100,
+          negotiable: true,
           description: "Tempo traveller for groups up to 12 passengers"
         }
       }
     }
   ];
+
+
+  // Vehicle information
+  const vehicleInfo = {
+    sedan: {
+      name: "Premium Sedan",
+      capacity: "1-3 Passengers",
+      features: ["Air Conditioning", "Comfortable Seating", "Music System", "GPS Navigation"],
+      price: "₹15/km",
+      image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2940&auto=format&fit=crop",
+      description: "Perfect for small families or business travelers requiring comfort and elegance."
+    },
+    suv: {
+      name: "Luxury SUV",
+      capacity: "4-6 Passengers",
+      features: ["Air Conditioning", "Spacious Interior", "Premium Sound System", "Extra Luggage Space"],
+      price: "₹18/km",
+      image: "https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=2936&auto=format&fit=crop",
+      description: "Ideal for families or small groups looking for a blend of comfort and space."
+    },
+    tempo: {
+      name: "Tempo Traveller",
+      capacity: "7-12 Passengers",
+      features: ["Air Conditioning", "Reclining Seats", "Ample Luggage Space", "Perfect for Groups"],
+      price: "₹22/km",
+      image: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=2940&auto=format&fit=crop",
+      description: "Perfect for medium-sized groups traveling together with ample space for luggage."
+    },
+    bus: {
+      name: "Luxury Bus",
+      capacity: "13+ Passengers",
+      features: ["Air Conditioning", "Reclining Seats", "Entertainment System", "Large Groups"],
+      price: "₹35/km",
+      image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=2940&auto=format&fit=crop",
+      description: "The ultimate solution for large groups traveling together in complete comfort."
+    }
+  };
+
+  // Update car type based on passenger count
+  useEffect(() => {
+    switch (passengerCount) {
+      case "1-3":
+        setSelectedCarType("sedan");
+        break;
+      case "4-6":
+        setSelectedCarType("suv");
+        break;
+      case "7-12":
+        setSelectedCarType("tempo");
+        break;
+      case "13+":
+        setSelectedCarType("bus");
+        break;
+      default:
+        setSelectedCarType("sedan");
+    }
+  }, [passengerCount]);
 
   // Define animation styles
   const animationStyles = `
@@ -511,12 +603,48 @@ const Index = () => {
     };
   }, []);
 
+  // Add new destinations data for Uttarakhand
+  const uttarakhandDestinations = [
+    {
+      id: 'rishikesh',
+      name: 'Rishikesh',
+      image: 'https://campinginrishikesh.in/wp-content/uploads/2020/03/camp-crossfire-river-view.jpg',
+      location: 'Uttarakhand',
+      description: 'World Capital of Yoga, famous for spiritual enlightenment and adventure sports.',
+      activities: ['River Rafting', 'Yoga', 'Camping']
+    },
+    {
+      id: 'mussoorie',
+      name: 'Mussoorie',
+      image: 'https://www.namasteindiatrip.com/wp-content/uploads/2019/09/Mussoorie-Travel-HD.jpg',
+      location: 'Uttarakhand',
+      description: 'Queen of Hills with panoramic views of the Himalayas and colonial charm.',
+      activities: ['Cable Car', 'Mall Road', 'Trekking']
+    },
+    {
+      id: 'haridwar',
+      name: 'Haridwar',
+      image: 'https://cdn.britannica.com/43/155643-050-E9989FB0/bathing-ghat-Har-ki-pauri-Haridwar-India-Uttarakhand.jpg',
+      location: 'Uttarakhand',
+      description: 'Holy city on the banks of River Ganges, famous for Ganga Aarti.',
+      activities: ['Ganga Aarti', 'Temple Visit', 'Holy Dip']
+    },
+    {
+      id: 'auli',
+      name: 'Auli',
+      image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=2070&auto=format&fit=crop',
+      location: 'Uttarakhand',
+      description: 'Skiing destination with breathtaking views of Nanda Devi.',
+      activities: ['Skiing', 'Cable Car', 'Photography']
+    }
+  ];
+
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="min-h-screen">
       <Navbar />
       
       {/* Hero Section - Professional redesign with realistic car animations */}
-      <section className="relative overflow-hidden bg-[url('https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?q=80&w=2069&auto=format&fit=crop')] bg-cover bg-center bg-fixed py-8 before:absolute before:inset-0 before:bg-gradient-to-br before:from-purple-900/80 before:via-blue-900/70 before:to-indigo-900/60 before:backdrop-blur-[2px]">
+      <section className="relative overflow-hidden bg-[url('https://dynamic.tourtravelworld.com/package-images/photo-big/dir_48/1430243/367404.jpg')] bg-cover bg-center bg-fixed py-8 before:absolute before:inset-0 before:bg-gradient-to-br before:from-purple-900/80 before:via-blue-900/70 before:to-indigo-900/60 before:backdrop-blur-[2px]">
         {/* Car Animation Container - Will change based on selection */}
         <div className="absolute inset-0 overflow-hidden">
           {/* SVG Car Animation - Moving from left to right */}
@@ -568,13 +696,13 @@ const Index = () => {
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 text-center drop-shadow-lg">
               India's Premier Taxi Booking Service
             </h1>
-            <p className="text-xl text-white text-center drop-shadow-md">
+            <p className="text-xl text-white text-center drop-shadow-md mb-6">
               Travel in style and comfort with our luxury fleet
             </p>
           </div>
 
           {/* Booking form panel */}
-          <div className="w-full max-w-7xl mx-auto bg-gradient-to-br from-white/95 via-primary-50/90 to-blue-50/85 backdrop-blur-2xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-white/30 overflow-visible mb-16">
+          <div id="booking-form" className="w-full max-w-7xl mx-auto bg-gradient-to-br from-white/95 via-primary-50/90 to-blue-50/85 backdrop-blur-2xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-white/30 overflow-visible mb-16">
             <div className="p-8 relative">
               {/* Background decoration */}
               <div className="absolute inset-0 bg-grid-pattern opacity-15 pointer-events-none"></div>
@@ -589,23 +717,23 @@ const Index = () => {
                     <MapPin className="h-5 w-5 mr-2 text-primary" /> From
                   </label>
                   <div className="relative">
-                    <select className="block w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80">
-                      <option>Select pickup point</option>
-                      <option>Delhi</option>
-                      <option>Mumbai</option>
-                      <option>Bangalore</option>
-                      <option>Kolkata</option>
-                      <option>Chennai</option>
-                      <option>Hyderabad</option>
-                      <option>Jaipur</option>
-                      <option>Shimla</option>
-                      <option>Manali</option>
-                      <option>Chandigarh</option>
-                      <option>Dehradun</option>
-                      <option>Lucknow</option>
-                      <option>Agra</option>
-                      <option>Varanasi</option>
-                      <option>Amritsar</option>
+                    <select 
+                      value={fromLocation} 
+                      onChange={(e) => setFromLocation(e.target.value)}
+                      className="block w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80"
+                    >
+                      <option value="">Select pickup point</option>
+                      <option value="Haridwar">Haridwar</option>
+                      <option value="Rishikesh">Rishikesh</option>
+                      <option value="Mussoorie">Mussoorie</option>
+                      <option value="Dhanaulti">Dhanaulti</option>
+                      <option value="Nainital">Nainital</option>
+                      <option value="Jim Corbett">Jim Corbett</option>
+                      <option value="Paonta Sahib">Paonta Sahib</option>
+                      <option value="Delhi">Delhi</option>
+                      <option value="Manali">Manali</option>
+                      <option value="Shimla">Shimla</option>
+                      <option value="Dehradun">Dehradun</option>
                     </select>
                   </div>
                 </div>
@@ -616,27 +744,23 @@ const Index = () => {
                     <MapPin className="h-5 w-5 mr-2 text-primary" /> To
                   </label>
                   <div className="relative">
-                    <select className="block w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80">
-                      <option>Select destination</option>
-                      <option>Manali</option>
-                      <option>Shimla</option>
-                      <option>Dharamshala</option>
-                      <option>Dalhousie</option>
-                      <option>Kasol</option>
-                      <option>Mussoorie</option>
-                      <option>Nainital</option>
-                      <option>Rishikesh</option>
-                      <option>Haridwar</option>
-                      <option>Kedarnath</option>
-                      <option>Badrinath</option>
-                      <option>Valley of Flowers</option>
-                      <option>Jim Corbett</option>
-                      <option>Lansdowne</option>
-                      <option>Auli</option>
-                      <option>Chopta</option>
-                      <option>Kasauli</option>
-                      <option>McLeodganj</option>
-                      <option>Spiti Valley</option>
+                    <select
+                      value={toLocation}
+                      onChange={(e) => setToLocation(e.target.value)}
+                      className="block w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80"
+                    >
+                      <option value="">Select destination</option>
+                      <option value="Haridwar">Haridwar</option>
+                      <option value="Rishikesh">Rishikesh</option>
+                      <option value="Mussoorie">Mussoorie</option>
+                      <option value="Dhanaulti">Dhanaulti</option>
+                      <option value="Nainital">Nainital</option>
+                      <option value="Jim Corbett">Jim Corbett</option>
+                      <option value="Paonta Sahib">Paonta Sahib</option>
+                      <option value="Delhi">Delhi</option>
+                      <option value="Manali">Manali</option>
+                      <option value="Shimla">Shimla</option>
+                      <option value="Dehradun">Dehradun</option>
                     </select>
                   </div>
                 </div>
@@ -644,61 +768,88 @@ const Index = () => {
                 {/* Date Picker */}
                 <div className="col-span-1">
                   <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
-                    <Calendar className="h-5 w-5 mr-2 text-primary" /> Date
+                    <CalendarIcon className="h-5 w-5 mr-2 text-primary" /> Date
                   </label>
-                  <div className="relative">
-                    <DatePickerWithOccasions 
-                      className="block w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80" 
-                    />
-                  </div>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80",
+                          !selectedDate && "text-muted-foreground"
+                        )}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {selectedDate ? format(selectedDate, "PPP") : <span>Pick a date</span>}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={selectedDate}
+                        onSelect={setSelectedDate}
+                        initialFocus
+                        disabled={(date) => date < new Date()}
+                      />
+                    </PopoverContent>
+                  </Popover>
                 </div>
 
                 {/* Passenger Count */}
-                <div className="col-span-1 md:col-span-3">
+                <div className="col-span-1">
                   <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
                     <Users className="h-5 w-5 mr-2 text-primary" /> Passengers
                   </label>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    {["1-3", "4-6", "7-12", "13+"].map((count) => (
-                      <div 
-                        key={count}
-                        onClick={() => setPassengerCount(count)}
-                        className={`cursor-pointer h-16 rounded-2xl flex items-center justify-center border-2 transition-all ${
-                          passengerCount === count 
-                            ? "border-primary-500 bg-primary-50/70 backdrop-blur-sm text-primary-700" 
-                            : "border-gray-100 bg-white/60 backdrop-blur-sm text-gray-600 hover:bg-white/80"
-                        }`}
-                      >
-                        <span className="font-medium">{count} {count === "1-3" ? "Person" : "People"}</span>
-                      </div>
-                    ))}
-                  </div>
+                  <Select value={passengerCount} onValueChange={setPassengerCount}>
+                    <SelectTrigger className="w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80">
+                      <SelectValue placeholder="Select passengers" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1-3">1-3 Passengers</SelectItem>
+                      <SelectItem value="4-6">4-6 Passengers</SelectItem>
+                      <SelectItem value="7-12">7-12 Passengers</SelectItem>
+                      <SelectItem value="13+">13+ Passengers</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
-                {/* Duration */}
+                {/* Car Type */}
                 <div className="col-span-1">
                   <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
-                    <Clock className="h-5 w-5 mr-2 text-primary" /> Duration
+                    <Car className="h-5 w-5 mr-2 text-primary" /> Car Type
                   </label>
-                  <div className="relative">
-                    <select className="block w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80">
-                      <option>One-Way Trip</option>
-                      <option>Round Trip</option>
-                      <option>Multi-Day Rental</option>
-                    </select>
-                  </div>
+                  <Select value={selectedCarType} onValueChange={setSelectedCarType}>
+                    <SelectTrigger className="w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80">
+                      <SelectValue placeholder="Select car type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="sedan">Premium Sedan</SelectItem>
+                      <SelectItem value="suv">Luxury SUV</SelectItem>
+                      <SelectItem value="tempo">Tempo Traveller</SelectItem>
+                      <SelectItem value="bus">Luxury Bus</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
-
+                <div className="col-span-1">
+  <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
+    <Phone className="h-5 w-5 mr-2 text-primary" /> Contact Number
+  </label>
+  <input 
+    type="tel" 
+    placeholder="Enter contact number" 
+    className="w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80"
+  />
+</div>
                 {/* Search Button */}
-                <div className="col-span-1 flex items-end">
-                  <button className="w-full h-16 text-white font-bold bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 rounded-2xl py-3 px-6 shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 text-lg transform hover:-translate-y-1">
+                <div className="col-span-1 md:col-span-3 flex justify-center">
+                  <button className="w-full md:w-auto px-12 h-16 text-white font-bold bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 rounded-2xl py-3 shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 text-lg transform hover:-translate-y-1">
                     <Car className="h-6 w-6 mr-2" />
                     SEARCH TAXIS
                   </button>
                 </div>
               </div>
 
-              {/* Vehicle Preview Section - Updates based on selection */}
+              {/* Vehicle Preview Section */}
               <div className="mt-8 p-6 bg-gradient-to-r from-primary-50/60 via-white/60 to-blue-50/60 backdrop-blur-xl rounded-2xl border border-white/60 shadow-lg relative overflow-hidden">
                 {/* Background decoration */}
                 <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
@@ -706,42 +857,33 @@ const Index = () => {
                 <div className="absolute -bottom-20 -left-20 w-48 h-48 bg-blue-400/15 rounded-full blur-3xl"></div>
                 <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
                   <div className="flex-shrink-0 w-60 h-40 rounded-xl overflow-hidden bg-white/70 backdrop-blur-sm flex items-center justify-center shadow-sm border border-white/60">
-                    <div id="vehiclePreviewImage">
-                      {/* Default sedan preview */}
-                      <svg width="180" height="100" viewBox="0 0 240 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g>
-                          {/* Sedan Body */}
-                          <path d="M40,70 L60,40 C70,25 170,25 180,40 L200,70 L40,70 Z" fill="#3B82F6" stroke="white" strokeWidth="2"/>
-                          {/* Sedan Top */}
-                          <path d="M80,40 C90,25 140,25 150,40 L150,70 L80,70 L80,40 Z" fill="#60A5FA" stroke="white" strokeWidth="1"/>
-                          {/* Windows */}
-                          <path d="M85,40 C95,30 135,30 145,40 L145,65 L85,65 L85,40 Z" fill="#DBEAFE" stroke="white" strokeWidth="1"/>
-                          {/* Tires */}
-                          <circle cx="80" cy="70" r="15" fill="#1F2937" stroke="white" strokeWidth="2"/>
-                          <circle cx="80" cy="70" r="7" fill="#4B5563" stroke="white" strokeWidth="1"/>
-                          <circle cx="160" cy="70" r="15" fill="#1F2937" stroke="white" strokeWidth="2"/>
-                          <circle cx="160" cy="70" r="7" fill="#4B5563" stroke="white" strokeWidth="1"/>
-                          {/* Lights */}
-                          <path d="M40,60 L40,70 L50,70 L50,60 Z" fill="#FBBF24"/>
-                          <path d="M190,60 L190,70 L200,70 L200,60 Z" fill="#FBBF24"/>
-                          {/* Details */}
-                          <rect x="110" y="50" width="20" height="5" rx="2" fill="#E5E7EB"/>
-                        </g>
-                      </svg>
-                    </div>
+                    <img 
+                      src={vehicleInfo[selectedCarType as keyof typeof vehicleInfo].image}
+                      alt={vehicleInfo[selectedCarType as keyof typeof vehicleInfo].name}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div className="flex-grow">
-                    <h3 id="vehiclePreviewTitle" className="text-xl font-bold text-gray-900 mb-2">Sedan</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">
+                      {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].name}
+                    </h3>
                     <div className="flex flex-wrap items-center gap-4 mb-3 text-gray-700">
-                      <span className="flex items-center"><CheckCircle className="h-4 w-4 mr-1 text-primary" /> AC</span>
-                      <span className="flex items-center"><CheckCircle className="h-4 w-4 mr-1 text-primary" /> Luggage Space</span>
-                      <span className="flex items-center"><CheckCircle className="h-4 w-4 mr-1 text-primary" /> Music System</span>
-                      <span className="flex items-center"><CheckCircle className="h-4 w-4 mr-1 text-primary" /> Bottled Water</span>
+                      {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].features.map((feature, index) => (
+                        <span key={index} className="flex items-center">
+                          <CheckCircle className="h-4 w-4 mr-1 text-primary" /> {feature}
+                        </span>
+                      ))}
                     </div>
-                    <p id="vehiclePreviewDescription" className="text-gray-600 mb-4">Comfortable sedan for up to 3 passengers with standard luggage.</p>
+                    <p className="text-gray-600 mb-4">
+                      {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].description}
+                    </p>
                     <div className="flex items-center gap-4">
-                      <div className="bg-primary text-white rounded-full py-1 px-4 text-sm font-medium">₹15/km</div>
-                      <div className="text-sm text-gray-500">*Final price may vary based on distance and duration</div>
+                      <div className="bg-primary text-white rounded-full py-1 px-4 text-sm font-medium">
+                        {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].price}
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        Recommended for {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].capacity}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -757,6 +899,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Vacation Banner Section */}
+      <VacationBanner />
 
       {/* Update animation keyframes */}
       <style>{`
@@ -779,32 +924,8 @@ const Index = () => {
         }
       `}</style>
 
-      {/* Quick Stats Section */}
-      <section className="py-12 bg-white" ref={statsRef}>
-        <div className={`container px-4 ${statsInView ? 'stagger-enter-active' : 'stagger-enter'}`}>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-            <div className="bg-white shadow-lg rounded-xl p-6 transform hover:-translate-y-1 transition-all duration-300 border border-primary-100">
-              <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">500+</div>
-              <div className="text-sm text-gray-600 font-medium">Happy Travelers</div>
-            </div>
-            <div className="bg-white shadow-lg rounded-xl p-6 transform hover:-translate-y-1 transition-all duration-300 border border-primary-100">
-              <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">50+</div>
-              <div className="text-sm text-gray-600 font-medium">Premium Vehicles</div>
-            </div>
-            <div className="bg-white shadow-lg rounded-xl p-6 transform hover:-translate-y-1 transition-all duration-300 border border-primary-100">
-              <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">20+</div>
-              <div className="text-sm text-gray-600 font-medium">Destinations</div>
-            </div>
-            <div className="bg-white shadow-lg rounded-xl p-6 transform hover:-translate-y-1 transition-all duration-300 border border-primary-100">
-              <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">24/7</div>
-              <div className="text-sm text-gray-600 font-medium">Customer Support</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Why Choose Us Section */}
-      <section className="py-16 bg-secondary mt-16" ref={whyChooseRef}>
+      <section className="py-16 bg-secondary" ref={whyChooseRef}>
         <div className={`container ${whyChooseInView ? 'fade-up-enter-active' : 'fade-up-enter'}`}>
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4 text-primary-800">Why Choose HimalayaJoy</h2>
@@ -858,7 +979,7 @@ const Index = () => {
       </section>
 
       {/* Popular Destinations */}
-      <section className="py-16 bg-white" ref={destinationsRef}>
+      <section className="py-16 bg-white" ref={destinationsRef} id="destinations-section">
         <div className={`container ${destinationsInView ? 'fade-up-enter-active' : 'fade-up-enter'}`}>
           <div className="flex flex-col md:flex-row justify-between items-center mb-10">
             <div>
@@ -883,7 +1004,7 @@ const Index = () => {
       </section>
 
       {/* Our Services */}
-      <section className="py-16 bg-tropical-gradient text-white" ref={servicesRef}>
+      <section className="py-16 bg-gradient-to-r from-primary-400 to-primary-200 text-white" ref={servicesRef}>
         <div className={`container ${servicesInView ? 'scale-up-enter-active' : 'scale-up-enter'}`}>
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Our Services</h2>
@@ -921,31 +1042,32 @@ const Index = () => {
             </div>
             
             <div className="glass-card p-8">
-              <Mountain className="h-10 w-10 mb-4" />
-              <h3 className="text-xl font-bold mb-3">Tour Packages</h3>
+              <Car className="h-10 w-10 mb-4" />
+              <h3 className="text-xl font-bold mb-3">Taxi Service & Local Guide Charges</h3>
               <p className="mb-4 opacity-90">
-                Curated tour packages covering the most beautiful destinations in North India, complete with accommodations.
+                Reliable taxi services with experienced drivers and knowledgeable local guides to make your journey smooth and informative.
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2" />
-                  <span>Hill Station Tours</span>
+                  <span>Airport & City Transfers</span>
                 </li>
                 <li className="flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2" />
-                  <span>Adventure Packages</span>
+                  <span>Full-Day Sightseeing Cabs</span>
                 </li>
                 <li className="flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2" />
-                  <span>Honeymoon Specials</span>
+                  <span>Professional Local Guides</span>
                 </li>
               </ul>
               <Link to="/packages">
                 <Button className="mt-6 bg-white/90 text-primary-600 hover:bg-white">
-                  Explore Packages
+                  Explore Services
                 </Button>
               </Link>
             </div>
+
             
             <div className="glass-card p-8">
               <Award className="h-10 w-10 mb-4" />
@@ -1050,7 +1172,7 @@ const Index = () => {
       )}
 
       {/* CTA Section */}
-      <section className="py-16 bg-sunset-gradient text-white">
+      <section className="py-16 bg-gradient-to-r from-primary-600 to-primary-400 text-white">
         <div className="container text-center">
           <h2 className="text-3xl font-bold mb-4">Ready for Your North India Adventure?</h2>
           <p className="max-w-2xl mx-auto mb-8">
@@ -1064,7 +1186,7 @@ const Index = () => {
               </Button>
             </Link>
             <Link to="/contact">
-              <Button size="lg" variant="outline" className="text-white border-white hover:bg-primary-600/20">
+              <Button size="lg" variant="outline" className="bg-white text-primary-600 hover:bg-gray-100">
                 Contact Us
               </Button>
             </Link>
@@ -1089,6 +1211,153 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Popular Places in Uttarakhand Section */}
+      <section className="py-16 bg-gradient-to-br from-blue-50 to-primary-50" id="uttarakhand-places">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4 text-primary-800 relative inline-block animate-slide-down">
+              Popular Places in Uttarakhand
+              <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-blue-500"></div>
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto animate-slide-up">
+              Explore the divine beauty of Devbhoomi Uttarakhand, from spiritual havens to adventure destinations
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {uttarakhandDestinations.map((destination, index) => (
+              <div 
+                key={destination.id}
+                className="destination-card group relative bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
+                style={{
+                  animation: `slideIn 0.5s ease-out forwards ${index * 0.1}s`,
+                  opacity: 0,
+                  transform: 'translateY(20px)'
+                }}
+              >
+                {/* Image Container with Overlay */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={destination.image}
+                    alt={destination.name}
+                    className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+
+                {/* Content */}
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-primary-800 mb-2 transform transition-all duration-300 group-hover:translate-x-1">{destination.name}</h3>
+                  <p className="text-gray-600 text-sm mb-4">{destination.description}</p>
+                  
+                  {/* Activities */}
+                  <div className="space-y-2">
+                    {destination.activities.map((activity, idx) => (
+                      <div 
+                        key={idx} 
+                        className="activity-item flex items-center text-sm text-gray-600"
+                        style={{
+                          animation: `fadeIn 0.5s ease-out forwards ${index * 0.1 + idx * 0.1}s`,
+                          opacity: 0
+                        }}
+                      >
+                        <CheckCircle className="h-4 w-4 mr-2 text-primary-500" />
+                        {activity}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Explore Button */}
+                  <button 
+                    className="mt-4 w-full bg-primary-600 text-white py-2 rounded-lg transform transition-all duration-300 hover:bg-primary-700 hover:scale-105 hover:shadow-lg"
+                    onClick={() => {
+                      window.location.href = '/contact ';
+                    }}
+                  >
+                    Explore More
+                  </button>
+                </div>
+
+                {/* Floating Location Badge */}
+                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium text-primary-600 shadow-lg">
+                  {destination.location}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Add these new animation keyframes */}
+      <style>
+        {`
+          @keyframes slideIn {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+              transform: translateX(-10px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+
+          @keyframes slide-up {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          @keyframes slide-down {
+            from {
+              opacity: 0;
+              transform: translateY(-20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          .animate-slide-up {
+            animation: slide-up 0.5s ease-out forwards;
+          }
+
+          .animate-slide-down {
+            animation: slide-down 0.5s ease-out forwards;
+          }
+
+          .destination-card {
+            will-change: transform, opacity;
+          }
+
+          .activity-item {
+            will-change: transform, opacity;
+          }
+
+          .destination-card:hover .activity-item {
+            transform: translateX(8px);
+            transition: transform 0.3s ease;
+          }
+        `}
+      </style>
 
       <Footer />
     </div>

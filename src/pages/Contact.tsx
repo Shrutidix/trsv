@@ -23,16 +23,22 @@ const Contact = () => {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       
-      <div className="bg-gradient-to-b from-primary-500 to-primary-600 py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center text-white mb-10">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
-            <p className="text-xl max-w-3xl mx-auto">
-              Have questions or need assistance? We're here to help plan your perfect journey.
-            </p>
-          </div>
-        </div>
-      </div>
+       <section className="bg-gradient-to-r from-primary-600 to-primary-300 py-20 text-white text-center">
+              <motion.div 
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="container mx-auto px-4 relative z-10"
+              >
+                <div className="text-center text-white-800 mb-10">
+                  <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
+                  <p className="text-xl max-w-3xl mx-auto">
+                  Have questions or need assistance? We're here to help plan your perfect journey.
+                  </p>
+                </div>
+              </motion.div>
+            </section>
+      
 
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -87,8 +93,8 @@ const Contact = () => {
                   <Phone className="h-5 w-5 text-primary-500 mt-1" />
                   <div>
                     <h3 className="font-semibold">Phone</h3>
-                    <p>+91 98765 43210</p>
-                    <p>+91 87654 32109</p>
+                    <p>+91 8077757674</p>
+                    <p>+91 9808762088</p>
                   </div>
                 </div>
                 
@@ -96,8 +102,8 @@ const Contact = () => {
                   <Mail className="h-5 w-5 text-primary-500 mt-1" />
                   <div>
                     <h3 className="font-semibold">Email</h3>
-                    <p>info@himalayajoy.com</p>
-                    <p>bookings@himalayajoy.com</p>
+                    <p>Shubhampanwar6561@gmail.com</p>
+                    <p>uttrakhandroadtrip@gmail.com</p>
                   </div>
                 </div>
                 
@@ -105,7 +111,7 @@ const Contact = () => {
                   <MapPin className="h-5 w-5 text-primary-500 mt-1" />
                   <div>
                     <h3 className="font-semibold">Address</h3>
-                    <p>123 Mountain View Road,<br />Dehradun, Uttarakhand<br />India - 248001</p>
+                    <p>Dehradun near isbt <br/> mdda calony mig12c</p>
                   </div>
                 </div>
                 
@@ -125,7 +131,7 @@ const Contact = () => {
               <p className="mb-4">For urgent travel assistance outside business hours:</p>
               <div className="bg-white p-4 rounded-md">
                 <p className="font-semibold">24/7 Traveler Support:</p>
-                <p className="text-primary-600">+91 99887 76655</p>
+                <p className="text-primary-600">+91 9808762088</p>
               </div>
             </div>
           </motion.div>
