@@ -15,7 +15,7 @@ import { format } from 'date-fns';
 import { 
   Car, Phone, CheckCircle, Award, Shield, Mountain, MapPin, Tent, Calendar as CalendarIcon, Clock, Users 
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import RouteDetails from '@/components/RouteDetails';
 
 // Add useInView hook at the top of the file
@@ -44,10 +44,27 @@ const useInView = (options = {}) => {
 };
 
 const Index = () => {
+  // Get URL parameters
+  const [searchParams] = useSearchParams();
+  const fromParam = searchParams.get('from');
+  const toParam = searchParams.get('to');
+
   const [selectedDate, setSelectedDate] = useState<Date>();
   const [selectedRoute, setSelectedRoute] = useState<typeof popularRoutes[0] | null>(null);
   const [passengerCount, setPassengerCount] = useState("1-3");
   const [selectedCarType, setSelectedCarType] = useState("sedan");
+  const [fromLocation, setFromLocation] = useState(fromParam || "");
+  const [toLocation, setToLocation] = useState(toParam || "");
+  
+  // Scroll to booking form if URL parameters are present
+  useEffect(() => {
+    if (fromParam || toParam) {
+      const bookingFormElement = document.getElementById('booking-form');
+      if (bookingFormElement) {
+        bookingFormElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [fromParam, toParam]);
   
   // Create refs for each section
   const [statsRef, statsInView] = useInView();
@@ -679,13 +696,13 @@ const Index = () => {
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 text-center drop-shadow-lg">
               India's Premier Taxi Booking Service
             </h1>
-            <p className="text-xl text-white text-center drop-shadow-md">
+            <p className="text-xl text-white text-center drop-shadow-md mb-6">
               Travel in style and comfort with our luxury fleet
             </p>
           </div>
 
           {/* Booking form panel */}
-          <div className="w-full max-w-7xl mx-auto bg-gradient-to-br from-white/95 via-primary-50/90 to-blue-50/85 backdrop-blur-2xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-white/30 overflow-visible mb-16">
+          <div id="booking-form" className="w-full max-w-7xl mx-auto bg-gradient-to-br from-white/95 via-primary-50/90 to-blue-50/85 backdrop-blur-2xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-white/30 overflow-visible mb-16">
             <div className="p-8 relative">
               {/* Background decoration */}
               <div className="absolute inset-0 bg-grid-pattern opacity-15 pointer-events-none"></div>
@@ -700,19 +717,23 @@ const Index = () => {
                     <MapPin className="h-5 w-5 mr-2 text-primary" /> From
                   </label>
                   <div className="relative">
-                    <select className="block w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80">
-                      <option>Select pickup point</option>
-                      <option>Haridwar</option>
-<option>Rishikesh</option>
-<option>Mussoorie</option>
-<option>Dhanaulti</option>
-<option>Nainital</option>
-<option>Jim Corbett</option>
-<option>Paonta Sahib</option>
-<option>Delhi</option>
-<option>Manali</option>
-<option>Shimla</option>
-
+                    <select 
+                      value={fromLocation} 
+                      onChange={(e) => setFromLocation(e.target.value)}
+                      className="block w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80"
+                    >
+                      <option value="">Select pickup point</option>
+                      <option value="Haridwar">Haridwar</option>
+                      <option value="Rishikesh">Rishikesh</option>
+                      <option value="Mussoorie">Mussoorie</option>
+                      <option value="Dhanaulti">Dhanaulti</option>
+                      <option value="Nainital">Nainital</option>
+                      <option value="Jim Corbett">Jim Corbett</option>
+                      <option value="Paonta Sahib">Paonta Sahib</option>
+                      <option value="Delhi">Delhi</option>
+                      <option value="Manali">Manali</option>
+                      <option value="Shimla">Shimla</option>
+                      <option value="Dehradun">Dehradun</option>
                     </select>
                   </div>
                 </div>
@@ -723,18 +744,23 @@ const Index = () => {
                     <MapPin className="h-5 w-5 mr-2 text-primary" /> To
                   </label>
                   <div className="relative">
-                    <select className="block w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80">
-                      <option>Select destination</option>
-                      <option>Haridwar</option>
-<option>Rishikesh</option>
-<option>Mussoorie</option>
-<option>Dhanaulti</option>
-<option>Nainital</option>
-<option>Jim Corbett</option>
-<option>Paonta Sahib</option>
-<option>Delhi</option>
-<option>Manali</option>
-<option>Shimla</option>
+                    <select
+                      value={toLocation}
+                      onChange={(e) => setToLocation(e.target.value)}
+                      className="block w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80"
+                    >
+                      <option value="">Select destination</option>
+                      <option value="Haridwar">Haridwar</option>
+                      <option value="Rishikesh">Rishikesh</option>
+                      <option value="Mussoorie">Mussoorie</option>
+                      <option value="Dhanaulti">Dhanaulti</option>
+                      <option value="Nainital">Nainital</option>
+                      <option value="Jim Corbett">Jim Corbett</option>
+                      <option value="Paonta Sahib">Paonta Sahib</option>
+                      <option value="Delhi">Delhi</option>
+                      <option value="Manali">Manali</option>
+                      <option value="Shimla">Shimla</option>
+                      <option value="Dehradun">Dehradun</option>
                     </select>
                   </div>
                 </div>
@@ -898,32 +924,8 @@ const Index = () => {
         }
       `}</style>
 
-      {/* Quick Stats Section 
-      <section className="py-12 bg-white" ref={statsRef}>
-        <div className={`container px-4 ${statsInView ? 'stagger-enter-active' : 'stagger-enter'}`}>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-            <div className="bg-white shadow-lg rounded-xl p-6 transform hover:-translate-y-1 transition-all duration-300 border border-primary-100">
-              <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">500+</div>
-              <div className="text-sm text-gray-600 font-medium">Happy Travelers</div>
-            </div>
-            <div className="bg-white shadow-lg rounded-xl p-6 transform hover:-translate-y-1 transition-all duration-300 border border-primary-100">
-              <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">50+</div>
-              <div className="text-sm text-gray-600 font-medium">Premium Vehicles</div>
-            </div>
-            <div className="bg-white shadow-lg rounded-xl p-6 transform hover:-translate-y-1 transition-all duration-300 border border-primary-100">
-              <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">20+</div>
-              <div className="text-sm text-gray-600 font-medium">Destinations</div>
-            </div>
-            <div className="bg-white shadow-lg rounded-xl p-6 transform hover:-translate-y-1 transition-all duration-300 border border-primary-100">
-              <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">24/7</div>
-              <div className="text-sm text-gray-600 font-medium">Customer Support</div>
-            </div>
-          </div>
-        </div>
-      </section>*/}
-
       {/* Why Choose Us Section */}
-      <section className="py-16 bg-secondary mt-16" ref={whyChooseRef}>
+      <section className="py-16 bg-secondary" ref={whyChooseRef}>
         <div className={`container ${whyChooseInView ? 'fade-up-enter-active' : 'fade-up-enter'}`}>
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4 text-primary-800">Why Choose HimalayaJoy</h2>
@@ -977,7 +979,7 @@ const Index = () => {
       </section>
 
       {/* Popular Destinations */}
-      <section className="py-16 bg-white" ref={destinationsRef}>
+      <section className="py-16 bg-white" ref={destinationsRef} id="destinations-section">
         <div className={`container ${destinationsInView ? 'fade-up-enter-active' : 'fade-up-enter'}`}>
           <div className="flex flex-col md:flex-row justify-between items-center mb-10">
             <div>
@@ -1211,7 +1213,7 @@ const Index = () => {
       </section>
 
       {/* Popular Places in Uttarakhand Section */}
-      <section className="py-16 bg-gradient-to-br from-blue-50 to-primary-50">
+      <section className="py-16 bg-gradient-to-br from-blue-50 to-primary-50" id="uttarakhand-places">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4 text-primary-800 relative inline-block animate-slide-down">
@@ -1267,7 +1269,12 @@ const Index = () => {
                   </div>
 
                   {/* Explore Button */}
-                  <button className="mt-4 w-full bg-primary-600 text-white py-2 rounded-lg transform transition-all duration-300 hover:bg-primary-700 hover:scale-105 hover:shadow-lg">
+                  <button 
+                    className="mt-4 w-full bg-primary-600 text-white py-2 rounded-lg transform transition-all duration-300 hover:bg-primary-700 hover:scale-105 hover:shadow-lg"
+                    onClick={() => {
+                      window.location.href = '/destinations';
+                    }}
+                  >
                     Explore More
                   </button>
                 </div>

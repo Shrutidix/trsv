@@ -12,36 +12,48 @@ const Packages = () => {
       title: "Kashmir Adventure",
       description: "Experience the natural beauty of Kashmir valleys and lakes",
       price: 24999,
-      duration: "6 days",
+      duration: "6 Days / 5 Nights",
       image: "https://images.unsplash.com/photo-1586183189334-1095f90aee92?q=80&w=1470&auto=format&fit=crop",
       location: "Kashmir Valley",
+      rating: 4.8,
+      features: ["Hotel", "Meals", "Transport", "Guide"],
+      isPopular: true
     },
     {
       id: "2",
       title: "Shimla Manali Trip",
       description: "Explore the hills and snow-covered landscapes of Himachal",
       price: 18999,
-      duration: "5 days",
+      duration: "5 Days / 4 Nights",
       image: "https://images.unsplash.com/photo-1626621342581-ebc3188b9554?q=80&w=1470&auto=format&fit=crop",
       location: "Himachal Pradesh",
+      rating: 4.7,
+      features: ["Hotel", "Transport", "Sightseeing"],
+      isPopular: false
     },
     {
       id: "3",
       title: "Golden Triangle Tour",
       description: "Discover the cultural heritage of Delhi, Agra, and Jaipur",
       price: 15999,
-      duration: "7 days",
+      duration: "7 Days / 6 Nights",
       image: "https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1476&auto=format&fit=crop",
       location: "Delhi, Agra, Jaipur",
+      rating: 4.6,
+      features: ["Hotel", "Transport", "Guide", "Entrance Fees"],
+      isPopular: true
     },
     {
       id: "4",
       title: "Leh Ladakh Expedition",
       description: "Adventure through the breathtaking landscapes of Ladakh",
       price: 29999,
-      duration: "8 days",
+      duration: "8 Days / 7 Nights",
       image: "https://images.unsplash.com/photo-1590077428593-a33c3fb77925?q=80&w=1374&auto=format&fit=crop",
       location: "Leh Ladakh",
+      rating: 4.9,
+      features: ["Hotel", "Transport", "Oxygen Support", "Adventure Activities"],
+      isPopular: false
     },
   ];
 
@@ -76,7 +88,9 @@ const Packages = () => {
               duration={pkg.duration}
               image={pkg.image}
               location={pkg.location}
-              isPopular={pkg.id === "1"}
+              rating={pkg.rating}
+              features={pkg.features}
+              isPopular={pkg.isPopular}
             />
           ))}
         </div>

@@ -1,79 +1,69 @@
 import React from "react";
-import { PackageCard, PackageCardProps } from "./PackageCard";
 
-const tourPackages: PackageCardProps[] = [
-  {
-    id: "1",
-    title: "Manali Adventure Trip",
-    description: "Enjoy the scenic beauty and adventure sports in Manali.",
-    image: "/images/manali.jpg",
-    location: "Manali, Himachal Pradesh",
-    duration: "5 Days / 4 Nights",
-    price: 14999,
-    rating: 4.7,
-    features: ["Meals", "Transport", "Hotel Stay"],
-    isPopular: true,
-  },
-  {
-    id: "2",
-    title: "Jaipur Royal Tour",
-    description: "Experience the royal heritage and vibrant culture of Jaipur.",
-    image: "/images/jaipur.jpg",
-    location: "Jaipur, Rajasthan",
-    duration: "3 Days / 2 Nights",
-    price: 9999,
-    rating: 4.5,
-    features: ["Guide", "Meals", "Hotel Stay"],
-  },
-];
+export interface PackageCardProps {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  location: string;
+  duration: string;
+  price: number;
+  rating: number;
+  features: string[];
+  isPopular?: boolean;
+}
 
-const carPackages: PackageCardProps[] = [
-  {
-    id: "3",
-    title: "SUV Rental for Uttarakhand",
-    description: "Spacious and comfortable SUVs for your Uttarakhand journey.",
-    image: "/images/suv.jpg",
-    location: "Dehradun, Uttarakhand",
-    duration: "Per Day Basis",
-    price: 3500,
-    rating: 4.8,
-    features: ["Driver", "AC", "Fuel Included"],
-  },
-  {
-    id: "4",
-    title: "Luxury Sedan for City Tour",
-    description: "Explore the city in comfort and style with our luxury sedan.",
-    image: "/images/sedan.jpg",
-    location: "Delhi NCR",
-    duration: "Per Day Basis",
-    price: 4500,
-    rating: 4.6,
-    features: ["Chauffeur", "AC", "Music System"],
-  },
-];
-
-const PackagesPage: React.FC = () => {
+export const PackageCard: React.FC<PackageCardProps> = ({
+  title,
+  description,
+  image,
+  location,
+  duration,
+  price,
+  rating,
+  features,
+  isPopular
+}) => {
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold text-center text-primary-800 mb-6">
-        Tour & Travel Packages
-      </h1>
-
-      <h2 className="text-2xl font-semibold text-primary-700 mb-4">Tour Packages</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {tourPackages.map((pkg) => (
-          <PackageCard key={pkg.id} {...pkg} />
-        ))}
+    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      <div className="relative">
+        {isPopular && (
+          <div className="absolute top-2 right-2 bg-primary-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+            Popular
+          </div>
+        )}
+        <img src={image} alt={title} className="w-full h-48 object-cover" />
       </div>
-
-      <h2 className="text-2xl font-semibold text-primary-700 mt-10 mb-4">Car Rental Packages</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {carPackages.map((pkg) => (
-          <PackageCard key={pkg.id} {...pkg} />
-        ))}
+      <div className="p-4">
+        <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
+        <p className="text-sm text-gray-600 mt-1">{location}</p>
+        <p className="text-sm text-gray-500 mt-2">{description}</p>
+        
+        <div className="flex items-center mt-2">
+          <span className="text-yellow-500 mr-1">★</span>
+          <span className="text-sm font-medium">{rating}</span>
+        </div>
+        
+        <div className="mt-3 flex flex-wrap gap-2">
+          {features.map((feature, index) => (
+            <span key={index} className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">
+              {feature}
+            </span>
+          ))}
+        </div>
+        
+        <div className="mt-4 flex justify-between items-center">
+          <div>
+            <p className="text-gray-500 text-xs">{duration}</p>
+            <p className="text-primary-600 font-bold">₹{price.toLocaleString()}</p>
+          </div>
+          <button className="bg-primary-500 hover:bg-primary-600 text-white px-3 py-1 rounded text-sm">
+            View Details
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
-export default PackagesPage;
+export default PackageCard;
