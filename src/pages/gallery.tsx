@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 // Import images correctly
 import image1 from "../assets/image1.jpeg";
@@ -14,26 +14,16 @@ import image7 from "../assets/image7.jpeg";
 import image8 from "../assets/image8.jpeg";
 import image9 from "../assets/image9.jpeg";
 import image10 from "../assets/image10.jpeg";
-import image11 from "../assets/image11.jpeg";
-import image12 from "../assets/image12.jpeg";
 
-const images = [
-  image1,
-  image2,
-  image3,
-  image4,
-  image5,
-  image6,
-  image7,
-  image8,
-  image9,
-  image10,
-  image11,
-  image12,
-];
+
+const images = [image1, image2, image3, image4, image5, image6, image7, image8, image9, image10];
 
 const Gallery: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const closeModal = () => {
+    setSelectedImage(null);
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -74,33 +64,26 @@ const Gallery: React.FC = () => {
         </div>
       </main>
 
-      {/* Modal for Enlarged Image */}
-      <AnimatePresence>
-        {selectedImage && (
-          <motion.div
-            className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedImage(null)}
-          >
-            <motion.img
-              src={selectedImage}
-              alt="Enlarged Gallery"
-              className="max-w-[90%] max-h-[90%] rounded-lg shadow-lg"
-              initial={{ scale: 0.8 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.8 }}
-            />
-            <button
-              className="absolute top-5 right-5 text-white text-3xl font-bold"
-              onClick={() => setSelectedImage(null)}
-            >
-              ✕
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Lightbox Modal */}
+      {selectedImage && (
+        <motion.div
+          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={closeModal}
+        >
+          <motion.img
+            src={selectedImage}
+            alt="Selected"
+            className="max-w-full max-h-[90vh] rounded-lg shadow-lg"
+            initial={{ scale: 0.8 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.3 }}
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on the image
+          />
+        </motion.div>
+      )}
 
       <Footer />
     </div>
