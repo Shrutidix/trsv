@@ -53,7 +53,7 @@ const Policy = () => {
           <p className="text-lg text-gray-600">If you have any questions about this Privacy Policy, you can contact us:</p>
           <ul className="list-disc ml-6 mt-4 text-lg text-gray-600">
             <li>
-              By email: <a href="mailto:uttarakhandroadtrip23@gmail.com" className="text-primary-600">uttarakhandroadtrip23@gmail.com</a>
+              By email: <a href="mailto:uttarakhandroadtrip23@gmail.com" className="text-primary-600">uttrakhandroadtrip@gmail.com</a>
             </li>
             <li>
               By visiting this page on our website: <a href="/contact" className="text-primary-600">Contact Us</a>

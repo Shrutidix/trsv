@@ -103,7 +103,7 @@ const Contact = () => {
                   <div>
                     <h3 className="font-semibold">Email</h3>
                     <p>Shubhampanwar6561@gmail.com</p>
-                    <p>bookings@himalayajoy.com</p>
+                    <p>uttrakhandroadtrip@gmail.com</p>
                   </div>
                 </div>
                 
