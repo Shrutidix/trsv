@@ -1,109 +1,296 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
-import { Car, CarTaxiFront, Truck, Bus } from "lucide-react";
+import React, { useState } from 'react';
+import { Button } from "@/components/ui/button";
+import { Phone, MessageCircle, Star, Snowflake, Users, Briefcase, Music, Zap, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-interface TaxiTypeSelectorProps {
-  selectedType: string;
-  onSelectType: (type: string) => void;
+interface CarSpecs {
+  name: string;
+  type: string;
+  rate: string;
+  nightCharges: string;
+  ac: boolean;
+  image: string;
+  specs: {
+    description: string;
+    safety: number;
+    cleanliness: number;
+    driverSkill: number;
+    overallRating: number;
+    features: string[];
+  };
 }
 
-const taxiTypes = [
+const cars: CarSpecs[] = [
   {
-    id: "sedan",
-    name: "Sedan",
-    icon: <Car className="h-6 w-6" />,
-    description: "Comfortable car for up to 4 passengers",
-    priceRange: "₹10-15/km",
-    image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=1470&auto=format&fit=crop"
+    name: "Swift Dzire",
+    type: "Sedan",
+    rate: "₹12/km",
+    nightCharges: "Rs 600",
+    ac: true,
+    image: "https://imgd.aeplcdn.com/664x374/n/cw/ec/130591/front-view-130.jpeg?isig=0&q=80",
+    specs: {
+      description: "Compact and fuel-efficient sedan perfect for city rides and comfortable journeys.",
+      safety: 4.5,
+      cleanliness: 4.6,
+      driverSkill: 4.7,
+      overallRating: 4.6,
+      features: ["Air Conditioning", "4 Seats", "2 Luggage", "Music System", "Charging Ports"]
+    }
   },
   {
-    id: "suv",
-    name: "SUV",
-    icon: <Truck className="h-6 w-6" />,
-    description: "Spacious vehicle for up to 6 passengers",
-    priceRange: "₹15-20/km",
-    image: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?q=80&w=1631&auto=format&fit=crop"
+    name: "Etios",
+    type: "Sedan",
+    rate: "₹14/km",
+    nightCharges: "Rs 600",
+    ac: true,
+    image: "https://imgd.aeplcdn.com/664x374/n/cw/ec/39015/front-view-130.jpeg?isig=0&q=80",
+    specs: {
+      description: "Reliable and spacious sedan with excellent comfort for long journeys.",
+      safety: 4.6,
+      cleanliness: 4.7,
+      driverSkill: 4.8,
+      overallRating: 4.7,
+      features: ["Air Conditioning", "5 Seats", "2 Luggage", "Music System", "Charging Ports"]
+    }
   },
   {
-    id: "luxury",
-    name: "Premium",
-    icon: <CarTaxiFront className="h-6 w-6" />,
-    description: "Luxury travel with premium amenities",
-    priceRange: "₹25-30/km",
-    image: "https://images.unsplash.com/photo-1585503418537-88331351ad99?q=80&w=1074&auto=format&fit=crop"
+    name: "Ertiga",
+    type: "MUVs",
+    rate: "₹15/km",
+    nightCharges: "Rs 600",
+    ac: true,
+    image: "https://imgd.aeplcdn.com/664x374/n/cw/ec/39015/front-view-130.jpeg?isig=0&q=80",
+    specs: {
+      description: "Versatile MUV perfect for family trips and group travel.",
+      safety: 4.7,
+      cleanliness: 4.8,
+      driverSkill: 4.6,
+      overallRating: 4.7,
+      features: ["Air Conditioning", "7 Seats", "3 Luggage", "Music System", "Charging Ports"]
+    }
   },
   {
-    id: "tempo",
-    name: "Tempo Traveller",
-    icon: <Bus className="h-6 w-6" />,
-    description: "Group travel for up to 12 passengers",
-    priceRange: "₹30-40/km",
-    image: "https://th.bing.com/th/id/OIP.zIxpcrfkGWQB4-OxnhpdtAAAAA?rs=1&pid=ImgDetMain"
+    name: "Innova",
+    type: "MUVs",
+    rate: "₹17/km",
+    nightCharges: "Rs 600",
+    ac: true,
+    image: "https://imgd.aeplcdn.com/664x374/n/cw/ec/39015/front-view-130.jpeg?isig=0&q=80",
+    specs: {
+      description: "Premium MUV with superior comfort and reliability for long journeys.",
+      safety: 4.8,
+      cleanliness: 4.7,
+      driverSkill: 4.8,
+      overallRating: 4.8,
+      features: ["Air Conditioning", "7 Seats", "4 Luggage", "Music System", "Charging Ports"]
+    }
+  },
+  {
+    name: "Innova Crysta",
+    type: "MUVs",
+    rate: "₹20/km",
+    nightCharges: "Rs 600",
+    ac: true,
+    image: "https://imgd.aeplcdn.com/664x374/n/cw/ec/39015/front-view-130.jpeg?isig=0&q=80",
+    specs: {
+      description: "Luxury MUV with premium features and exceptional comfort.",
+      safety: 4.9,
+      cleanliness: 4.8,
+      driverSkill: 4.9,
+      overallRating: 4.9,
+      features: ["Air Conditioning", "7 Seats", "4 Luggage", "Music System", "Charging Ports", "Premium Interior"]
+    }
+  },
+  {
+    name: "Fortuner",
+    type: "SUV",
+    rate: "₹22/km",
+    nightCharges: "Rs 600",
+    ac: true,
+    image: "https://imgd.aeplcdn.com/664x374/n/cw/ec/39015/front-view-130.jpeg?isig=0&q=80",
+    specs: {
+      description: "Spacious SUV with excellent ground clearance for hill stations and rough terrain.",
+      safety: 4.7,
+      cleanliness: 4.5,
+      driverSkill: 4.4,
+      overallRating: 4.6,
+      features: ["Air Conditioning", "6 Seats", "3 Luggage", "Music System", "Charging Ports"]
+    }
   }
 ];
 
-const TaxiTypeSelector: React.FC<TaxiTypeSelectorProps> = ({ selectedType, onSelectType }) => {
+const TaxiTypeSelector: React.FC = () => {
+  const [selectedCar, setSelectedCar] = useState<CarSpecs | null>(null);
+
+  const handleCall = () => {
+    window.location.href = "tel:+1234567890";
+  };
+
+  const handleWhatsApp = () => {
+    window.open("https://wa.me/1234567890", "_blank");
+  };
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {taxiTypes.map((type) => (
-        <motion.div
-          key={type.id}
-          whileHover={{ y: -5 }}
-          className={cn(
-            "relative border rounded-lg overflow-hidden cursor-pointer transition-all duration-300",
-            selectedType === type.id 
-              ? "border-primary-500 shadow-lg" 
-              : "border-gray-200 hover:border-primary-300 hover:shadow-sm"
-          )}
-          onClick={() => onSelectType(type.id)}
-        >
-          {/* Real taxi image */}
-          <div className="h-40 overflow-hidden">
-            <img 
-              src={type.image} 
-              alt={type.name}
-              className="w-full h-full object-cover"
-            />
-            {selectedType === type.id && (
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="absolute inset-0 bg-primary-500/20 border-4 border-primary-500"
-              />
-            )}
-          </div>
-          
-          <div className="p-4">
-            <div className="flex items-center mb-2">
-              <span className={cn(
-                "p-2 rounded-full mr-2",
-                selectedType === type.id ? "bg-primary-100 text-primary-500" : "bg-gray-100 text-gray-500"
-              )}>
-                {type.icon}
-              </span>
-              <h3 className="text-lg font-semibold">{type.name}</h3>
-            </div>
-            
-            <p className="text-gray-600 text-sm mb-3">{type.description}</p>
-            <div className="flex justify-between items-center">
-              <span className="text-sm font-medium bg-gray-100 px-3 py-1 rounded-full">
-                {type.priceRange}
-              </span>
-              
-              {selectedType === type.id && (
-                <motion.span
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="bg-primary-500 text-white text-xs px-2 py-1 rounded-full"
+    <div className="min-h-screen bg-gray-50">
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex justify-center gap-4 mb-8">
+          <Button 
+            onClick={handleCall}
+            className="bg-green-600 hover:bg-green-700 text-white px-6 py-2"
+          >
+            <Phone className="h-4 w-4 mr-2" />
+            Call us
+          </Button>
+          <Button 
+            onClick={handleWhatsApp}
+            className="bg-[#25D366] hover:bg-[#128C7E] text-white px-6 py-2"
+          >
+            <MessageCircle className="h-4 w-4 mr-2" />
+            Whatsapp
+          </Button>
+        </div>
+        <h2 className="text-2xl font-bold text-center mb-6">Our Fleet</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {cars.map((car, index) => (
+            <React.Fragment key={car.name}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -5 }}
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300"
+              >
+                <div className="relative h-48">
+                  <img
+                    src={car.image}
+                    alt={car.name}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-4 left-4 text-white">
+                    <h3 className="text-xl font-bold mb-1">{car.name}</h3>
+                    <p className="text-base font-semibold">{car.rate} Starting</p>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-xs font-medium text-gray-600 bg-gray-100 px-2 py-1 rounded-full">
+                      {car.type}
+                    </span>
+                    <span className="text-xs font-medium text-gray-600">
+                      Night: {car.nightCharges}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <Snowflake className="h-4 w-4 text-primary-500" />
+                    <span className="text-xs text-gray-600">Air Conditioning</span>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    className="w-full text-primary-600 hover:text-primary-700 text-xs py-1"
+                    onClick={() => setSelectedCar(selectedCar?.name === car.name ? null : car)}
+                  >
+                    <ChevronDown className={`h-4 w-4 mr-1 transition-transform ${selectedCar?.name === car.name ? 'rotate-180' : ''}`} />
+                    View Details
+                  </Button>
+                </div>
+              </motion.div>
+
+              {selectedCar?.name === car.name && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="col-span-full bg-white rounded-xl shadow-md overflow-hidden"
+                  style={{
+                    gridColumn: `span ${window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1}`,
+                    marginTop: '1.5rem'
+                  }}
                 >
-                  Selected
-                </motion.span>
+                  <div className="p-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="relative h-[300px] rounded-lg overflow-hidden">
+                        <img
+                          src={selectedCar.image}
+                          alt={selectedCar.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="space-y-4">
+                        <h3 className="text-2xl font-bold">{selectedCar.name}</h3>
+                        <p className="text-gray-600">{selectedCar.specs.description}</p>
+
+                        <div className="grid grid-cols-2 gap-3">
+                          <div className="bg-gray-50 p-3 rounded-lg">
+                            <h4 className="font-semibold text-sm mb-1">Safety</h4>
+                            <div className="flex items-center">
+                              <Star className="h-4 w-4 text-yellow-400 mr-1" />
+                              <span className="text-sm">{selectedCar.specs.safety}/5</span>
+                            </div>
+                          </div>
+                          <div className="bg-gray-50 p-3 rounded-lg">
+                            <h4 className="font-semibold text-sm mb-1">Cleanliness</h4>
+                            <div className="flex items-center">
+                              <Star className="h-4 w-4 text-yellow-400 mr-1" />
+                              <span className="text-sm">{selectedCar.specs.cleanliness}/5</span>
+                            </div>
+                          </div>
+                          <div className="bg-gray-50 p-3 rounded-lg">
+                            <h4 className="font-semibold text-sm mb-1">Driver Skill</h4>
+                            <div className="flex items-center">
+                              <Star className="h-4 w-4 text-yellow-400 mr-1" />
+                              <span className="text-sm">{selectedCar.specs.driverSkill}/5</span>
+                            </div>
+                          </div>
+                          <div className="bg-gray-50 p-3 rounded-lg">
+                            <h4 className="font-semibold text-sm mb-1">Overall Rating</h4>
+                            <div className="flex items-center">
+                              <Star className="h-4 w-4 text-yellow-400 mr-1" />
+                              <span className="text-sm">{selectedCar.specs.overallRating}/5</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div>
+                          <h4 className="font-semibold text-sm mb-2">Features</h4>
+                          <div className="grid grid-cols-2 gap-2">
+                            {selectedCar.specs.features.map((feature, index) => (
+                              <div key={index} className="flex items-center gap-2 bg-gray-50 p-2 rounded-lg text-sm">
+                                {feature.includes("Air Conditioning") && <Snowflake className="h-4 w-4 text-primary-500" />}
+                                {feature.includes("Seats") && <Users className="h-4 w-4 text-primary-500" />}
+                                {feature.includes("Luggage") && <Briefcase className="h-4 w-4 text-primary-500" />}
+                                {feature.includes("Music System") && <Music className="h-4 w-4 text-primary-500" />}
+                                {feature.includes("Charging Ports") && <Zap className="h-4 w-4 text-primary-500" />}
+                                <span>{feature}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="flex gap-3 pt-2">
+                          <Button 
+                            onClick={handleCall}
+                            className="flex-1 bg-green-600 hover:bg-green-700 text-white text-sm py-1"
+                          >
+                            <Phone className="h-3 w-3 mr-1" />
+                            Call us
+                          </Button>
+                          <Button 
+                            onClick={handleWhatsApp}
+                            className="flex-1 bg-[#25D366] hover:bg-[#128C7E] text-white text-sm py-1"
+                          >
+                            <MessageCircle className="h-3 w-3 mr-1" />
+                            Whatsapp
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
               )}
-            </div>
-          </div>
-        </motion.div>
-      ))}
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
