@@ -21,6 +21,7 @@ const Navbar = () => {
     { name: 'Taxi Services', path: '/taxi' },
     { name: 'Destinations', path: '/destinations' },
     { name: 'Packages', path: '/packages' },
+    { name: 'Gallery', path: '/gallery' },
     { name: 'About Us', path: '/about' },
     { name: 'Contact', path: '/contact' },
   ];

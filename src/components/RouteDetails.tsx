@@ -139,9 +139,9 @@ const RouteDetails: React.FC<RouteDetailsProps> = ({ isOpen, onClose, route }) =
             </div>
           </TabsContent>
 
-          <TabsContent value="gallery" className="space-y-6">
+        <TabsContent value="gallery" className="space-y-6">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {/* Add your gallery images here */}
+             
               {[1, 2, 3, 4, 5, 6].map((item) => (
                 <div key={item} className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center">
                   <Camera className="h-8 w-8 text-gray-400" />

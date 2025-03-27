@@ -92,7 +92,7 @@ const Footer = () => {
         <a href="tel:+91 8077757674" className="bg-red-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition">
           <FaPhoneAlt size={20} />
         </a>
-        <a href="https://wa.me/919876543210" className="bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition">
+        <a href="https://wa.me/918954257372" className="bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition">
   <FaWhatsapp size={20} />
 </a>
       </div>
