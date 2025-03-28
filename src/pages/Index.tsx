@@ -965,15 +965,18 @@ const Index = () => {
               </p>
             </div>
             
-            <div className="text-center p-6 bg-white rounded-xl shadow-sm card-hover-effect">
-              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Phone className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="font-bold text-lg mb-2 text-primary-800">24/7 Support</h3>
-              <p className="text-gray-600">
-                Round-the-clock customer support to assist you throughout your journey.
-              </p>
-            </div>
+            <a href="tel:+918077757674" className="block">
+  <div className="text-center p-6 bg-white rounded-xl shadow-sm card-hover-effect">
+    <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+      <Phone className="h-8 w-8 text-primary" />
+    </div>
+    <h3 className="font-bold text-lg mb-2 text-primary-800">24/7 Support</h3>
+    <p className="text-gray-600">
+      Round-the-clock customer support to assist you throughout your journey.
+    </p>
+  </div>
+</a>
+
           </div>
         </div>
       </section>

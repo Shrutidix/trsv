@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
@@ -78,23 +77,18 @@ const popularPlaces = [
     famousFor: ["Jhula Devi Temple", "Chaubatia Orchards", "Upat Golf Course", "Bhalu Dam", "Majkhali"]
   }
 ];
+
 const NotFound = () => {
-  const location = useLocation();
   const [selectedPlace, setSelectedPlace] = useState(null);
-  const modalRef = useRef(null);
 
-  useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
-  }, [location.pathname]);
-
-  const handleOutsideClick = (e) => {
-    if (modalRef.current && !modalRef.current.contains(e.target)) {
+  const closeModal = (e) => {
+    if (e.target.id === "modalBackground") {
       setSelectedPlace(null);
     }
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+    <div className="flex flex-col min-h-screen bg-gray-100">
       <Navbar />
       
       <section className="bg-gradient-to-r from-primary-600 to-primary-300 py-20 text-white text-center">
@@ -107,73 +101,39 @@ const NotFound = () => {
           <div className="text-center text-white-800 mb-10">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Popular Places in Uttarakhand</h1>
             <p className="text-xl max-w-3xl mx-auto">
-              Discover the best travel experiences with us. We offer expert-guided tours and hassle-free transportation across North India.
+            Explore the most beautiful and spiritual destinations in Uttarakhand.
             </p>
           </div>
         </motion.div>
       </section>
-
-      <div className="container mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+      
+      <section className="py-10 text-center">
+        <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-6">
           {popularPlaces.map((place, index) => (
-            <div 
-              key={index} 
-              className="relative rounded-lg overflow-hidden shadow-2xl hover:shadow-3xl transition-transform transform hover:-translate-y-2 cursor-pointer scale-105 bg-white p-4"
-              onClick={() => setSelectedPlace(place)}
-            >
-              <div className="relative overflow-hidden rounded-lg">
-                <img 
-                  src={place.img} 
-                  alt={place.name} 
-                  className="w-full h-56 object-cover transition-transform duration-500 ease-in-out transform hover:scale-110 hover:rotate-1"
-                />
-              </div>
-              <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-                <h3 className="text-3xl font-semibold text-white">{place.name}</h3>
-              </div>
+            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:scale-105 cursor-pointer" onClick={() => setSelectedPlace(place)}>
+              <img src={place.img} alt={place.name} className="w-full h-56 object-cover" />
+              <div className="p-4 text-gray-800 font-semibold text-lg">{place.name}</div>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
       {selectedPlace && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50"
-          onClick={handleOutsideClick}
-        >
-          <div 
-            ref={modalRef} 
-            className="relative bg-white bg-opacity-95 backdrop-blur-xl shadow-2xl rounded-3xl max-w-4xl w-full h-[80vh] overflow-y-auto p-8 md:p-12 transition-transform transform scale-100 hover:scale-105 duration-300 ease-in-out"
-          >
-            <button 
-              className="absolute top-4 right-4 text-gray-700 hover:text-red-500 text-4xl transition-colors duration-200" 
-              onClick={() => setSelectedPlace(null)}
-            >
-              &times;
-            </button>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <img 
-                src={selectedPlace.img} 
-                alt={selectedPlace.name} 
-                className="w-full h-80 md:h-full object-cover rounded-2xl shadow-lg" 
-              />
-              <div className="flex flex-col justify-center">
-                <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mt-6 md:mt-0 text-center md:text-left">{selectedPlace.name}</h2>
-                <p className="text-lg md:text-xl text-gray-700 mt-4 text-center md:text-left leading-relaxed">{selectedPlace.description}</p>
-              </div>
-            </div>
-            <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 mt-6 text-center">Famous For:</h3>
-            <ul className="list-disc list-inside text-gray-800 text-lg md:text-xl mt-4 space-y-3 px-4 md:px-8">
-              {selectedPlace.famousFor.map((item, index) => (
-                <li key={index} className="flex items-center space-x-2">
-                  <span className="text-primary-600 text-2xl">•</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      )}
+  <div id="modalBackground" className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4" onClick={closeModal}>
+    <div className="bg-white rounded-lg shadow-lg max-w-lg w-full p-6 relative max-h-[80vh] overflow-y-auto">
+      <button className="absolute top-2 right-2 text-gray-700 hover:text-red-500 text-2xl" onClick={() => setSelectedPlace(null)}>×</button>
+      <h2 className="text-2xl font-bold mb-2">{selectedPlace.name}</h2>
+      <img src={selectedPlace.img} alt={selectedPlace.name} className="w-full h-40 object-cover rounded-lg mb-4" />
+      <p className="text-gray-600 mb-4">{selectedPlace.description}</p>
+      <h3 className="text-lg font-semibold">Famous Points:</h3>
+      <ul className="list-disc list-inside text-gray-700 max-h-40 overflow-y-auto">
+        {selectedPlace.famousFor.map((point, index) => (
+          <li key={index}>{point}</li>
+        ))}
+      </ul>
+    </div>
+  </div>
+)}
 
       <Footer />
     </div>
