@@ -10,6 +10,7 @@ const Navbar = () => {
   const isMobile = useIsMobile();
   const location = useLocation();
 
+  
   // Scroll to top when route changes
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -91,7 +92,15 @@ const Navbar = () => {
             <div className="flex items-center justify-between flex-1 pl-8">
               <NavLinks />
               <Button asChild>
-                <Link to="/contact">Book Now</Link>
+                <Link to="/#booking-form" onClick={(e) => {
+                  const isHomePage = window.location.pathname === '/';
+                  if (isHomePage) {
+                    e.preventDefault();
+                    document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}>
+                  Book Now
+                </Link>
               </Button>
             </div>
           )}

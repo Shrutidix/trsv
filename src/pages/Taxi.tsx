@@ -9,10 +9,10 @@ const Taxi = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary-600 to-primary-300 py-20 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Book Your Taxi Service</h1>
-          <p className="text-xl max-w-3xl mx-auto">
+      <section className="bg-gradient-to-r from-primary-600 to-primary-300 py-8 text-white text-center">
+        <div className="container mx-auto px-4">
+          <h1 className="text-2xl md:text-3xl font-bold mb-2">Book Your Taxi Service</h1>
+          <p className="text-base max-w-2xl mx-auto">
             Choose from our fleet of comfortable vehicles with experienced drivers for your journey
           </p>
         </div>

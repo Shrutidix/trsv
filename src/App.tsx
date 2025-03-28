@@ -13,6 +13,7 @@ import Policy from "./pages/policy";
 import Terms from "./pages/terms";
 import Packages from "./pages/Packages";
 import Gallery from "./pages/gallery";
+import Feedback from "./pages/Feedback";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/routes" element={<RoutesPage />} />
           <Route path="/packages" element={<Packages />} />
+          <Route path="/feedback" element={<Feedback />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
           <Route path="/gallery" element={<Gallery/>}/>

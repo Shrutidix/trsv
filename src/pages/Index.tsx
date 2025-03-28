@@ -74,6 +74,9 @@ const Index = () => {
   const [packagesRef, packagesInView] = useInView();
   const [testimonialRef, testimonialInView] = useInView();
 
+  // Add state for calendar popover
+  const [calendarOpen, setCalendarOpen] = useState(false);
+
   // Sample data
   const destinations = [
     {
@@ -720,20 +723,17 @@ const Index = () => {
                     <select 
                       value={fromLocation} 
                       onChange={(e) => setFromLocation(e.target.value)}
-                      className="block w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80"
+                      className="block w-full h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-2.5 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-base transition-all hover:bg-white/80"
                     >
                       <option value="">Select pickup point</option>
+                      <option value="Dehradun">Dehradun</option>
+                      <option value="Mussoorie">Mussoorie</option>
                       <option value="Haridwar">Haridwar</option>
                       <option value="Rishikesh">Rishikesh</option>
-                      <option value="Mussoorie">Mussoorie</option>
+                      <option value="Kana Tal">Kana Tal</option>
                       <option value="Dhanaulti">Dhanaulti</option>
-                      <option value="Nainital">Nainital</option>
-                      <option value="Jim Corbett">Jim Corbett</option>
-                      <option value="Paonta Sahib">Paonta Sahib</option>
-                      <option value="Delhi">Delhi</option>
-                      <option value="Manali">Manali</option>
-                      <option value="Shimla">Shimla</option>
-                      <option value="Dehradun">Dehradun</option>
+                      <option value="Saharanpur">Saharanpur</option>
+                      <option value="Delhi">Delhi (NCR)</option>
                     </select>
                   </div>
                 </div>
@@ -747,20 +747,30 @@ const Index = () => {
                     <select
                       value={toLocation}
                       onChange={(e) => setToLocation(e.target.value)}
-                      className="block w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80"
+                      className="block w-full h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-2.5 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-base transition-all hover:bg-white/80"
                     >
                       <option value="">Select destination</option>
+                      <option value="All India">All India</option>
+                      <option value="We'll decide later">We'll decide later</option>
+                      <option value="Dehradun">Dehradun</option>
+                      <option value="Mussoorie">Mussoorie</option>
                       <option value="Haridwar">Haridwar</option>
                       <option value="Rishikesh">Rishikesh</option>
-                      <option value="Mussoorie">Mussoorie</option>
+                      <option value="Kana Tal">Kana Tal</option>
                       <option value="Dhanaulti">Dhanaulti</option>
-                      <option value="Nainital">Nainital</option>
-                      <option value="Jim Corbett">Jim Corbett</option>
-                      <option value="Paonta Sahib">Paonta Sahib</option>
-                      <option value="Delhi">Delhi</option>
-                      <option value="Manali">Manali</option>
-                      <option value="Shimla">Shimla</option>
-                      <option value="Dehradun">Dehradun</option>
+                      <option value="Saharanpur">Saharanpur</option>
+                      <option value="Delhi">Delhi (NCR)</option>
+                      <option value="Agra">Agra (Taj Mahal)</option>
+                      <option value="Jaipur">Jaipur (Pink City)</option>
+                      <option value="Udaipur">Udaipur (City of Lakes)</option>
+                      <option value="Varanasi">Varanasi (Spiritual Capital)</option>
+                      <option value="Amritsar">Amritsar (Golden Temple)</option>
+                      <option value="Mumbai">Mumbai (Financial Capital)</option>
+                      <option value="Goa">Goa (Beach Paradise)</option>
+                      <option value="Kerala">Kerala (God's Own Country)</option>
+                      <option value="Manali">Manali (Himalayan Paradise)</option>
+                      <option value="Shimla">Shimla (Queen of Hills)</option>
+                      <option value="Darjeeling">Darjeeling (Tea Paradise)</option>
                     </select>
                   </div>
                 </div>
@@ -770,12 +780,12 @@ const Index = () => {
                   <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
                     <CalendarIcon className="h-5 w-5 mr-2 text-primary" /> Date
                   </label>
-                  <Popover>
+                  <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
                     <PopoverTrigger asChild>
                       <Button
                         variant={"outline"}
                         className={cn(
-                          "w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80",
+                          "w-full h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-2.5 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-base transition-all hover:bg-white/80",
                           !selectedDate && "text-muted-foreground"
                         )}
                       >
@@ -787,7 +797,10 @@ const Index = () => {
                       <Calendar
                         mode="single"
                         selected={selectedDate}
-                        onSelect={setSelectedDate}
+                        onSelect={(date) => {
+                          setSelectedDate(date);
+                          setCalendarOpen(false); // Close the popover after selection
+                        }}
                         initialFocus
                         disabled={(date) => date < new Date()}
                       />
@@ -801,10 +814,10 @@ const Index = () => {
                     <Users className="h-5 w-5 mr-2 text-primary" /> Passengers
                   </label>
                   <Select value={passengerCount} onValueChange={setPassengerCount}>
-                    <SelectTrigger className="w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80">
+                    <SelectTrigger className="w-full h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-2.5 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-base transition-all hover:bg-white/80">
                       <SelectValue placeholder="Select passengers" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="max-h-[200px]">
                       <SelectItem value="1-3">1-3 Passengers</SelectItem>
                       <SelectItem value="4-6">4-6 Passengers</SelectItem>
                       <SelectItem value="7-12">7-12 Passengers</SelectItem>
@@ -819,10 +832,10 @@ const Index = () => {
                     <Car className="h-5 w-5 mr-2 text-primary" /> Car Type
                   </label>
                   <Select value={selectedCarType} onValueChange={setSelectedCarType}>
-                    <SelectTrigger className="w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80">
+                    <SelectTrigger className="w-full h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-2.5 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-base transition-all hover:bg-white/80">
                       <SelectValue placeholder="Select car type" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="max-h-[200px]">
                       <SelectItem value="sedan">Premium Sedan</SelectItem>
                       <SelectItem value="suv">Luxury SUV</SelectItem>
                       <SelectItem value="tempo">Tempo Traveller</SelectItem>
@@ -830,21 +843,24 @@ const Index = () => {
                     </SelectContent>
                   </Select>
                 </div>
+
+                {/* Phone Number Input */}
                 <div className="col-span-1">
-  <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
-    <Phone className="h-5 w-5 mr-2 text-primary" /> Contact Number
-  </label>
-  <input 
-    type="tel" 
-    placeholder="Enter contact number" 
-    className="w-full h-16 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-3 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg transition-all hover:bg-white/80"
-  />
-</div>
+                  <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
+                    <Phone className="h-5 w-5 mr-2 text-primary" /> Contact Number
+                  </label>
+                  <input 
+                    type="tel" 
+                    placeholder="Enter contact number" 
+                    className="w-full h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-2.5 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-base transition-all hover:bg-white/80"
+                  />
+                </div>
+
                 {/* Search Button */}
                 <div className="col-span-1 md:col-span-3 flex justify-center">
-                  <button className="w-full md:w-auto px-12 h-16 text-white font-bold bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 rounded-2xl py-3 shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 text-lg transform hover:-translate-y-1">
-                    <Car className="h-6 w-6 mr-2" />
-                    SEARCH TAXIS
+                  <button className="w-full md:w-auto px-12 h-14 text-white font-bold bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 rounded-2xl py-2.5 shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 text-base transform hover:-translate-y-1">
+                    <Car className="h-5 w-5 mr-2" />
+                    BOOK TAXI
                   </button>
                 </div>
               </div>
