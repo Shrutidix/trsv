@@ -119,8 +119,8 @@ const Contact = () => {
                   <Clock className="h-5 w-5 text-primary-500 mt-1" />
                   <div>
                     <h3 className="font-semibold">Business Hours</h3>
-                    <p>Monday - Saturday: 9:00 AM - 7:00 PM</p>
-                    <p>Sunday: 10:00 AM - 2:00 PM</p>
+                    <p>Your travel plans never stop, <br/>and neither do we!<br/> Available 24/7, 365 days a year</p>
+                    
                   </div>
                 </div>
               </div>

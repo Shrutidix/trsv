@@ -28,7 +28,7 @@ const cars: CarSpecs[] = [
     rate: "₹12/km",
     nightCharges: "Rs 600",
     ac: true,
-    image: "https://i0.wp.com/cargayan.com/wp-content/uploads/2023/05/2-1.png",
+    image: "https://wallpapers.com/images/hd/suzuki-dzire-2022-sherwood-brown-y5e1vukdf48ljnb0.jpg",
     specs: {
       description: "Compact and fuel-efficient sedan perfect for city rides and comfortable journeys.",
       safety: 4.5,
@@ -44,7 +44,7 @@ const cars: CarSpecs[] = [
     rate: "₹14/km",
     nightCharges: "Rs 600",
     ac: true,
-    image: "https://www.motorworldindia.com/wp-content/uploads/2016/08/Toyota-Etios-Liva-Platinum-Facelift-Brazil-5.jpg",
+    image: "https://cuyomotor.com.ar/wp-content/uploads/2023/06/Toyota-Etios-hatch-XLS.jpg",
     specs: {
       description: "Reliable and spacious sedan with excellent comfort for long journeys.",
       safety: 4.6,
@@ -60,7 +60,7 @@ const cars: CarSpecs[] = [
     rate: "₹15/km",
     nightCharges: "Rs 600",
     ac: true,
-    image: "https://stat.overdrive.in/wp-content/odgallery/2018/11/48773_Maruti_Suzuki_Ertiga_2019_043.JPG",
+    image: "https://w7.pngwing.com/pngs/798/694/png-transparent-white-suzuki-ertiga-suv-suzuki-ertiga-suzuki-swift-maruti-car-suzuki-compact-car-sedan-subcompact-car.png",
     specs: {
       description: "Versatile MUV perfect for family trips and group travel.",
       safety: 4.7,
@@ -76,7 +76,7 @@ const cars: CarSpecs[] = [
     rate: "₹17/km",
     nightCharges: "Rs 600",
     ac: true,
-    image: "https://imgd.aeplcdn.com/1056x594/cw/ec/20623/Toyota-Innova-Crysta-Exterior-123846.jpg?wm=0&q=80",
+    image: "https://img.philkotse.com/crop/643x362/2020/12/09/f3xu3v8D/innova-red-mica-metallic-4da2.png",
     specs: {
       description: "Premium MUV with superior comfort and reliability for long journeys.",
       safety: 4.8,
@@ -92,7 +92,7 @@ const cars: CarSpecs[] = [
     rate: "₹20/km",
     nightCharges: "Rs 600",
     ac: true,
-    image: "https://stat.overdrive.in/wp-content/odgallery/2016/05/30083_INNOVA_CRYSTA_front.jpg",
+    image: "https://www.pngitem.com/pimgs/m/692-6925190_toyota-innova-crysta-hd-png-download.png",
     specs: {
       description: "Luxury MUV with premium features and exceptional comfort.",
       safety: 4.9,
@@ -108,7 +108,7 @@ const cars: CarSpecs[] = [
     rate: "₹22/km",
     nightCharges: "Rs 600",
     ac: true,
-    image: "https://th.bing.com/th/id/OIP.tpT_fY686U1ZoNWHKR3nowHaD3?rs=1&pid=ImgDetMain",
+    image: "https://ic1.maxabout.us/news/2020/06/Toyota-Fortuner-Legender-2.png",
     specs: {
       description: "Spacious SUV with excellent ground clearance for hill stations and rough terrain.",
       safety: 4.7,
@@ -269,14 +269,18 @@ const TaxiTypeSelector: React.FC = () => {
                           </Button>
                         </div>
                       </div>
+                 
                     </div>
                   </div>
+                       
+       
                 </motion.div>
               )}
             </React.Fragment>
           ))}
         </div>
       </div>
+      
     </div>
   );
 };
