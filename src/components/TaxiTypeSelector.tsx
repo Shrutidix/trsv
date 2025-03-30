@@ -60,7 +60,7 @@ const cars: CarSpecs[] = [
     rate: "₹15/km",
     nightCharges: "Rs 600",
     ac: true,
-    image: "https://w7.pngwing.com/pngs/798/694/png-transparent-white-suzuki-ertiga-suv-suzuki-ertiga-suzuki-swift-maruti-car-suzuki-compact-car-sedan-subcompact-car.png",
+    image: "https://th.bing.com/th/id/OIP.WmpZMNmbuUE1SFxuBav2wgHaEK?rs=1&pid=ImgDetMain",
     specs: {
       description: "Versatile MUV perfect for family trips and group travel.",
       safety: 4.7,
@@ -192,7 +192,7 @@ const TaxiTypeSelector: React.FC = () => {
                     marginTop: '1.5rem'
                   }}
                 >
-                  <div className="p-6">
+                  <div className="p-6 ">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="relative h-[300px] rounded-lg overflow-hidden">
                         <img
@@ -201,7 +201,7 @@ const TaxiTypeSelector: React.FC = () => {
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <div className="space-y-4">
+                      <div className="space-y-4 ">
                         <h3 className="text-2xl font-bold">{selectedCar.name}</h3>
                         <p className="text-gray-600">{selectedCar.specs.description}</p>
 
