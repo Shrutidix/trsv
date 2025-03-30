@@ -6,6 +6,7 @@ import DestinationCard from '@/components/DestinationCard';
 import PackageCard from '@/components/PackageCard';
 import TestimonialCard from '@/components/TestimonialCard';
 import VacationBanner from '@/components/VacationBanner';
+import BookingForm from '@/components/BookingForm';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -13,7 +14,7 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { 
-  Car, Phone, CheckCircle, Award, Shield, Mountain, MapPin, Tent, Calendar as CalendarIcon, Clock, Users 
+  Car, Phone, CheckCircle, Award, Shield, Mountain, MapPin, Tent, Calendar as CalendarIcon, Clock, Users, CheckCircle2 
 } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 import RouteDetails from '@/components/RouteDetails';
@@ -55,6 +56,11 @@ const Index = () => {
   const [selectedCarType, setSelectedCarType] = useState("sedan");
   const [fromLocation, setFromLocation] = useState(fromParam || "");
   const [toLocation, setToLocation] = useState(toParam || "");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   
   // Scroll to booking form if URL parameters are present
   useEffect(() => {
@@ -343,6 +349,80 @@ const Index = () => {
         setSelectedCarType("sedan");
     }
   }, [passengerCount]);
+
+  // Add form submission handler
+  const handleSubmit = async () => {
+    if (!fromLocation || !toLocation || !selectedDate || !phoneNumber) {
+      setErrorMessage("Please fill in all required fields");
+      setSubmitStatus("error");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+    setErrorMessage("");
+
+    try {
+      // Convert passenger count string to number
+      const passengerNumber = parseInt(passengerCount.split('-')[0]);
+
+      // Format car type to match backend enum exactly
+      const formattedCarType = selectedCarType === 'suv' ? 'SUV' : 
+        selectedCarType.charAt(0).toUpperCase() + selectedCarType.slice(1);
+
+      const bookingData = {
+        from: fromLocation,
+        to: toLocation,
+        date: selectedDate.toISOString(),
+        passengers: passengerNumber,
+        carType: formattedCarType,
+        phoneNumber: phoneNumber,
+        status: 'pending'
+      };
+
+      console.log('Sending booking data:', bookingData); // Debug log
+
+      const response = await fetch('http://localhost:3000/api/bookings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(bookingData)
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to submit booking');
+      }
+
+      const data = await response.json();
+      setSubmitStatus("success");
+      
+      // Reset form
+      setFromLocation("");
+      setToLocation("");
+      setSelectedDate(undefined);
+      setPassengerCount("1-3");
+      setSelectedCarType("sedan");
+      setPhoneNumber("");
+      
+      // Show success message
+      setShowSuccessMessage(true);
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 5000);
+      
+    } catch (error) {
+      console.error('Error submitting booking:', error);
+      setErrorMessage(error instanceof Error ? error.message : "Failed to submit booking. Please try again.");
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   // Define animation styles
   const animationStyles = `
@@ -851,17 +931,39 @@ const Index = () => {
                   </label>
                   <input 
                     type="tel" 
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
                     placeholder="Enter contact number" 
                     className="w-full h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-2.5 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-base transition-all hover:bg-white/80"
                   />
                 </div>
 
                 {/* Search Button */}
-                <div className="col-span-1 md:col-span-3 flex justify-center">
-                  <button className="w-full md:w-auto px-12 h-14 text-white font-bold bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 rounded-2xl py-2.5 shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 text-base transform hover:-translate-y-1">
-                    <Car className="h-5 w-5 mr-2" />
-                    BOOK TAXI
+                <div className="col-span-1 md:col-span-3 flex flex-col items-center gap-4">
+                  <button 
+                    onClick={handleSubmit}
+                    disabled={isSubmitting}
+                    className={`w-full md:w-auto px-12 h-14 text-white font-bold bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 rounded-2xl py-2.5 shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 text-base transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed`}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Submitting...
+                      </>
+                    ) : (
+                      <>
+                        <Car className="h-5 w-5 mr-2" />
+                        BOOK TAXI
+                      </>
+                    )}
                   </button>
+                  
+                  {submitStatus === "error" && (
+                    <p className="text-red-500 text-sm">{errorMessage}</p>
+                  )}
                 </div>
               </div>
 
@@ -918,27 +1020,6 @@ const Index = () => {
 
       {/* Vacation Banner Section */}
       <VacationBanner />
-
-      {/* Update animation keyframes */}
-      <style>{`
-        @keyframes roadMove {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        
-        .animate-road {
-          animation: roadMove 2s linear infinite;
-        }
-
-        @keyframes drive {
-          0% { transform: translateX(-15%); }
-          100% { transform: translateX(115%); }
-        }
-
-        .animate-drive {
-          animation: drive 15s linear infinite;
-        }
-      `}</style>
 
       {/* Why Choose Us Section */}
       <section className="py-16 bg-secondary" ref={whyChooseRef}>
@@ -1377,8 +1458,44 @@ const Index = () => {
             transform: translateX(8px);
             transition: transform 0.3s ease;
           }
+
+          @keyframes slide-in {
+            0% {
+              transform: translateX(100%);
+              opacity: 0;
+            }
+            100% {
+              transform: translateX(0);
+              opacity: 1;
+            }
+          }
+
+          .animate-slide-in {
+            animation: slide-in 0.5s ease-out forwards;
+          }
         `}
       </style>
+
+      {/* Add Success Message Component */}
+      {showSuccessMessage && (
+        <div className="fixed top-4 right-4 z-50 animate-slide-in">
+          <div className="bg-green-50 border-l-4 border-green-500 p-4 rounded-lg shadow-lg max-w-md">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <CheckCircle2 className="h-6 w-6 text-green-500" />
+              </div>
+              <div className="ml-3">
+                <p className="text-sm font-medium text-green-800">
+                  Booking Submitted Successfully!
+                </p>
+                <p className="mt-1 text-sm text-green-700">
+                  We'll contact you shortly to confirm your booking.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>
