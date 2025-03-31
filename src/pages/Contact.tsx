@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -10,35 +10,86 @@ import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 const Contact = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: ''
+  });
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message Sent",
-      description: "We've received your message and will get back to you shortly.",
-    });
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('https://trsvbackend.vercel.app/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to send message');
+      }
+
+      toast({
+        title: "Message Sent",
+        description: "We've received your message and will get back to you shortly.",
+      });
+
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Error sending message:', error);
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
       
-       <section className="bg-gradient-to-r from-primary-600 to-primary-300 py-8 text-white text-center">
-              <motion.div 
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="container mx-auto px-4 relative z-10"
-              >
-                <div className="text-center text-white-800 mb-4">
-                  <h1 className="text-2xl md:text-3xl font-bold mb-2">Contact Us</h1>
-                  <p className="text-base max-w-2xl mx-auto">
-                  Have questions or need assistance? We're here to help plan your perfect journey.
-                  </p>
-                </div>
-              </motion.div>
-            </section>
-      
+      <section className="bg-gradient-to-r from-primary-600 to-primary-300 py-8 text-white text-center">
+        <motion.div 
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="container mx-auto px-4 relative z-10"
+        >
+          <div className="text-center text-white-800 mb-4">
+            <h1 className="text-2xl md:text-3xl font-bold mb-2">Contact Us</h1>
+            <p className="text-base max-w-2xl mx-auto">
+              Have questions or need assistance? We're here to help plan your perfect journey.
+            </p>
+          </div>
+        </motion.div>
+      </section>
 
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -53,30 +104,74 @@ const Contact = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium">Name</label>
-                  <Input id="name" placeholder="Your name" required />
+                  <Input 
+                    id="name" 
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Your name" 
+                    required 
+                  />
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="email" className="text-sm font-medium">Email</label>
-                  <Input id="email" type="email" placeholder="Your email" required />
+                  <Input 
+                    id="email" 
+                    name="email"
+                    type="email" 
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Your email" 
+                    required 
+                  />
                 </div>
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="phone" className="text-sm font-medium">Phone</label>
+                <Input 
+                  id="phone" 
+                  name="phone"
+                  type="tel" 
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="Your phone number" 
+                  required 
+                />
               </div>
               
               <div className="space-y-2">
                 <label htmlFor="subject" className="text-sm font-medium">Subject</label>
-                <Input id="subject" placeholder="Subject of your message" required />
+                <Input 
+                  id="subject" 
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder="Subject of your message" 
+                  required 
+                />
               </div>
               
               <div className="space-y-2">
                 <label htmlFor="message" className="text-sm font-medium">Message</label>
                 <Textarea 
                   id="message" 
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder="How can we help you?" 
                   className="min-h-[150px]" 
                   required 
                 />
               </div>
               
-              <Button type="submit" className="w-full">Send Message</Button>
+              <Button 
+                type="submit" 
+                className="w-full"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Sending...' : 'Send Message'}
+              </Button>
             </form>
           </motion.div>
           

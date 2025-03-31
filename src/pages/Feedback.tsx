@@ -70,9 +70,10 @@ const Feedback = () => {
         }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to submit feedback');
+        throw new Error(data.message || 'Failed to submit feedback. Please try again later.');
       }
 
       setShowThankYou(true);
@@ -91,7 +92,7 @@ const Feedback = () => {
       }, 3000);
     } catch (error) {
       console.error('Error submitting feedback:', error);
-      setError(error instanceof Error ? error.message : 'Failed to submit feedback. Please try again.');
+      setError(error instanceof Error ? error.message : 'Failed to submit feedback. Please try again later.');
     } finally {
       setIsSubmitting(false);
     }
