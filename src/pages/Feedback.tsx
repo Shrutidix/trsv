@@ -12,6 +12,8 @@ const Feedback = () => {
   const [showThankYou, setShowThankYou] = useState(false);
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const totalSteps = 4;
   const progress = (step / totalSteps) * 100;
@@ -50,6 +52,8 @@ const Feedback = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+    setIsSubmitting(true);
     
     try {
       const response = await fetch('https://trsvbackend.vercel.app/api/feedback', {
@@ -67,7 +71,8 @@ const Feedback = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to submit feedback');
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to submit feedback');
       }
 
       setShowThankYou(true);
@@ -82,10 +87,13 @@ const Feedback = () => {
         setShowThankYou(false);
         setEmail('');
         setPhone('');
+        setError(null);
       }, 3000);
     } catch (error) {
       console.error('Error submitting feedback:', error);
-      // You might want to show an error message to the user
+      setError(error instanceof Error ? error.message : 'Failed to submit feedback. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -236,12 +244,17 @@ const Feedback = () => {
               </div>
               <button
                 type="submit"
-                className="w-full bg-primary-600 text-white py-2 rounded-lg hover:bg-primary-700 transition-colors"
-                disabled={rating === 0}
+                className="w-full bg-primary-600 text-white py-2 rounded-lg hover:bg-primary-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={rating === 0 || isSubmitting}
               >
-                Submit Feedback
+                {isSubmitting ? 'Submitting...' : 'Submit Feedback'}
               </button>
             </form>
+            {error && (
+              <div className="mt-4 p-4 bg-red-100 text-red-700 rounded-lg">
+                {error}
+              </div>
+            )}
           </motion.div>
         );
 
