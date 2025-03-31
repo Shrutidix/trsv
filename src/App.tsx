@@ -32,12 +32,10 @@ const App = () => (
           <Route path="/routes" element={<RoutesPage />} />
           <Route path="/packages" element={<Packages />} />
           <Route path="/feedback" element={<Feedback />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          {/* help her to hep out  */}
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/privacy" element={<Policy />} />
+          <Route path="/terms" element={<Terms />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/gallery" element={<Gallery/>}/>
-          <Route path="/privacy" element={<Policy/>}/>
-          <Route path="/terms" element={<Terms/>}/>
         </Routes>
       </Router>
     </TooltipProvider>
