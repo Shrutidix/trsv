@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Checkbox } from "../components/ui/checkbox";
-import { Plus, Download } from "lucide-react";
 import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
-import logo from '../assets/@website-logo (1).jpg';
 
 interface Charge {
   description: string;
@@ -47,6 +44,8 @@ const Invoice = () => {
     description: "",
     amount: ""
   });
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const calculateTotal = () => {
     const driverCharge = Number(invoiceData.driverCharge || 0);
@@ -100,8 +99,9 @@ const Invoice = () => {
     "Cash", "UPI", "Bank Transfer", "Credit Card", "Debit Card"
   ];
 
-  const generatePDF = () => {
+  const generatePDF = async () => {
     try {
+      setIsLoading(true);
       const doc = new jsPDF();
       let y = 20;
 
@@ -159,8 +159,8 @@ const Invoice = () => {
       doc.text("CUSTOMER DETAILS", 15, y);
       
       y += 7;
-      doc.setFont("helvetica", 'normal');
       doc.setFontSize(10);
+      doc.setFont("helvetica", 'normal');
       doc.text([
         `Name: ${invoiceData.customerName}`,
         `Phone: ${invoiceData.phone}`,
@@ -268,6 +268,8 @@ const Invoice = () => {
     } catch (error) {
       console.error('PDF Generation Error:', error);
       alert('Failed to generate PDF. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -480,9 +482,9 @@ const Invoice = () => {
         <Button
           onClick={generatePDF}
           className="w-full bg-green-600 hover:bg-green-700 text-white"
-          disabled={!invoiceData.customerName || !invoiceData.from || !invoiceData.to || !invoiceData.travelDate}
+          disabled={!invoiceData.customerName || !invoiceData.from || !invoiceData.to || !invoiceData.travelDate || isLoading}
         >
-          Generate Invoice
+          {isLoading ? 'Generating...' : 'Generate Invoice'}
         </Button>
       </div>
     </div>
