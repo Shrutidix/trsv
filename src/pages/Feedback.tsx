@@ -10,6 +10,8 @@ const Feedback = () => {
   const [experience, setExperience] = useState("");
   const [rating, setRating] = useState(0);
   const [showThankYou, setShowThankYou] = useState(false);
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
 
   const totalSteps = 4;
   const progress = (step / totalSteps) * 100;
@@ -46,14 +48,45 @@ const Feedback = () => {
     "https://images.unsplash.com/photo-1593691509543-c55fb32e5cee?q=80&w=2070&auto=format&fit=crop", // Nainital
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setShowThankYou(true);
     
-    // Redirect to Google after 3 seconds
-    setTimeout(() => {
-      window.location.href = "https://www.google.com";
-    }, 3000);
+    try {
+      const response = await fetch('https://trsvbackend.vercel.app/api/feedback', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          rating,
+          message: experience
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit feedback');
+      }
+
+      setShowThankYou(true);
+      
+      // Reset form after successful submission
+      setTimeout(() => {
+        setStep(1);
+        setDestination('');
+        setName('');
+        setExperience('');
+        setRating(0);
+        setShowThankYou(false);
+        setEmail('');
+        setPhone('');
+      }, 3000);
+    } catch (error) {
+      console.error('Error submitting feedback:', error);
+      // You might want to show an error message to the user
+    }
   };
 
   const renderStep = () => {
@@ -104,22 +137,38 @@ const Feedback = () => {
             className="max-w-md mx-auto p-6 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg"
           >
             <h2 className="text-2xl font-bold mb-4 text-center">Welcome!</h2>
-            <p className="text-gray-600 mb-6 text-center">Please enter your name to continue</p>
+            <p className="text-gray-600 mb-6 text-center">Please enter your details to continue</p>
             <form onSubmit={(e) => {
               e.preventDefault();
-              if (name.trim()) setStep(3);
+              if (name.trim() && email.trim() && phone.trim()) setStep(3);
             }}>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Your name"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 mb-4"
+                required
+              />
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Your email"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 mb-4"
+                required
+              />
+              <input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="Your phone number"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 mb-4"
                 required
               />
               <button
                 type="submit"
-                className="w-full mt-4 bg-primary-600 text-white py-2 rounded-lg hover:bg-primary-700 transition-colors"
+                className="w-full bg-primary-600 text-white py-2 rounded-lg hover:bg-primary-700 transition-colors"
               >
                 Continue
               </button>
