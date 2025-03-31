@@ -15,6 +15,7 @@ import Terms from "./pages/terms";
 import Packages from "./pages/Packages";
 import Gallery from "./pages/gallery";
 import Feedback from "./pages/Feedback";
+import Invoice from "./pages/Invoice";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App = () => (
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/privacy" element={<Policy />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/invoice" element={<Invoice />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
