@@ -138,7 +138,7 @@ const popularPlaces = [
   }
 ];
 
-const [selectedImage, setSelectedImage] = useState(null); // For opening images
+
 
 const NotFound = () => {
   const [selectedPlace, setSelectedPlace] = useState(null);
