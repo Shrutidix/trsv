@@ -327,7 +327,7 @@ const Invoice = () => {
                 const qrCenterX = xPos + (qrCodeSize / 2);
                 doc.text("Scan to pay", qrCenterX, y + qrCodeSize + 5, { align: 'center' });
                 doc.setFontSize(12);
-                doc.text(`₹${calculateTotal()}/-`, qrCenterX, y + qrCodeSize + 12, { align: 'center' });
+                doc.text(`₹ ${calculateTotal()}/-`, xPos, y + qrCodeSize + 12, { align: 'left' });
                 
                 y += qrCodeSize + 20;
               } catch (error) {
@@ -386,7 +386,7 @@ const Invoice = () => {
 
     } catch (error) {
       console.error('PDF Generation Error:', error);
-      alert('Failed to generate PDF. Please try again.');
+      alert('Failed to generate PDF. Please check the console for more details.');
     } finally {
       setIsLoading(false);
     }
