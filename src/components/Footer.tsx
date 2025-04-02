@@ -17,13 +17,13 @@ const Footer = () => {
               </div>
               <p className="text-gray-400 mb-4">Your trusted partner for unforgettable adventures across North India. Explore the majestic Himalayas with our expert guides and comfortable transportation.</p>
               <div className="flex gap-4">
-                <a href="#" className="text-primary-300 hover:text-white transition-colors">
+                <a href="https://www.facebook.com/" className="text-primary-300 hover:text-white transition-colors">
                   <Facebook size={20} />
                 </a>
                 <a href="https://www.instagram.com/uttarakhandroadtrip/" className="text-primary-300 hover:text-white transition-colors">
                   <Instagram size={20} />
                 </a>
-                <a href="#" className="text-primary-300 hover:text-white transition-colors">
+                <a href="https://x.com/?lang=en-in" className="text-primary-300 hover:text-white transition-colors">
                   <Twitter size={20} />
                 </a>
               </div>

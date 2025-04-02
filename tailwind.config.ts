@@ -88,14 +88,9 @@ export default {
 					to: { height: '0' }
 				},
 				// 🔴 Add Vibration Keyframes
-				vibrate: {
-					'0%': { transform: 'translate(0, 0)' },
-					'20%': { transform: 'translate(-2px, 2px)' },
-					'40%': { transform: 'translate(2px, -2px)' },
-					'60%': { transform: 'translate(-2px, 2px)' },
-					'80%': { transform: 'translate(2px, -2px)' },
-					'100%': { transform: 'translate(0, 0)' }
-				},
+				
+				
+				
 				// 🔴 Add Pulse Keyframes
 				pulse: {
 					'0%': { transform: 'scale(1)', opacity: '0.8' },
