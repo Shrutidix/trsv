@@ -80,25 +80,34 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
+				},
+				// 🔴 Add Vibration Keyframes
+				vibrate: {
+					'0%': { transform: 'translate(0, 0)' },
+					'20%': { transform: 'translate(-2px, 2px)' },
+					'40%': { transform: 'translate(2px, -2px)' },
+					'60%': { transform: 'translate(-2px, 2px)' },
+					'80%': { transform: 'translate(2px, -2px)' },
+					'100%': { transform: 'translate(0, 0)' }
+				},
+				// 🔴 Add Pulse Keyframes
+				pulse: {
+					'0%': { transform: 'scale(1)', opacity: '0.8' },
+					'50%': { transform: 'scale(1.6)', opacity: '0' },
+					'100%': { transform: 'scale(1)', opacity: '0.8' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'vibrate': 'vibrate 0.2s linear infinite',
+				'pulse': 'pulse 1.5s infinite'
 			},
 			backgroundImage: {
 				'mountain-pattern': "url('/lovable-uploads/4539cab9-5a17-4e29-bd19-af2bdaf5bebf.png')",

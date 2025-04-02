@@ -108,7 +108,7 @@ const cars: CarSpecs[] = [
     rate: "₹22/km",
     nightCharges: "Rs 600",
     ac: true,
-    image: "https://ic1.maxabout.us/news/2020/06/Toyota-Fortuner-Legender-2.png",
+    image: "https://i.pinimg.com/736x/70/3c/73/703c733d7e0bd3f04caebbfe9d50f115.jpg",
     specs: {
       description: "Spacious SUV with excellent ground clearance for hill stations and rough terrain.",
       safety: 4.7,

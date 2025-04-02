@@ -89,13 +89,31 @@ const Footer = () => {
 
       {/* Floating Action Buttons */}
       <div className="fixed bottom-6 right-6 flex flex-col gap-4">
-        <a href="tel:+91 8077757674" className="bg-red-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition">
-          <FaPhoneAlt size={20} />
+    {/* Call Button with Vibration & Glow Effect */}
+    <div className="relative">
+        {/* Ripple Effect */}
+        <span className="absolute w-[60px] h-[60px] bg-red-500/50 rounded-full animate-pulse"></span>
+
+        {/* Call Button with Vibration */}
+        <a 
+          href="tel:+91 8077757674" 
+          className="flex items-center justify-center w-[50px] h-[50px] bg-red-500 text-white rounded-full shadow-lg animate-vibrate relative"
+        >
+            <FaPhoneAlt size={20} />
         </a>
-        <a href="https://wa.me/918954257372" className="bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition">
-  <FaWhatsapp size={20} />
-</a>
-      </div>
+    </div>
+
+    {/* WhatsApp Button */}
+    <a 
+      href="https://wa.me/918077757674" 
+      className="flex items-center justify-center w-[50px] h-[50px] bg-green-600 text-white rounded-full shadow-lg"
+    >
+        <FaWhatsapp size={20} />
+    </a>
+</div>
+
+
+
     </>
   );
 };
