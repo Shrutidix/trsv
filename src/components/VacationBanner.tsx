@@ -73,7 +73,7 @@ const VacationBanner = () => {
   useEffect(() => {
     controls.start({ opacity: 1 });
   }, [controls]);
-
+  
   // Shimmer animation sequence
   useEffect(() => {
     const shimmerSequence = async () => {
@@ -200,11 +200,11 @@ const VacationBanner = () => {
   const generateGreeting = () => {
     try {
       if (upcomingFestival && upcomingFestival.festivalDetails) {
-        return upcomingFestival.festivalDetails.greeting;
-      } else if (hasLongWeekend) {
-        return "Yay! Extended Holidays! Perfect for a trip! 🎉";
-      } else if (sequences.length > 0) {
-        return "Yay! Holiday time! Plan a quick getaway! 🌴";
+      return upcomingFestival.festivalDetails.greeting;
+    } else if (hasLongWeekend) {
+      return "Yay! Extended Holidays! Perfect for a trip! 🎉";
+    } else if (sequences.length > 0) {
+      return "Yay! Holiday time! Plan a quick getaway! 🌴";
       }
     } catch (error) {
       console.error('Error generating greeting:', error);
@@ -280,11 +280,11 @@ const VacationBanner = () => {
               <span className="text-3xl md:text-4xl font-bold text-yellow-100">
                 {FESTIVALS[0].greeting}
               </span>
-            </motion.div>
-            
+          </motion.div>
+
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
               className="font-hindi text-xl md:text-2xl text-yellow-100/90"
             >
@@ -309,7 +309,7 @@ const VacationBanner = () => {
               onClick={() => window.location.href = "/contact"}
             >
               Book Special Puja Package
-            </Button>
+              </Button>
           </motion.div>
         </div>
       </div>
