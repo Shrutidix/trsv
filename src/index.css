@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -81,6 +84,10 @@
     --sidebar-accent-foreground: 265 30% 90%;
     --sidebar-border: 265 30% 25%;
     --sidebar-ring: 265 89% 66%;
+  }
+
+  .font-hindi {
+    font-family: 'Tiro Devanagari Hindi', serif;
   }
 }
 

@@ -1019,7 +1019,9 @@ const Index = () => {
       </section>
 
       {/* Vacation Banner Section */}
-      <VacationBanner />
+      <div className="w-full bg-white">
+        <VacationBanner />
+      </div>
 
       {/* Why Choose Us Section */}
       <section className="py-16 bg-secondary" ref={whyChooseRef}>
