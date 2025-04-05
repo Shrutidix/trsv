@@ -61,6 +61,7 @@ const Index = () => {
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [showMyChoiceDesign, setShowMyChoiceDesign] = useState(false);
   
   // Scroll to booking form if URL parameters are present
   useEffect(() => {
@@ -168,25 +169,25 @@ const Index = () => {
 
   const testimonials = [
     {
-      name: 'Priya Sharma',
-      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop',
+      name: 'Saksham Chaudhary',
+      avatar: '/saksham.jpg',
       rating: 5,
-      text: 'My trip to Manali was flawless. Uttarakhand Road Trip arranged everything perfectly from hotel to taxi. Our driver was very knowledgeable and friendly!',
+      text: 'Manali trip ekdum mast raha! Driver bhaiya ne bohot acche se guide kiya, har jagah ki knowledge thi unko. Taxi time pe aayi, clean thi, AC perfect tha. Rates bhi reasonable the. Full paisa vasool service! 👌',
       destination: 'Manali Trip',
     },
     {
-      name: 'Rahul Mehta',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2071&auto=format&fit=crop',
-      rating: 4,
-      text: 'We had a wonderful time exploring Shimla. The package was exactly as described, and the support team was always available when needed.',
-      destination: 'Shimla Package',
+      name: 'अमित शर्मा',
+      avatar: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2080&auto=format&fit=crop',
+      rating: 5,
+      text: 'Haridwar-Rishikesh ka trip zabardast raha! Ganga aarti ke liye best spot bataya, local market mein bhi le gaye. Driver bhaiya ne pura din ghuma ke sab dikha diya. Next time bhi inhi se booking karunga pakka! 🙏',
+      destination: 'Haridwar-Rishikesh Tour',
     },
     {
-      name: 'Anjali Kapoor',
-      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2070&auto=format&fit=crop',
+      name: 'प्रिया गुप्ता',
+      avatar: 'https://images.unsplash.com/photo-1664575602554-2087b04935a5?q=80&w=2087&auto=format&fit=crop',
       rating: 5,
-      text: 'The Ladakh tour exceeded all expectations. The itinerary was perfectly balanced with adventure activities and time to relax and enjoy the scenery.',
-      destination: 'Ladakh Adventure',
+      text: 'Mussoorie weekend trip ke liye perfect service! Kempty falls, mall road, gun hill - sab jagah time se pohcha diya. Family ke saath travel kar rahi thi, bilkul safe feel hua. Driver uncle ne local food places bhi recommend kiye. Highly recommended! ⭐',
+      destination: 'Mussoorie Weekend',
     },
   ];
 
@@ -300,25 +301,67 @@ const Index = () => {
       name: "Premium Sedan",
       capacity: "1-3 Passengers",
       features: ["Air Conditioning", "Comfortable Seating", "Music System", "GPS Navigation"],
-      price: "₹15/km",
-      image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2940&auto=format&fit=crop",
-      description: "Perfect for small families or business travelers requiring comfort and elegance."
+      price: "₹12-14/km",
+      image: "https://wallpapers.com/images/hd/suzuki-dzire-2022-sherwood-brown-y5e1vukdf48ljnb0.jpg",
+      description: "Perfect for small families or business travelers requiring comfort and elegance. Choose from Swift Dzire or Etios.",
+      vehicles: [
+        {
+          name: "Swift Dzire",
+          image: "https://wallpapers.com/images/hd/suzuki-dzire-2022-sherwood-brown-y5e1vukdf48ljnb0.jpg",
+          rate: "₹12/km",
+          features: ["Air Conditioning", "4 Seats", "2 Luggage", "Music System", "Charging Ports"]
+        },
+        {
+          name: "Etios",
+          image: "https://cuyomotor.com.ar/wp-content/uploads/2023/06/Toyota-Etios-hatch-XLS.jpg",
+          rate: "₹14/km",
+          features: ["Air Conditioning", "5 Seats", "2 Luggage", "Music System", "Charging Ports"]
+        }
+      ]
     },
     suv: {
       name: "Luxury SUV",
       capacity: "4-6 Passengers",
       features: ["Air Conditioning", "Spacious Interior", "Premium Sound System", "Extra Luggage Space"],
-      price: "₹18/km",
-      image: "https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=2936&auto=format&fit=crop",
-      description: "Ideal for families or small groups looking for a blend of comfort and space."
+      price: "₹22/km",
+      image: "https://i.pinimg.com/736x/70/3c/73/703c733d7e0bd3f04caebbfe9d50f115.jpg",
+      description: "Ideal for families or small groups looking for a blend of comfort and space. Choose from Fortuner.",
+      vehicles: [
+        {
+          name: "Fortuner",
+          image: "https://i.pinimg.com/736x/70/3c/73/703c733d7e0bd3f04caebbfe9d50f115.jpg",
+          rate: "₹22/km",
+          features: ["Air Conditioning", "6 Seats", "3 Luggage", "Music System", "Charging Ports"]
+        }
+      ]
     },
     tempo: {
       name: "Tempo Traveller",
       capacity: "7-12 Passengers",
       features: ["Air Conditioning", "Reclining Seats", "Ample Luggage Space", "Perfect for Groups"],
-      price: "₹22/km",
-      image: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=2940&auto=format&fit=crop",
-      description: "Perfect for medium-sized groups traveling together with ample space for luggage."
+      price: "₹15-20/km",
+      image: "https://th.bing.com/th/id/OIP.WmpZMNmbuUE1SFxuBav2wgHaEK?rs=1&pid=ImgDetMain",
+      description: "Perfect for medium-sized groups traveling together with ample space for luggage. Choose from Ertiga, Innova, or Innova Crysta.",
+      vehicles: [
+        {
+          name: "Ertiga",
+          image: "https://th.bing.com/th/id/OIP.WmpZMNmbuUE1SFxuBav2wgHaEK?rs=1&pid=ImgDetMain",
+          rate: "₹15/km",
+          features: ["Air Conditioning", "7 Seats", "3 Luggage", "Music System", "Charging Ports"]
+        },
+        {
+          name: "Innova",
+          image: "https://img.philkotse.com/crop/643x362/2020/12/09/f3xu3v8D/innova-red-mica-metallic-4da2.png",
+          rate: "₹17/km",
+          features: ["Air Conditioning", "7 Seats", "4 Luggage", "Music System", "Charging Ports"]
+        },
+        {
+          name: "Innova Crysta",
+          image: "https://imgd.aeplcdn.com/664x374/n/cw/ec/130591/front-view-130.jpeg?isig=0&q=80",
+          rate: "₹20/km",
+          features: ["Air Conditioning", "7 Seats", "4 Luggage", "Music System", "Charging Ports", "Premium Interior"]
+        }
+      ]
     },
     bus: {
       name: "Luxury Bus",
@@ -326,7 +369,15 @@ const Index = () => {
       features: ["Air Conditioning", "Reclining Seats", "Entertainment System", "Large Groups"],
       price: "₹35/km",
       image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=2940&auto=format&fit=crop",
-      description: "The ultimate solution for large groups traveling together in complete comfort."
+      description: "The ultimate solution for large groups traveling together in complete comfort.",
+      vehicles: [
+        {
+          name: "Luxury Bus",
+          image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=2940&auto=format&fit=crop",
+          rate: "₹35/km",
+          features: ["Air Conditioning", "13+ Seats", "Large Luggage Space", "Entertainment System", "Reclining Seats"]
+        }
+      ]
     }
   };
 
@@ -349,6 +400,12 @@ const Index = () => {
         setSelectedCarType("sedan");
     }
   }, [passengerCount]);
+
+  // Handle car type change
+  const handleCarTypeChange = (value: string) => {
+    setSelectedCarType(value);
+    setShowMyChoiceDesign(value === "myChoice");
+  };
 
   // Add form submission handler
   const handleSubmit = async () => {
@@ -911,7 +968,7 @@ const Index = () => {
                   <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
                     <Car className="h-5 w-5 mr-2 text-primary" /> Car Type
                   </label>
-                  <Select value={selectedCarType} onValueChange={setSelectedCarType}>
+                  <Select value={selectedCarType} onValueChange={handleCarTypeChange}>
                     <SelectTrigger className="w-full h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-2.5 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-base transition-all hover:bg-white/80">
                       <SelectValue placeholder="Select car type" />
                     </SelectTrigger>
@@ -920,6 +977,7 @@ const Index = () => {
                       <SelectItem value="suv">Luxury SUV</SelectItem>
                       <SelectItem value="tempo">Tempo Traveller</SelectItem>
                       <SelectItem value="bus">Luxury Bus</SelectItem>
+                      <SelectItem value="myChoice">My Choice</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -927,15 +985,19 @@ const Index = () => {
                 {/* Phone Number Input */}
                 <div className="col-span-1">
                   <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
-                    <Phone className="h-5 w-5 mr-2 text-primary" /> Contact Number
+                    <Phone className="h-5 w-5 mr-2 text-primary" /> Contact Number <span className="text-red-500 ml-1">*</span>
                   </label>
                   <input 
                     type="tel" 
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     placeholder="Enter contact number" 
+                    required
                     className="w-full h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-2.5 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-base transition-all hover:bg-white/80"
                   />
+                  {phoneNumber === "" && (
+                    <p className="text-red-500 text-xs mt-1">Phone number is required</p>
+                  )}
                 </div>
 
                 {/* Search Button */}
@@ -973,39 +1035,109 @@ const Index = () => {
                 <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
                 <div className="absolute -top-20 -right-20 w-48 h-48 bg-primary-400/15 rounded-full blur-3xl"></div>
                 <div className="absolute -bottom-20 -left-20 w-48 h-48 bg-blue-400/15 rounded-full blur-3xl"></div>
-                <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
-                  <div className="flex-shrink-0 w-60 h-40 rounded-xl overflow-hidden bg-white/70 backdrop-blur-sm flex items-center justify-center shadow-sm border border-white/60">
-                    <img 
-                      src={vehicleInfo[selectedCarType as keyof typeof vehicleInfo].image}
-                      alt={vehicleInfo[selectedCarType as keyof typeof vehicleInfo].name}
-                      className="w-full h-full object-cover"
-                    />
+                
+                {showMyChoiceDesign ? (
+                  <div className="flex flex-col items-center justify-center py-8 relative z-10">
+                    <div className="w-full max-w-md text-center mb-6">
+                      <h3 className="text-2xl font-bold text-primary-700 mb-3">Choose Your Perfect Vehicle</h3>
+                      <p className="text-gray-600 mb-6">
+                        Browse our extensive fleet of vehicles and find the perfect match for your journey.
+                        From luxury sedans to spacious buses, we have it all!
+                      </p>
+                    </div>
+                    
+                    <Link to="/taxi" className="w-full">
+                      <Button className="w-full bg-primary-600 hover:bg-primary-700 text-white px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <Car className="h-5 w-5 mr-2" />
+                        Explore All Vehicles
+                      </Button>
+                    </Link>
                   </div>
-                  <div className="flex-grow">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">
-                      {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].name}
-                    </h3>
-                    <div className="flex flex-wrap items-center gap-4 mb-3 text-gray-700">
-                      {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].features.map((feature, index) => (
-                        <span key={index} className="flex items-center">
-                          <CheckCircle className="h-4 w-4 mr-1 text-primary" /> {feature}
-                        </span>
-                      ))}
+                ) : (
+                  <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
+                    <div className="flex-shrink-0 w-60 h-40 rounded-xl overflow-hidden bg-white/70 backdrop-blur-sm flex items-center justify-center shadow-sm border border-white/60">
+                      <img 
+                        src={vehicleInfo[selectedCarType as keyof typeof vehicleInfo].image}
+                        alt={vehicleInfo[selectedCarType as keyof typeof vehicleInfo].name}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
-                    <p className="text-gray-600 mb-4">
-                      {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].description}
-                    </p>
-                    <div className="flex items-center gap-4">
-                      <div className="bg-primary text-white rounded-full py-1 px-4 text-sm font-medium">
-                        {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].price}
+                    <div className="flex-grow">
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">
+                        {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].name}
+                      </h3>
+                      <div className="flex flex-wrap items-center gap-4 mb-3 text-gray-700">
+                        {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].features.map((feature, index) => (
+                          <span key={index} className="flex items-center">
+                            <CheckCircle className="h-4 w-4 mr-1 text-primary" /> {feature}
+                          </span>
+                        ))}
                       </div>
-                      <div className="text-sm text-gray-500">
-                        Recommended for {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].capacity}
+                      <p className="text-gray-600 mb-4">
+                        {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].description}
+                      </p>
+                      <div className="flex items-center gap-4">
+                        <div className="bg-primary text-white rounded-full py-1 px-4 text-sm font-medium">
+                          {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].price}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          Recommended for {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].capacity}
+                        </div>
                       </div>
                     </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Vehicle Grid Section - Shows specific vehicles based on selected type */}
+              {!showMyChoiceDesign && (
+                <div className="mt-8 p-6 bg-gradient-to-r from-primary-50/60 via-white/60 to-blue-50/60 backdrop-blur-xl rounded-2xl border border-white/60 shadow-lg relative overflow-hidden">
+                  <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+                  <div className="absolute -top-20 -right-20 w-48 h-48 bg-primary-400/15 rounded-full blur-3xl"></div>
+                  <div className="absolute -bottom-20 -left-20 w-48 h-48 bg-blue-400/15 rounded-full blur-3xl"></div>
+                  
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 relative z-10">
+                    Available {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].name} Vehicles
+                  </h3>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10">
+                    {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].vehicles.map((vehicle, index) => (
+                      <div key={index} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm border border-primary-100 hover:shadow-md transition-all">
+                        <div className="h-32 bg-primary-50 rounded-lg mb-3 flex items-center justify-center overflow-hidden">
+                          <img 
+                            src={vehicle.image} 
+                            alt={vehicle.name} 
+                            className="w-full h-full object-contain p-2"
+                          />
+                        </div>
+                        <h4 className="font-medium text-gray-800">{vehicle.name}</h4>
+                        <div className="flex items-center justify-between mt-2">
+                          <p className="text-sm text-primary-600 font-medium">{vehicle.rate}</p>
+                          <div className="flex items-center text-xs text-gray-500">
+                            {vehicle.features.filter(f => f.includes("Seats")).join(", ")}
+                          </div>
+                        </div>
+                        <div className="mt-2 flex flex-wrap gap-1">
+                          {vehicle.features.filter(f => !f.includes("Seats")).map((feature, idx) => (
+                            <span key={idx} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+                              {feature}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <div className="mt-6 text-center relative z-10">
+                    <Link to="/taxi" className="inline-block">
+                      <Button className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+                        <Car className="h-4 w-4 mr-2" />
+                        View All Vehicles
+                      </Button>
+                    </Link>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
           
