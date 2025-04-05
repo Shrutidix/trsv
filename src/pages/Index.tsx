@@ -170,7 +170,7 @@ const Index = () => {
   const testimonials = [
     {
       name: 'Saksham Chaudhary',
-      avatar: '/saksham.jpg',
+      avatar: 'https://thumbs.dreamstime.com/b/amber-india-september-portrait-unidentified-indian-man-wearing-blue-t-shirt-streets-104351515.jpg',
       rating: 5,
       text: 'Manali trip ekdum mast raha! Driver bhaiya ne bohot acche se guide kiya, har jagah ki knowledge thi unko. Taxi time pe aayi, clean thi, AC perfect tha. Rates bhi reasonable the. Full paisa vasool service! 👌',
       destination: 'Manali Trip',
