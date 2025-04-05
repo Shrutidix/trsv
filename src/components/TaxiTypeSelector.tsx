@@ -124,11 +124,11 @@ const TaxiTypeSelector: React.FC = () => {
   const [selectedCar, setSelectedCar] = useState<CarSpecs | null>(null);
 
   const handleCall = () => {
-    window.location.href = "tel:+1234567890";
+    window.location.href = "tel:+91 8077757674";
   };
 
   const handleWhatsApp = () => {
-    window.open("https://wa.me/1234567890", "_blank");
+    window.open("https://wa.me/918077757674", "_blank");
   };
 
   return (
