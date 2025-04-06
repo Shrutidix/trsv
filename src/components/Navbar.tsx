@@ -10,6 +10,7 @@ const Navbar = () => {
   const isMobile = useIsMobile();
   const location = useLocation();
 
+  
   // Scroll to top when route changes
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -21,6 +22,7 @@ const Navbar = () => {
     { name: 'Taxi Services', path: '/taxi' },
     { name: 'Destinations', path: '/destinations' },
     { name: 'Packages', path: '/packages' },
+    { name: 'Gallery', path: '/gallery' },
     { name: 'About Us', path: '/about' },
     { name: 'Contact', path: '/contact' },
   ];
@@ -51,7 +53,7 @@ const Navbar = () => {
                 <Phone className="h-4 w-4" />
                 <span>+91 8077757674</span>
               </a>
-              <a href="mailto:info@himalayajoy.com" className="hidden md:flex items-center gap-1 text-sm text-gray-600 hover:text-primary-500">
+              <a href="mailto:info@uttarakhandroadtrip.com" className="hidden md:flex items-center gap-1 text-sm text-gray-600 hover:text-primary-500">
                 <Mail className="h-4 w-4" />
                 <span>uttrakhandroadtrip@gmail.com</span>
               </a>
@@ -90,7 +92,15 @@ const Navbar = () => {
             <div className="flex items-center justify-between flex-1 pl-8">
               <NavLinks />
               <Button asChild>
-                <Link to="/contact">Book Now</Link>
+                <Link to="/#booking-form" onClick={(e) => {
+                  const isHomePage = window.location.pathname === '/';
+                  if (isHomePage) {
+                    e.preventDefault();
+                    document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}>
+                  Book Now
+                </Link>
               </Button>
             </div>
           )}

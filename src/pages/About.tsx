@@ -11,19 +11,17 @@ const About = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary-600 to-primary-300 py-20 text-white text-center">
+      <section className="bg-gradient-to-r from-primary-600 to-primary-300 py-8 text-white text-center">
         <motion.div 
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
           className="container mx-auto px-4 relative z-10"
         >
-          <div className="text-center text-white-800 mb-10">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">About Us</h1>
-            <p className="text-xl max-w-3xl mx-auto">
-              Discover the best travel experiences with us. We offer expert-guided tours and hassle-free transportation across North India.
-            </p>
-          </div>
+          <h1 className="text-2xl md:text-3xl font-bold mb-2">About Us</h1>
+          <p className="text-base max-w-2xl mx-auto">
+            Discover the best travel experiences with us. We offer expert-guided tours and hassle-free transportation across North India.
+          </p>
         </motion.div>
       </section>
      
@@ -32,26 +30,54 @@ const About = () => {
         {/* Owners Section */}
         <div className="grid md:grid-cols-2 gap-8 items-center bg-white shadow-lg rounded-lg p-8 mb-12">
           <div className="text-center">
-            <img
-              src="src\assets\WhatsApp Image 2025-03-27 at 2.20.18 PM.jpeg"
-              alt="Sachin Choudhary"
-              className="w-72 h-72 rounded-full object-cover border-4 border-primary-500 shadow-lg mx-auto"
-            />
-            <h2 className="text-3xl font-bold text-primary-800 mt-4">Sachin Choudhary</h2>
-            <p className="text-lg text-gray-600 mt-2">
-              Founder & CEO of Uttarakhand Road Trip Pvt Ltd. Passionate about delivering the best travel experiences across Dehradun and Uttarakhand.
-            </p>
+            <motion.div
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="relative inline-block"
+            >
+              <div className="absolute inset-0 bg-primary-500/20 rounded-full blur-xl transform scale-110" />
+              <img
+                src="/images/sachin-choudhary.jpg"
+                alt="Sachin Choudhary"
+                className="w-72 h-72 rounded-full object-cover border-4 border-primary-500 shadow-lg mx-auto relative z-10"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <h2 className="text-3xl font-bold text-primary-800 mt-4">Sachin Choudhary</h2>
+              <p className="text-lg text-gray-600 mt-2">
+                Founder & CEO of Uttarakhand Road Trip Pvt Ltd. Passionate about delivering the best travel experiences across Dehradun and Uttarakhand.
+              </p>
+            </motion.div>
           </div>
           <div className="text-center">
-            <img
-              src="src\assets\WhatsApp Image 2025-03-27 at 2.20.17 PM.jpeg"
-              alt="[Shubham panwar]"
-              className="w-72 h-72 rounded-full object-cover border-4 border-primary-500 shadow-lg mx-auto"
-            />
-            <h2 className="text-3xl font-bold text-primary-800 mt-4">Shubham panwar</h2>
-            <p className="text-lg text-gray-600 mt-2">
-              Co-Founder & Managing Director of Uttarakhand Road Trip Pvt Ltd. Committed to providing exceptional travel experiences and seamless logistics.
-            </p>
+            <motion.div
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="relative inline-block"
+            >
+              <div className="absolute inset-0 bg-primary-500/20 rounded-full blur-xl transform scale-110" />
+              <img
+                src="/images/shubham-panwar.jpg"
+                alt="Shubham Panwar"
+                className="w-72 h-72 rounded-full object-cover border-4 border-primary-500 shadow-lg mx-auto relative z-10"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              <h2 className="text-3xl font-bold text-primary-800 mt-4">Shubham Panwar</h2>
+              <p className="text-lg text-gray-600 mt-2">
+                Co-Founder & Managing Director of Uttarakhand Road Trip Pvt Ltd. Committed to providing exceptional travel experiences and seamless logistics.
+              </p>
+            </motion.div>
           </div>
         </div>
         

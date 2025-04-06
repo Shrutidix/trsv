@@ -9,15 +9,15 @@ const Policy = () => {
       <Navbar />
       
       {/* Header Section */}
-      <section className="bg-gradient-to-r from-primary-600 to-primary-300 py-20 text-white text-center">
+      <section className="bg-gradient-to-r from-primary-600 to-primary-300 py-8 text-white text-center">
         <motion.div 
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
           className="container mx-auto px-4 relative z-10"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Privacy Policy</h1>
-          <p className="text-xl max-w-3xl mx-auto">
+          <h1 className="text-2xl md:text-3xl font-bold mb-2">Privacy Policy</h1>
+          <p className="text-base max-w-2xl mx-auto">
             Our commitment to your privacy and security.
           </p>
         </motion.div>

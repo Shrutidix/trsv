@@ -100,70 +100,75 @@ export const popularRoutes: Route[] = [
     ]
   },
   {
-    id: "dehradun-haridwar",
-    from: "Dehradun",
-    to: "Haridwar",
-    distance: "52 km",
-    duration: "2 hours",
-    basePrice: 1500,
-    image: "https://images.pexels.com/photos/19010052/pexels-photo-19010052/free-photo-of-figure-of-lakshmi-goddess.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    stops: [
+    "id": "dehradun-haridwar",
+    "from": "Dehradun",
+    "to": "Haridwar",
+    "distance": "52 km",
+    "duration": "2 hours",
+    "basePrice": 1800,
+    "image": "https://images.pexels.com/photos/19010052/pexels-photo-19010052/free-photo-of-figure-of-lakshmi-goddess.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    "stops": [
       {
-        name: "Dehradun",
-        lat: 30.3165,
-        lng: 78.0322
+        "name": "Dehradun",
+        "lat": 30.3165,
+        "lng": 78.0322
       },
       {
-        name: "Doiwala",
-        description: "Important junction town",
-        lat: 30.1778,
-        lng: 78.1178
+        "name": "Doiwala",
+        "description": "Important junction town",
+        "lat": 30.1778,
+        "lng": 78.1178
       },
       {
-        name: "Raiwala",
-        description: "Transit point with refreshment stops",
-        lat: 30.0877,
-        lng: 78.2233
+        "name": "Raiwala",
+        "description": "Transit point with refreshment stops",
+        "lat": 30.0877,
+        "lng": 78.2233
       },
       {
-        name: "Haridwar",
-        lat: 29.9457,
-        lng: 78.1642
+        "name": "Haridwar",
+        "lat": 29.9457,
+        "lng": 78.1642
       }
     ],
-    description: "Travel to the holy city of Haridwar, where spirituality meets the Ganges. Perfect for pilgrimage and experiencing the rich cultural heritage.",
-    attractions: [
+    "description": "Travel to the holy city of Haridwar, where spirituality meets the Ganges. Perfect for pilgrimage and experiencing the rich cultural heritage.",
+    "attractions": [
       {
-        name: "Har Ki Pauri",
-        description: "Sacred ghat where the evening Ganga Aarti takes place",
-        image: "https://th.bing.com/th/id/OIP.x2HIpa6IH7pNAXmV1RvgjwHaFR?rs=1&pid=ImgDetMain"
+        "name": "Har Ki Pauri",
+        "description": "Sacred ghat where the evening Ganga Aarti takes place",
+        "image": "https://th.bing.com/th/id/OIP.x2HIpa6IH7pNAXmV1RvgjwHaFR?rs=1&pid=ImgDetMain"
       },
       {
-        name: "Mansa Devi Temple",
-        description: "Ancient temple offering panoramic views of Haridwar",
-        image: "https://www.tripsavvy.com/thmb/e0N3S9ZUthIXnU2oMPpRbNMPmmw=/3481x2321/filters:fill(auto,1)/GettyImages-943681362-b14111ffae644aebabb0659d7e479ed7.jpg"
+        "name": "Mansa Devi Temple",
+        "description": "Ancient temple offering panoramic views of Haridwar",
+        "image": "https://www.tripsavvy.com/thmb/e0N3S9ZUthIXnU2oMPpRbNMPmmw=/3481x2321/filters:fill(auto,1)/GettyImages-943681362-b14111ffae644aebabb0659d7e479ed7.jpg"
       }
     ],
-    vehicles: [
+    "vehicles": [
       {
-        type: "Sedan",
-        capacity: "4 passengers",
-        price: 1500,
-        image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?q=80&w=2070&auto=format&fit=crop"
+        "type": "Sedan",
+        "capacity": "4 passengers",
+        "price": 1800,
+        "negotiable": true,
+        "image": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?q=80&w=2070&auto=format&fit=crop"
       },
       {
-        type: "SUV",
-        capacity: "6 passengers",
-        price: 2200,
-        image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop"
+        "type": "SUV",
+        "capacity": "6 passengers",
+        "price": 2500,
+        "negotiable": true,
+        "image": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop"
       },
       {
-        type: "Tempo Traveller",
-        capacity: "12 passengers",
-        price: 4000,
-        image: "https://images.unsplash.com/photo-1625056280799-9114bd8f49cc?q=80&w=2071&auto=format&fit=crop"
+        "type": "Tempo Traveller",
+        "capacity": "12 passengers",
+        "price": 4300,
+        "negotiable": true,
+        "image": "https://images.unsplash.com/photo-1625056280799-9114bd8f49cc?q=80&w=2071&auto=format&fit=crop"
       }
     ]
+  
+  
   },
   {
     id: "dehradun-rishikesh",

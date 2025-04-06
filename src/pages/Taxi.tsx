@@ -1,109 +1,160 @@
-
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import TaxiBookingForm from "@/components/TaxiBookingForm";
-import TaxiTypeSelector from "@/components/TaxiTypeSelector";
-import TaxiView3D from "@/components/TaxiView3D";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useToast } from "@/components/ui/use-toast";
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Car, Clock, Phone } from 'lucide-react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import TaxiTypeSelector from '@/components/TaxiTypeSelector';
+import { Input } from '../components/ui/input';
+import { Button } from '../components/ui/button';
 
 const Taxi = () => {
-  const [selectedTaxiType, setSelectedTaxiType] = useState("sedan");
-  const [show3DView, setShow3DView] = useState(false);
-  const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    carName: ''
+  });
 
-  const handleBookNow = () => {
-    toast({
-      title: "Booking Request Submitted",
-      description: "We'll contact you shortly to confirm your taxi booking.",
-    });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission here
+    console.log('Form submitted:', formData);
   };
 
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
       
-      <div className="relative py-20 bg-gradient-to-r from-primary-600 to-primary-400 overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1632276536839-84cad7fd03b0?q=80&w=2062&auto=format&fit=crop')]"></div>
-        <motion.div 
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="container mx-auto px-4 relative z-10"
-        >
-          <div className="text-center text-white mb-10">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Premium Taxi Services</h1>
-            <p className="text-xl max-w-3xl mx-auto">
-              Comfortable, reliable and professional taxi services for your North India journey
-            </p>
-          </div>
-          <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
-            {/* <TaxiBookingForm /> */}
-          </div>
-        </motion.div>
-      </div>
-
-      <div className="container mx-auto px-4 py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold">Choose Your Perfect Vehicle</h2>
-          <p className="text-gray-600 mt-2">Select from our range of comfortable vehicles for your journey</p>
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-primary-600 to-primary-300 py-8 text-white text-center">
+        <div className="container mx-auto px-4">
+          <h1 className="text-2xl md:text-3xl font-bold mb-2">Book Your Taxi Service</h1>
+          <p className="text-base max-w-2xl mx-auto">
+            Choose from our fleet of comfortable vehicles with experienced drivers for your journey
+          </p>
         </div>
+      </section>
 
-        <div className="mb-16">
-          <TaxiTypeSelector 
-            selectedType={selectedTaxiType} 
-            onSelectType={(type) => {
-              setSelectedTaxiType(type);
-              setShow3DView(true);
-            }}
-          />
-        </div>
+      {/* Taxi Types Section */}
+      <TaxiTypeSelector />
 
-        {show3DView && (
+      {/* Custom Car Request Section */}
+      <section className="py-16 bg-gradient-to-r from-gray-50 to-gray-100">
+        <div className="container mx-auto px-4">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4 }}
-            className="mb-16"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden"
           >
-            <div className="bg-white rounded-xl overflow-hidden shadow-xl border border-gray-100">
-              <Tabs defaultValue="view" className="w-full">
-                <div className="border-b">
-                  <div className="container px-6">
-                    <TabsList className="bg-transparent h-16">
-                      <TabsTrigger 
-                        value="view" 
-                        className="data-[state=active]:border-b-2 data-[state=active]:border-primary-500 data-[state=active]:text-primary-500 rounded-none"
-                      >
-                        3D Interactive View
-                      </TabsTrigger>
-                    </TabsList>
+            <div className="p-8 md:p-12">
+              <div className="text-center mb-8">
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4"
+                >
+                  <Car className="w-8 h-8 text-primary-600" />
+                </motion.div>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                  Can't Find Your Preferred Car?
+                </h2>
+                <p className="text-gray-600">
+                  Don't worry! Tell us what you're looking for, and we'll arrange it for you within an hour.
+                </p>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="text-sm font-medium text-gray-700">Your Name</label>
+                    <Input
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Enter your name"
+                      required
+                      className="w-full"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="phone" className="text-sm font-medium text-gray-700">Phone Number</label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="Enter your phone number"
+                      required
+                      className="w-full"
+                    />
                   </div>
                 </div>
                 
-                <TabsContent value="view" className="p-0">
-                  <div className="h-[600px]">
-                    <TaxiView3D carType={selectedTaxiType} />
+                <div className="space-y-2">
+                  <label htmlFor="carName" className="text-sm font-medium text-gray-700">Preferred Car</label>
+                  <Input
+                    id="carName"
+                    name="carName"
+                    value={formData.carName}
+                    onChange={handleChange}
+                    placeholder="Tell us which car you're looking for"
+                    required
+                    className="w-full"
+                  />
+                </div>
+
+                <div className="flex justify-center">
+                  <Button
+                    type="submit"
+                    className="bg-primary-600 text-white px-8 py-3 rounded-lg hover:bg-primary-700 transition-colors"
+                  >
+                    Submit Request
+                  </Button>
+                </div>
+              </form>
+
+              {/* Features */}
+              <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="flex items-center space-x-3">
+                  <div className="flex-shrink-0">
+                    <Clock className="w-6 h-6 text-primary-600" />
                   </div>
-                </TabsContent>
-              </Tabs>
-            </div>
-            
-            <div className="mt-8 text-center">
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={handleBookNow}
-                className="bg-primary-500 text-white px-8 py-4 rounded-lg hover:bg-primary-600 transition-colors font-semibold text-lg shadow-lg"
-              >
-                Book This {selectedTaxiType.charAt(0).toUpperCase() + selectedTaxiType.slice(1)} Now
-              </motion.button>
+                  <div className="text-sm text-gray-600">
+                    Response within 1 hour
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="flex-shrink-0">
+                    <Phone className="w-6 h-6 text-primary-600" />
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    Direct phone support
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="flex-shrink-0">
+                    <Car className="w-6 h-6 text-primary-600" />
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    Wide range of vehicles
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.div>
-        )}
-      </div>
+        </div>
+      </section>
 
       <Footer />
     </div>

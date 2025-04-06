@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PackageBookingForm from "@/components/PackageBookingForm";
 import PackageCard from "@/components/PackageCard";
+import { motion } from "framer-motion";
 
 const Packages = () => {
   const packages = [
@@ -13,7 +14,7 @@ const Packages = () => {
       description: "Experience the natural beauty of Kashmir valleys and lakes",
       price: 24999,
       duration: "6 Days / 5 Nights",
-      image: "https://images.unsplash.com/photo-1586183189334-1095f90aee92?q=80&w=1470&auto=format&fit=crop",
+      image: "https://res.cloudinary.com/dyiffrkzh/image/upload/v1702624053/bbj/unvpp7wfwbecni1i6rii.jpg",
       location: "Kashmir Valley",
       rating: 4.8,
       features: ["Hotel", "Meals", "Transport", "Guide"],
@@ -25,7 +26,7 @@ const Packages = () => {
       description: "Explore the hills and snow-covered landscapes of Himachal",
       price: 18999,
       duration: "5 Days / 4 Nights",
-      image: "https://images.unsplash.com/photo-1626621342581-ebc3188b9554?q=80&w=1470&auto=format&fit=crop",
+      image: "https://cdn.getyourguide.com/img/tour/735112f87174d8a3a6220ee10f2ee5210ab4e0d98c96979a99e2ff6168154014.jpeg/145.jpg",
       location: "Himachal Pradesh",
       rating: 4.7,
       features: ["Hotel", "Transport", "Sightseeing"],
@@ -49,7 +50,7 @@ const Packages = () => {
       description: "Adventure through the breathtaking landscapes of Ladakh",
       price: 29999,
       duration: "8 Days / 7 Nights",
-      image: "https://images.unsplash.com/photo-1590077428593-a33c3fb77925?q=80&w=1374&auto=format&fit=crop",
+      image: "https://himshikhartreks.com/wp-content/uploads/2018/07/32c3582e-b7b7-4af6-a518-9482a1a9aa4c-1.jpg",
       location: "Leh Ladakh",
       rating: 4.9,
       features: ["Hotel", "Transport", "Oxygen Support", "Adventure Activities"],
@@ -60,20 +61,19 @@ const Packages = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <div className="relative bg-gradient-to-b from-primary-500 to-primary-600 py-20">
-        <div className="absolute inset-0 opacity-20 bg-mountain-pattern bg-cover bg-center"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center text-white mb-10">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Discover North India Tour Packages</h1>
-            <p className="text-xl max-w-3xl mx-auto">
-              Explore curated packages for unforgettable adventures in the Himalayas and beyond
-            </p>
-          </div>
-          <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
-            <PackageBookingForm />
-          </div>
-        </div>
-      </div>
+      <section className="bg-gradient-to-r from-primary-600 to-primary-300 py-20 text-white text-center">
+        <motion.div 
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="container mx-auto px-4 relative z-10"
+        >
+          <h1 className="text-4xl md:text-5xl font-bold mb-4"> Discover North India Tour Packages</h1>
+          <p className="text-xl max-w-3xl mx-auto">
+          Explore curated packages for unforgettable adventures in the Himalayas and beyond.
+          </p>
+        </motion.div>
+      </section>
 
       <div className="container mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold text-center mb-12">Popular Tour Packages</h2>
