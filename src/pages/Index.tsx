@@ -866,24 +866,24 @@ const Index = () => {
 
           {/* Booking form panel */}
           <div id="booking-form" className="w-full max-w-7xl mx-auto bg-gradient-to-br from-white/95 via-primary-50/90 to-blue-50/85 backdrop-blur-2xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-white/30 overflow-visible mb-16">
-            <div className="p-8 relative">
-              {/* Background decoration */}
+            <div className="p-4 md:p-8 relative">
+              {/* Background decoration - Simplified for mobile */}
               <div className="absolute inset-0 bg-grid-pattern opacity-15 pointer-events-none"></div>
-              <div className="absolute -top-10 -right-10 w-48 h-48 bg-primary-400/20 rounded-full blur-3xl"></div>
-              <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-blue-400/20 rounded-full blur-3xl"></div>
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-200/10 rounded-full blur-3xl pointer-events-none"></div>
+              <div className="absolute -top-10 -right-10 w-48 h-48 bg-primary-400/20 rounded-full blur-3xl hidden md:block"></div>
+              <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-blue-400/20 rounded-full blur-3xl hidden md:block"></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-200/10 rounded-full blur-3xl pointer-events-none hidden md:block"></div>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 relative z-10">
                 {/* From Location */}
                 <div className="col-span-1">
-                  <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
-                    <MapPin className="h-5 w-5 mr-2 text-primary" /> From
+                  <label className="block text-gray-700 text-sm md:text-base font-medium mb-2 md:mb-3 flex items-center">
+                    <MapPin className="h-4 w-4 md:h-5 md:w-5 mr-2 text-primary" /> From
                   </label>
                   <div className="relative">
                     <select 
                       value={fromLocation} 
                       onChange={(e) => setFromLocation(e.target.value)}
-                      className="block w-full h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-2.5 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-base transition-all hover:bg-white/80"
+                      className="block w-full h-12 md:h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-xl md:rounded-2xl py-2 px-3 md:px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-sm md:text-base transition-all hover:bg-white/80"
                     >
                       <option value="">Select pickup point</option>
                       <option value="Dehradun">Dehradun</option>
@@ -900,14 +900,14 @@ const Index = () => {
 
                 {/* To Location */}
                 <div className="col-span-1">
-                  <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
-                    <MapPin className="h-5 w-5 mr-2 text-primary" /> To
+                  <label className="block text-gray-700 text-sm md:text-base font-medium mb-2 md:mb-3 flex items-center">
+                    <MapPin className="h-4 w-4 md:h-5 md:w-5 mr-2 text-primary" /> To
                   </label>
                   <div className="relative">
                     <select
                       value={toLocation}
                       onChange={(e) => setToLocation(e.target.value)}
-                      className="block w-full h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-2.5 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-base transition-all hover:bg-white/80"
+                      className="block w-full h-12 md:h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-xl md:rounded-2xl py-2 px-3 md:px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-sm md:text-base transition-all hover:bg-white/80"
                     >
                       <option value="">Select destination</option>
                       <option value="All India">All India</option>
@@ -920,32 +920,21 @@ const Index = () => {
                       <option value="Dhanaulti">Dhanaulti</option>
                       <option value="Saharanpur">Saharanpur</option>
                       <option value="Delhi">Delhi (NCR)</option>
-                      <option value="Agra">Agra (Taj Mahal)</option>
-                      <option value="Jaipur">Jaipur (Pink City)</option>
-                      <option value="Udaipur">Udaipur (City of Lakes)</option>
-                      <option value="Varanasi">Varanasi (Spiritual Capital)</option>
-                      <option value="Amritsar">Amritsar (Golden Temple)</option>
-                      <option value="Mumbai">Mumbai (Financial Capital)</option>
-                      <option value="Goa">Goa (Beach Paradise)</option>
-                      <option value="Kerala">Kerala (God's Own Country)</option>
-                      <option value="Manali">Manali (Himalayan Paradise)</option>
-                      <option value="Shimla">Shimla (Queen of Hills)</option>
-                      <option value="Darjeeling">Darjeeling (Tea Paradise)</option>
                     </select>
                   </div>
                 </div>
 
                 {/* Date Picker */}
                 <div className="col-span-1">
-                  <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
-                    <CalendarIcon className="h-5 w-5 mr-2 text-primary" /> Date
+                  <label className="block text-gray-700 text-sm md:text-base font-medium mb-2 md:mb-3 flex items-center">
+                    <CalendarIcon className="h-4 w-4 md:h-5 md:w-5 mr-2 text-primary" /> Date
                   </label>
                   <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
                     <PopoverTrigger asChild>
                       <Button
                         variant={"outline"}
                         className={cn(
-                          "w-full h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-2.5 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-base transition-all hover:bg-white/80",
+                          "w-full h-12 md:h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-xl md:rounded-2xl py-2 px-3 md:px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-sm md:text-base transition-all hover:bg-white/80",
                           !selectedDate && "text-muted-foreground"
                         )}
                       >
@@ -959,7 +948,7 @@ const Index = () => {
                         selected={selectedDate}
                         onSelect={(date) => {
                           setSelectedDate(date);
-                          setCalendarOpen(false); // Close the popover after selection
+                          setCalendarOpen(false);
                         }}
                         initialFocus
                         disabled={(date) => date < new Date()}
@@ -970,11 +959,11 @@ const Index = () => {
 
                 {/* Passenger Count */}
                 <div className="col-span-1">
-                  <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
-                    <Users className="h-5 w-5 mr-2 text-primary" /> Passengers
+                  <label className="block text-gray-700 text-sm md:text-base font-medium mb-2 md:mb-3 flex items-center">
+                    <Users className="h-4 w-4 md:h-5 md:w-5 mr-2 text-primary" /> Passengers
                   </label>
                   <Select value={passengerCount} onValueChange={setPassengerCount}>
-                    <SelectTrigger className="w-full h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-2.5 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-base transition-all hover:bg-white/80">
+                    <SelectTrigger className="w-full h-12 md:h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-xl md:rounded-2xl py-2 px-3 md:px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-sm md:text-base transition-all hover:bg-white/80">
                       <SelectValue placeholder="Select passengers" />
                     </SelectTrigger>
                     <SelectContent className="max-h-[200px]">
@@ -988,11 +977,11 @@ const Index = () => {
 
                 {/* Car Type */}
                 <div className="col-span-1">
-                  <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
-                    <Car className="h-5 w-5 mr-2 text-primary" /> Car Type
+                  <label className="block text-gray-700 text-sm md:text-base font-medium mb-2 md:mb-3 flex items-center">
+                    <Car className="h-4 w-4 md:h-5 md:w-5 mr-2 text-primary" /> Car Type
                   </label>
                   <Select value={selectedCarType} onValueChange={handleCarTypeChange}>
-                    <SelectTrigger className="w-full h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-2.5 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-base transition-all hover:bg-white/80">
+                    <SelectTrigger className="w-full h-12 md:h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-xl md:rounded-2xl py-2 px-3 md:px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-sm md:text-base transition-all hover:bg-white/80">
                       <SelectValue placeholder="Select car type" />
                     </SelectTrigger>
                     <SelectContent className="max-h-[200px]">
@@ -1007,8 +996,8 @@ const Index = () => {
 
                 {/* Phone Number Input */}
                 <div className="col-span-1">
-                  <label className="block text-gray-700 text-base font-medium mb-3 flex items-center">
-                    <Phone className="h-5 w-5 mr-2 text-primary" /> Contact Number <span className="text-red-500 ml-1">*</span>
+                  <label className="block text-gray-700 text-sm md:text-base font-medium mb-2 md:mb-3 flex items-center">
+                    <Phone className="h-4 w-4 md:h-5 md:w-5 mr-2 text-primary" /> Contact Number <span className="text-red-500 ml-1">*</span>
                   </label>
                   <input 
                     type="tel" 
@@ -1016,7 +1005,7 @@ const Index = () => {
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     placeholder="Enter contact number" 
                     required
-                    className="w-full h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-2xl py-2.5 px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-base transition-all hover:bg-white/80"
+                    className="w-full h-12 md:h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-xl md:rounded-2xl py-2 px-3 md:px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-sm md:text-base transition-all hover:bg-white/80"
                   />
                   {phoneNumber === "" && (
                     <p className="text-red-500 text-xs mt-1">Phone number is required</p>
@@ -1028,11 +1017,11 @@ const Index = () => {
                   <button 
                     onClick={handleSubmit}
                     disabled={isSubmitting}
-                    className={`w-full md:w-auto px-12 h-14 text-white font-bold bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 rounded-2xl py-2.5 shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 text-base transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed`}
+                    className={`w-full md:w-auto px-8 md:px-12 h-12 md:h-14 text-white font-bold bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 rounded-xl md:rounded-2xl py-2 shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 text-sm md:text-base transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed`}
                   >
                     {isSubmitting ? (
                       <>
-                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <svg className="animate-spin -ml-1 mr-3 h-4 w-4 md:h-5 md:w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
@@ -1040,70 +1029,71 @@ const Index = () => {
                       </>
                     ) : (
                       <>
-                        <Car className="h-5 w-5 mr-2" />
+                        <Car className="h-4 w-4 md:h-5 md:w-5 mr-2" />
                         BOOK TAXI
                       </>
                     )}
                   </button>
                   
                   {submitStatus === "error" && (
-                    <p className="text-red-500 text-sm">{errorMessage}</p>
+                    <p className="text-red-500 text-xs md:text-sm">{errorMessage}</p>
                   )}
                 </div>
               </div>
 
-              {/* Vehicle Preview Section */}
-              <div className="mt-8 p-6 bg-gradient-to-r from-primary-50/60 via-white/60 to-blue-50/60 backdrop-blur-xl rounded-2xl border border-white/60 shadow-lg relative overflow-hidden">
-                {/* Background decoration */}
-                <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
-                <div className="absolute -top-20 -right-20 w-48 h-48 bg-primary-400/15 rounded-full blur-3xl"></div>
-                <div className="absolute -bottom-20 -left-20 w-48 h-48 bg-blue-400/15 rounded-full blur-3xl"></div>
+              {/* Vehicle Preview Section - Simplified for mobile */}
+              <div className="mt-6 md:mt-8 p-4 md:p-6 bg-gradient-to-r from-primary-50/60 via-white/60 to-blue-50/60 backdrop-blur-xl rounded-xl md:rounded-2xl border border-white/60 shadow-lg relative overflow-hidden">
+                {/* Background decoration - Hidden on mobile */}
+                <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none hidden md:block"></div>
+                <div className="absolute -top-20 -right-20 w-48 h-48 bg-primary-400/15 rounded-full blur-3xl hidden md:block"></div>
+                <div className="absolute -bottom-20 -left-20 w-48 h-48 bg-blue-400/15 rounded-full blur-3xl hidden md:block"></div>
                 
                 {showMyChoiceDesign ? (
-                  <div className="flex flex-col items-center justify-center py-8 relative z-10">
-                    <div className="w-full max-w-md text-center mb-6">
-                      <h3 className="text-2xl font-bold text-primary-700 mb-3">Choose Your Perfect Vehicle</h3>
-                      <p className="text-gray-600 mb-6">
+                  <div className="flex flex-col items-center justify-center py-4 md:py-8 relative z-10">
+                    <div className="w-full max-w-md text-center mb-4 md:mb-6">
+                      <h3 className="text-xl md:text-2xl font-bold text-primary-700 mb-2 md:mb-3">Choose Your Perfect Vehicle</h3>
+                      <p className="text-gray-600 text-sm md:text-base mb-4 md:mb-6">
                         Browse our extensive fleet of vehicles and find the perfect match for your journey.
                         From luxury sedans to spacious buses, we have it all!
                       </p>
                     </div>
                     
                     <Link to="/taxi" className="w-full">
-                      <Button className="w-full bg-primary-600 hover:bg-primary-700 text-white px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                        <Car className="h-5 w-5 mr-2" />
+                      <Button className="w-full bg-primary-600 hover:bg-primary-700 text-white px-6 py-4 md:px-8 md:py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <Car className="h-4 w-4 md:h-5 md:w-5 mr-2" />
                         Explore All Vehicles
                       </Button>
                     </Link>
                   </div>
                 ) : (
-                  <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
-                    <div className="flex-shrink-0 w-60 h-40 rounded-xl overflow-hidden bg-white/70 backdrop-blur-sm flex items-center justify-center shadow-sm border border-white/60">
+                  <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 relative z-10">
+                    <div className="flex-shrink-0 w-40 h-32 md:w-60 md:h-40 rounded-xl overflow-hidden bg-white/70 backdrop-blur-sm flex items-center justify-center shadow-sm border border-white/60">
                       <img 
                         src={vehicleInfo[selectedCarType as keyof typeof vehicleInfo].image}
                         alt={vehicleInfo[selectedCarType as keyof typeof vehicleInfo].name}
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                     </div>
                     <div className="flex-grow">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">
+                      <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">
                         {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].name}
                       </h3>
-                      <div className="flex flex-wrap items-center gap-4 mb-3 text-gray-700">
+                      <div className="flex flex-wrap items-center gap-2 md:gap-4 mb-2 md:mb-3 text-gray-700 text-sm md:text-base">
                         {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].features.map((feature, index) => (
                           <span key={index} className="flex items-center">
-                            <CheckCircle className="h-4 w-4 mr-1 text-primary" /> {feature}
+                            <CheckCircle className="h-3 w-3 md:h-4 md:w-4 mr-1 text-primary" /> {feature}
                           </span>
                         ))}
                       </div>
-                      <p className="text-gray-600 mb-4">
+                      <p className="text-gray-600 text-sm md:text-base mb-2 md:mb-4">
                         {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].description}
                       </p>
-                      <div className="flex items-center gap-4">
-                        <div className="bg-primary text-white rounded-full py-1 px-4 text-sm font-medium">
+                      <div className="flex items-center gap-2 md:gap-4">
+                        <div className="bg-primary text-white rounded-full py-1 px-3 md:px-4 text-xs md:text-sm font-medium">
                           {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].price}
                         </div>
-                        <div className="text-sm text-gray-500">
+                        <div className="text-xs md:text-sm text-gray-500">
                           Recommended for {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].capacity}
                         </div>
                       </div>
@@ -1111,56 +1101,6 @@ const Index = () => {
                   </div>
                 )}
               </div>
-
-              {/* Vehicle Grid Section - Shows specific vehicles based on selected type */}
-              {!showMyChoiceDesign && (
-                <div className="mt-8 p-6 bg-gradient-to-r from-primary-50/60 via-white/60 to-blue-50/60 backdrop-blur-xl rounded-2xl border border-white/60 shadow-lg relative overflow-hidden">
-                  <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
-                  <div className="absolute -top-20 -right-20 w-48 h-48 bg-primary-400/15 rounded-full blur-3xl"></div>
-                  <div className="absolute -bottom-20 -left-20 w-48 h-48 bg-blue-400/15 rounded-full blur-3xl"></div>
-                  
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 relative z-10">
-                    Available {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].name} Vehicles
-                  </h3>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10">
-                    {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].vehicles.map((vehicle, index) => (
-                      <div key={index} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm border border-primary-100 hover:shadow-md transition-all">
-                        <div className="h-32 bg-primary-50 rounded-lg mb-3 flex items-center justify-center overflow-hidden">
-                          <img 
-                            src={vehicle.image} 
-                            alt={vehicle.name} 
-                            className="w-full h-full object-contain p-2"
-                          />
-                        </div>
-                        <h4 className="font-medium text-gray-800">{vehicle.name}</h4>
-                        <div className="flex items-center justify-between mt-2">
-                          <p className="text-sm text-primary-600 font-medium">{vehicle.rate}</p>
-                          <div className="flex items-center text-xs text-gray-500">
-                            {vehicle.features.filter(f => f.includes("Seats")).join(", ")}
-                          </div>
-                        </div>
-                        <div className="mt-2 flex flex-wrap gap-1">
-                          {vehicle.features.filter(f => !f.includes("Seats")).map((feature, idx) => (
-                            <span key={idx} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
-                              {feature}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  
-                  <div className="mt-6 text-center relative z-10">
-                    <Link to="/taxi" className="inline-block">
-                      <Button className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
-                        <Car className="h-4 w-4 mr-2" />
-                        View All Vehicles
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
           
