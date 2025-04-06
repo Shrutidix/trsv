@@ -357,7 +357,7 @@ const Index = () => {
         },
         {
           name: "Innova Crysta",
-          image: "https://imgd.aeplcdn.com/664x374/n/cw/ec/130591/front-view-130.jpeg?isig=0&q=80",
+          image: "https://imgd.aeplcdn.com/0X0/n/cw/ec/20623/innova-crysta-exterior-left-front-three-quarter.jpeg?q=85",
           rate: "₹20/km",
           features: ["Air Conditioning", "7 Seats", "4 Luggage", "Music System", "Charging Ports", "Premium Interior"]
         }
