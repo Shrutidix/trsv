@@ -650,11 +650,6 @@ export const popularRoutes: Route[] = [
     description: "Travel through scenic mountain roads to reach Kotdwar, gateway to Lansdowne and Pauri Garhwal.",
     attractions: [
       {
-        name: "Durga Devi Temple",
-        description: "Ancient temple with historical significance",
-        image: "https://th.bing.com/th/id/OIP.fJIz_Px9Cg8dKjYXpm36VgHaFj?rs=1&pid=ImgDetMain"
-      },
-      {
         name: "Sidhbali Temple",
         description: "Popular pilgrimage site near Kotdwar",
         image: "https://th.bing.com/th/id/OIP.FQBiFTUCi_Ef4jxPDRn6IwHaEC?rs=1&pid=ImgDetMain"

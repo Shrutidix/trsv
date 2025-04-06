@@ -25,30 +25,30 @@ const Terms = () => {
       
       {/* Terms Content */}
       <main className="flex-grow container mx-auto px-4 py-12">
-        <section className="bg-white shadow-lg rounded-lg p-8 mb-12">
+        <section className="bg-white shadow-lg rounded-lg p-8 mb-12 border border-primary-100">
           <h2 className="text-3xl font-bold text-primary-800 mb-4">Acceptance of Terms</h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-primary-700">
             By accessing our website, you agree to be bound by these Terms and Conditions. If you do not agree, please do not use our services.
           </p>
         </section>
 
-        <section className="bg-white shadow-lg rounded-lg p-8 mb-12">
+        <section className="bg-white shadow-lg rounded-lg p-8 mb-12 border border-primary-100">
           <h2 className="text-3xl font-bold text-primary-800 mb-4">Cookies</h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-primary-700">
             We use cookies to improve your experience. By continuing to browse, you agree to our use of cookies in accordance with our Privacy Policy.
           </p>
         </section>
 
-        <section className="bg-white shadow-lg rounded-lg p-8 mb-12">
+        <section className="bg-white shadow-lg rounded-lg p-8 mb-12 border border-primary-100">
           <h2 className="text-3xl font-bold text-primary-800 mb-4">Intellectual Property</h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-primary-700">
             All content on this website, including text, graphics, logos, and images, is the property of Uttarakhand Road Trip and may not be used without permission.
           </p>
         </section>
 
-        <section className="bg-white shadow-lg rounded-lg p-8 mb-12">
+        <section className="bg-white shadow-lg rounded-lg p-8 mb-12 border border-primary-100">
           <h2 className="text-3xl font-bold text-primary-800 mb-4">User Responsibilities</h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-primary-700">
             You agree not to use our website for any unlawful purpose or in violation of these terms.
           </p>
         </section>

@@ -784,7 +784,30 @@ const Index = () => {
       <Navbar />
       
       {/* Hero Section - Professional redesign with realistic car animations */}
-      <section className="relative overflow-hidden bg-[url('https://dynamic.tourtravelworld.com/package-images/photo-big/dir_48/1430243/367404.jpg')] bg-cover bg-center bg-fixed py-8 before:absolute before:inset-0 before:bg-gradient-to-br before:from-purple-900/80 before:via-blue-900/70 before:to-indigo-900/60 before:backdrop-blur-[2px]">
+      <section className="relative overflow-hidden bg-[url('https://images.unsplash.com/photo-1517299321609-52687d1bc55a?q=80&w=2940&auto=format&fit=crop')] bg-cover bg-center bg-fixed py-8 before:absolute before:inset-0 before:bg-gradient-to-br before:from-blue-900/80 before:via-blue-800/70 before:to-indigo-900/60 before:backdrop-blur-[2px]">
+        {/* Snowfall Animation */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(100)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute top-[-20px] animate-snowfall"
+              style={{
+                left: `${Math.random() * 100}%`,
+                animationDuration: `${Math.random() * 5 + 5}s`,
+                animationDelay: `${Math.random() * 5}s`,
+                opacity: Math.random() * 0.7 + 0.3,
+                fontSize: `${Math.random() * 10 + 10}px`,
+                filter: 'blur(1px)',
+                transform: `scale(${Math.random() * 0.5 + 0.5})`,
+              }}
+            >
+              <div className="snowflake">
+                <div className="snowflake-inner"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+
         {/* Car Animation Container - Will change based on selection */}
         <div className="absolute inset-0 overflow-hidden">
           {/* SVG Car Animation - Moving from left to right */}
@@ -1156,7 +1179,7 @@ const Index = () => {
       </div>
 
       {/* Why Choose Us Section */}
-      <section className="py-16 bg-secondary" ref={whyChooseRef}>
+      <section className="py-16 bg-gradient-to-br from-primary-50 via-primary-100 to-secondary-50" ref={whyChooseRef}>
         <div className={`container ${whyChooseInView ? 'fade-up-enter-active' : 'fade-up-enter'}`}>
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4 text-primary-800">Why Choose Uttarakhand Road Trip</h2>
@@ -1213,7 +1236,7 @@ const Index = () => {
       </section>
 
       {/* Popular Destinations */}
-      <section className="py-16 bg-white" ref={destinationsRef} id="destinations-section">
+      <section className="py-16 bg-gradient-to-br from-white via-primary-50 to-white" ref={destinationsRef} id="destinations-section">
         <div className={`container ${destinationsInView ? 'fade-up-enter-active' : 'fade-up-enter'}`}>
           <div className="flex flex-col md:flex-row justify-between items-center mb-10">
             <div>
@@ -1238,93 +1261,92 @@ const Index = () => {
       </section>
 
       {/* Our Services */}
-      <section className="py-16 bg-gradient-to-r from-primary-400 to-primary-200 text-white" ref={servicesRef}>
+      <section className="py-16 bg-gradient-to-br from-primary-100 via-primary-50 to-secondary-100" ref={servicesRef}>
         <div className={`container ${servicesInView ? 'scale-up-enter-active' : 'scale-up-enter'}`}>
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Our Services</h2>
-            <p className="max-w-3xl mx-auto opacity-90">
+            <h2 className="text-3xl font-bold mb-4 text-primary-800">Our Services</h2>
+            <p className="max-w-3xl mx-auto text-primary-700">
               Comprehensive travel services to make your North India journey memorable
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="glass-card p-8">
-              <Car className="h-10 w-10 mb-4" />
-              <h3 className="text-xl font-bold mb-3">Taxi Services</h3>
-              <p className="mb-4 opacity-90">
+            <div className="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-primary-100 hover:shadow-xl transition-all duration-300">
+              <Car className="h-10 w-10 mb-4 text-primary-600" />
+              <h3 className="text-xl font-bold mb-3 text-primary-800">Taxi Services</h3>
+              <p className="mb-4 text-primary-700">
                 Comfortable and reliable taxi services with experienced drivers who know the best routes in North India.
               </p>
-              <ul className="space-y-2">
+              <ul className="space-y-2 text-primary-700">
                 <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2" />
+                  <CheckCircle className="h-4 w-4 mr-2 text-primary-600" />
                   <span>Airport Transfers</span>
                 </li>
                 <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2" />
+                  <CheckCircle className="h-4 w-4 mr-2 text-primary-600" />
                   <span>Sightseeing Tours</span>
                 </li>
                 <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2" />
+                  <CheckCircle className="h-4 w-4 mr-2 text-primary-600" />
                   <span>Multi-day Trip Transport</span>
                 </li>
               </ul>
               <Link to="/taxi">
-                <Button className="mt-6 bg-white/90 text-primary-600 hover:bg-white">
+                <Button className="mt-6 bg-primary-600 hover:bg-primary-700 text-white">
                   Book a Taxi
                 </Button>
               </Link>
             </div>
             
-            <div className="glass-card p-8">
-              <Car className="h-10 w-10 mb-4" />
-              <h3 className="text-xl font-bold mb-3">Taxi Service & Local Guide Charges</h3>
-              <p className="mb-4 opacity-90">
+            <div className="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-primary-100 hover:shadow-xl transition-all duration-300">
+              <Car className="h-10 w-10 mb-4 text-primary-600" />
+              <h3 className="text-xl font-bold mb-3 text-primary-800">Taxi Service & Local Guide Charges</h3>
+              <p className="mb-4 text-primary-700">
                 Reliable taxi services with experienced drivers and knowledgeable local guides to make your journey smooth and informative.
               </p>
-              <ul className="space-y-2">
+              <ul className="space-y-2 text-primary-700">
                 <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2" />
+                  <CheckCircle className="h-4 w-4 mr-2 text-primary-600" />
                   <span>Airport & City Transfers</span>
                 </li>
                 <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2" />
+                  <CheckCircle className="h-4 w-4 mr-2 text-primary-600" />
                   <span>Full-Day Sightseeing Cabs</span>
                 </li>
                 <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2" />
+                  <CheckCircle className="h-4 w-4 mr-2 text-primary-600" />
                   <span>Professional Local Guides</span>
                 </li>
               </ul>
               <Link to="/packages">
-                <Button className="mt-6 bg-white/90 text-primary-600 hover:bg-white">
+                <Button className="mt-6 bg-primary-600 hover:bg-primary-700 text-white">
                   Explore Services
                 </Button>
               </Link>
             </div>
 
-            
-            <div className="glass-card p-8">
-              <Award className="h-10 w-10 mb-4" />
-              <h3 className="text-xl font-bold mb-3">Custom Tours</h3>
-              <p className="mb-4 opacity-90">
+            <div className="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-primary-100 hover:shadow-xl transition-all duration-300">
+              <Award className="h-10 w-10 mb-4 text-primary-600" />
+              <h3 className="text-xl font-bold mb-3 text-primary-800">Custom Tours</h3>
+              <p className="mb-4 text-primary-700">
                 Personalized itineraries designed to match your interests, timeframe, and budget for the perfect North India experience.
               </p>
-              <ul className="space-y-2">
+              <ul className="space-y-2 text-primary-700">
                 <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2" />
+                  <CheckCircle className="h-4 w-4 mr-2 text-primary-600" />
                   <span>Personalized Itineraries</span>
                 </li>
                 <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2" />
+                  <CheckCircle className="h-4 w-4 mr-2 text-primary-600" />
                   <span>Special Experiences</span>
                 </li>
                 <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2" />
+                  <CheckCircle className="h-4 w-4 mr-2 text-primary-600" />
                   <span>Group Tour Options</span>
                 </li>
               </ul>
               <Link to="/contact">
-                <Button className="mt-6 bg-white/90 text-primary-600 hover:bg-white">
+                <Button className="mt-6 bg-primary-600 hover:bg-primary-700 text-white">
                   Request Custom Tour
                 </Button>
               </Link>
@@ -1429,7 +1451,7 @@ const Index = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-16 bg-secondary/50" ref={testimonialRef}>
+      <section className="py-16 bg-gradient-to-br from-secondary-50 via-primary-50 to-secondary-100" ref={testimonialRef}>
         <div className={`container ${testimonialInView ? 'stagger-enter-active' : 'stagger-enter'}`}>
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4 text-primary-800">What Travelers Say</h2>
@@ -1606,6 +1628,68 @@ const Index = () => {
 
           .animate-slide-in {
             animation: slide-in 0.5s ease-out forwards;
+          }
+
+          @keyframes snowfall {
+            0% {
+              transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            25% {
+              transform: translateY(25vh) translateX(10px) rotate(90deg);
+            }
+            50% {
+              transform: translateY(50vh) translateX(-10px) rotate(180deg);
+            }
+            75% {
+              transform: translateY(75vh) translateX(10px) rotate(270deg);
+            }
+            100% {
+              transform: translateY(100vh) translateX(0) rotate(360deg);
+            }
+          }
+
+          .animate-snowfall {
+            animation: snowfall linear infinite;
+          }
+
+          .snowflake {
+            position: relative;
+            width: 10px;
+            height: 10px;
+          }
+
+          .snowflake-inner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 
+              0 0 5px rgba(255, 255, 255, 0.8),
+              0 0 10px rgba(255, 255, 255, 0.6),
+              0 0 15px rgba(255, 255, 255, 0.4);
+          }
+
+          .snowflake-inner::before,
+          .snowflake-inner::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 
+              0 0 5px rgba(255, 255, 255, 0.8),
+              0 0 10px rgba(255, 255, 255, 0.6),
+              0 0 15px rgba(255, 255, 255, 0.4);
+          }
+
+          .snowflake-inner::before {
+            transform: rotate(45deg);
+          }
+
+          .snowflake-inner::after {
+            transform: rotate(-45deg);
           }
         `}
       </style>
