@@ -42,7 +42,7 @@ const RouteDetails: React.FC<RouteDetailsProps> = ({ isOpen, onClose, route }) =
               <TabsTrigger value="overview" className="flex items-center gap-2">
                 <Info className="h-4 w-4" /> Overview
               </TabsTrigger>
-              <TabsTrigger value="map" className="flex items-center gap-2">
+              {/*<TabsTrigger value="map" className="flex items-center gap-2">
                 <Map className="h-4 w-4" /> Route Map
               </TabsTrigger>
               <TabsTrigger value="stops" className="flex items-center gap-2">
@@ -50,7 +50,7 @@ const RouteDetails: React.FC<RouteDetailsProps> = ({ isOpen, onClose, route }) =
               </TabsTrigger>
               <TabsTrigger value="gallery" className="flex items-center gap-2">
                 <Camera className="h-4 w-4" /> Gallery
-              </TabsTrigger>
+              </TabsTrigger>*/}
             </TabsList>
 
             <div className="overflow-y-auto flex-grow p-2">
