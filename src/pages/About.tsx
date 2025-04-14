@@ -95,7 +95,7 @@ const About = () => {
     ].map((service, index) => (
       <div 
         key={index} 
-        className="p-6 bg-gradient-to-r from-purple-200 to-purple-400 text-white shadow-xl rounded-xl text-center transform hover:scale-105 transition duration-300"
+        className="p-6 bg-gradient-to-r from-purple-200 to-purple-200 text-purple shadow-xl rounded-xl text-center transform hover:scale-105 transition duration-300"
       >
         <h3 className="text-xl font-semibold">{service.title}</h3>
         <p className="mt-2">{service.desc}</p>
