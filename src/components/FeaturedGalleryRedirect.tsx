@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import owner1 from "../assets/image5.jpeg";
 import tourist1 from "../assets/tourist1.jpeg";
 import place from "../assets/rishikesh.jpg";
-import owner3 from "../assets/owner3.jpeg";
+import owner3 from "../assets/image1.jpeg";
 
 // YouTube video link (replace with your own link)
 const youtubeVideoLink = "https://www.youtube.com/embed/6M7wWia442I";
