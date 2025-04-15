@@ -25,7 +25,6 @@ import tourist7 from "../assets/tourist7.jpeg";
 import tourist8 from "../assets/tourist8.jpeg";
 import tourist9 from "../assets/tourist9.jpeg";
 import tourist10 from "../assets/tourist10.jpeg";
-
 import tourist12 from "../assets/tourist12.jpeg";
 
 // Place Images
@@ -42,38 +41,30 @@ import place10 from "../assets/snoy mountain.jpg";
 import place11 from "../assets/place2.jpeg";
 
 // Car Images
-
 import car3 from "../assets/car3.jpg";
 import car4 from "../assets/car4.jpg";
 import car5 from "../assets/car5.png";
 import car6 from "../assets/car6.jpg";
+import car7 from "../assets/image1.jpeg";
+import car8 from "../assets/image2.jpeg";
+import car9 from "../assets/image3.jpeg";
+import car10 from "../assets/image6.jpeg";
+import car11 from "../assets/image7.jpeg";
+import car12 from "../assets/image8.jpeg";
 
-// Celebrity Images
+// Celebrity
 import celebrity1 from "../assets/celeb1.jpeg";
 
 // Videos
-import ukvideo1 from "../assets/ukvideo1.mp4";
+import ukvideo1 from "../assets/vedio1.mp4";
 import ukvideo2 from "../assets/ukvideo2.mp4";
 
 // Category Data
 const categoryData: Record<string, (string | { title: string; src: string })[]> = {
   Owner: [owner1, owner2, owner3, owner4, owner5, owner6, owner7, owner8, owner9],
-  Tourist: [
-    tourist1,
-    tourist2,
-    tourist3,
-    tourist4,
-    tourist5,
-    tourist6,
-    tourist7,
-    tourist8,
-    tourist9,
-    tourist10,
-   
-    tourist12,
-  ],
+  Tourist: [tourist1, tourist2, tourist3, tourist4, tourist5, tourist6, tourist7, tourist8, tourist9, tourist10, tourist12],
   Place: [place1, place2, place3, place4, place5, place6, place7, place8, place9, place10, place11],
-  Car: [ car3, car4, car5, car6],
+  Car: [car3, car4, car5, car6, car7, car8, car9, car10, car11, car12],
   Celebrity: [celebrity1],
   Video: [
     { title: "Trip to Himalayas", src: ukvideo1 },
@@ -114,7 +105,7 @@ const Gallery: React.FC = () => {
         </motion.div>
       </section>
 
-      {/* Category Selector */}
+      {/* Category Buttons */}
       <section className="container mx-auto px-4 py-12 text-center">
         <h2 className="text-2xl font-semibold mb-6 text-gray-800">✨ Explore By Category</h2>
         <div className="flex flex-wrap justify-center gap-4 mb-10">
@@ -169,7 +160,11 @@ const Gallery: React.FC = () => {
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: index * 0.03 }}
                     >
-                      <video controls className="w-full h-60 object-cover">
+                      <video
+                        controls
+                        title={item.title}
+                        className="w-full h-60 object-cover hover:brightness-105 transition-all duration-300"
+                      >
                         <source src={item.src} type="video/mp4" />
                         Your browser does not support the video tag.
                       </video>
@@ -185,7 +180,7 @@ const Gallery: React.FC = () => {
         </AnimatePresence>
       </section>
 
-      {/* Image Modal */}
+      {/* Modal for Image */}
       <AnimatePresence>
         {selectedImage && (
           <motion.div
