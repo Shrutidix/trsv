@@ -39,7 +39,7 @@ import place8 from "../assets/place10.jpg";
 import place9 from "../assets/place11.jpg";
 import place10 from "../assets/snoy mountain.jpg";
 import place11 from "../assets/place2.jpeg";
-import place12 from  "../assets/delhi.jpg";
+import place12 from  "../assets/Delhi.jpg";
 import place13 from "../assets/haridawar.jpg";
 import place14 from "../assets/Nainital.jpg"
 
