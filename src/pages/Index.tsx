@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 import RouteDetails from '@/components/RouteDetails';
+import FeaturedGalleryRedirect from '../components/FeaturedGalleryRedirect';
 
 // Add useInView hook at the top of the file
 const useInView = (options = {}) => {
@@ -1117,7 +1118,10 @@ const Index = () => {
       <div className="w-full bg-white">
         <VacationBanner />
       </div>
-
+  {/*gallery */}
+  <div className='w-full bg-white'>
+    <FeaturedGalleryRedirect/>
+  </div>
       {/* Why Choose Us Section */}
       <section className="py-16 bg-gradient-to-br from-primary-50 via-primary-100 to-secondary-50" ref={whyChooseRef}>
         <div className={`container ${whyChooseInView ? 'fade-up-enter-active' : 'fade-up-enter'}`}>

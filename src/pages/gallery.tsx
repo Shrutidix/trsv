@@ -39,6 +39,9 @@ import place8 from "../assets/place10.jpg";
 import place9 from "../assets/place11.jpg";
 import place10 from "../assets/snoy mountain.jpg";
 import place11 from "../assets/place2.jpeg";
+import place12 from  "../assets/delhi.jpg";
+import place13 from "../assets/haridawar.jpg";
+import place14 from "../assets/Nainital.jpg"
 
 // Car Images
 import car3 from "../assets/car3.jpg";
@@ -58,27 +61,26 @@ import celebrity1 from "../assets/celeb1.jpeg";
 // Videos
 import ukvideo1 from "../assets/vedio1.mp4";
 import ukvideo2 from "../assets/ukvideo2.mp4";
+import ukvideo3 from "../assets/place4.mp4";
+import ukvideo4 from "../assets/place5.mp4";
 
-// Category Data
 const categoryData: Record<string, (string | { title: string; src: string })[]> = {
   Owner: [owner1, owner2, owner3, owner4, owner5, owner6, owner7, owner8, owner9],
-  Tourist: [tourist1, tourist2, tourist3, tourist4, tourist5, tourist6, tourist7, tourist8, tourist9, tourist10, tourist12],
-  Place: [place1, place2, place3, place4, place5, place6, place7, place8, place9, place10, place11],
+  Tourist: [
+    tourist1, tourist2, tourist3, tourist4, tourist5, tourist6,
+    tourist7, tourist8, tourist9, tourist10, tourist12
+  ],
+  Place: [
+    place1, place2, place3, place4, place5, place6,
+    place7, place8, place9, place10, place11, place12, place13, place14
+  ],
   Car: [car3, car4, car5, car6, car7, car8, car9, car10, car11, car12],
   Celebrity: [celebrity1],
   Video: [
     { title: "Trip to Himalayas", src: ukvideo1 },
     { title: "Adventure in Rishikesh", src: ukvideo2 },
-    { title: "Mountain Ride", src: ukvideo1 },
-    { title: "Temple Visit", src: ukvideo2 },
-    { title: "Local Culture", src: ukvideo1 },
-    { title: "Market Tour", src: ukvideo2 },
-    { title: "Snow Drive", src: ukvideo1 },
-    { title: "Camping Night", src: ukvideo2 },
-    { title: "River Rafting", src: ukvideo1 },
-    { title: "Sunset View", src: ukvideo2 },
-    { title: "Scenic Drive", src: ukvideo1 },
-    { title: "Food Vlog", src: ukvideo2 },
+    { title: "Mountain Ride", src: ukvideo3 },
+    { title: "Temple Visit", src: ukvideo4 },
   ],
 };
 
@@ -87,36 +89,71 @@ const Gallery: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100">
+    <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
 
       {/* Banner */}
-      <section className="bg-gradient-to-r from-primary-600 to-primary-300 py-20 text-white text-center shadow">
+      <section className="bg-gradient-to-r from-indigo-700 to-purple-500 py-20 text-white text-center shadow-lg">
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6 }}
           className="container mx-auto px-4"
         >
-          <h1 className="text-4xl font-bold mb-2">Gallery</h1>
-          <p className="text-lg max-w-2xl mx-auto">
-            Explore owner-shared, tourist experiences, places, cars, celebrities, and tour videos!
+          <h1 className="text-5xl font-extrabold mb-3 tracking-tight">Gallery</h1>
+          <p className="text-lg max-w-3xl mx-auto text-white/90">
+            Dive into experiences shared by owners and tourists, scenic places, luxury rides, and more!
           </p>
         </motion.div>
       </section>
 
+      {/* Constant YouTube Video */}
+      <section className="container mx-auto px-4 py-14 text-center">
+        <h2 className="text-3xl font-semibold mb-8 text-gray-800">🎬  Video</h2>
+        <div className="relative aspect-video max-w-4xl mx-auto rounded-xl overflow-hidden shadow-lg">
+          <iframe
+            className="w-full h-full"
+            src="https://www.youtube.com/embed/6M7wWia442I"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+      </section>
+
+      {/* General Gallery (Always Visible) */}
+      <section className="container mx-auto px-4 pb-10 text-center">
+        <h2 className="text-3xl font-semibold mb-8 text-gray-800">✨ General Gallery</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2">
+          {[owner1, owner2, tourist1, place1].map((imgSrc, idx) => (
+            <motion.div
+              key={idx}
+              className="rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+              whileHover={{ scale: 1.03 }}
+            >
+              <img
+                src={imgSrc}
+                alt={`General Image ${idx + 1}`}
+                loading="lazy"
+                className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* Category Buttons */}
-      <section className="container mx-auto px-4 py-12 text-center">
-        <h2 className="text-2xl font-semibold mb-6 text-gray-800">✨ Explore By Category</h2>
+      <section className="container mx-auto px-4 py-14 text-center">
+        <h2 className="text-3xl font-semibold mb-8 text-gray-800">📂 Explore by Category</h2>
         <div className="flex flex-wrap justify-center gap-4 mb-10">
           {Object.keys(categoryData).map((category) => (
             <button
               key={category}
               onClick={() => setActiveCategory((prev) => (prev === category ? null : category))}
-              className={`px-5 py-2 rounded-full border font-medium shadow-sm transition-all duration-300 ${
+              className={`px-6 py-2 rounded-full border font-medium shadow-md transition-all duration-300 text-sm sm:text-base ${
                 activeCategory === category
                   ? "bg-indigo-600 text-white"
-                  : "bg-white text-indigo-600 border-indigo-600 hover:bg-indigo-100"
+                  : "bg-white text-indigo-600 border-indigo-600 hover:bg-indigo-50"
               }`}
             >
               {category}
@@ -124,7 +161,7 @@ const Gallery: React.FC = () => {
           ))}
         </div>
 
-        {/* Category Grid */}
+        {/* Category Content */}
         <AnimatePresence>
           {activeCategory && (
             <motion.div
@@ -135,12 +172,12 @@ const Gallery: React.FC = () => {
               transition={{ duration: 0.5 }}
               className="overflow-hidden"
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2">
                 {categoryData[activeCategory]?.map((item, index) =>
                   typeof item === "string" ? (
                     <motion.div
                       key={index}
-                      className="rounded-lg overflow-hidden shadow-md bg-white cursor-pointer"
+                      className="rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 cursor-pointer"
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: index * 0.03 }}
@@ -149,28 +186,22 @@ const Gallery: React.FC = () => {
                       <img
                         src={item}
                         alt={`${activeCategory} ${index + 1}`}
-                        className="w-full h-60 object-cover hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                        className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
                       />
                     </motion.div>
                   ) : (
                     <motion.div
                       key={index}
-                      className="rounded-lg overflow-hidden shadow-md bg-white"
+                      className="rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300"
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: index * 0.03 }}
                     >
-                      <video
-                        controls
-                        title={item.title}
-                        className="w-full h-60 object-cover hover:brightness-105 transition-all duration-300"
-                      >
+                      <video controls title={item.title} className="w-full h-64 object-cover">
                         <source src={item.src} type="video/mp4" />
-                        Your browser does not support the video tag.
                       </video>
-                      <div className="p-2 text-sm font-medium text-center text-gray-700">
-                        {item.title}
-                      </div>
+                      <div className="p-3 text-center font-medium text-sm text-gray-700">{item.title}</div>
                     </motion.div>
                   )
                 )}
@@ -180,11 +211,11 @@ const Gallery: React.FC = () => {
         </AnimatePresence>
       </section>
 
-      {/* Modal for Image */}
+      {/* Modal Preview */}
       <AnimatePresence>
         {selectedImage && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -192,15 +223,15 @@ const Gallery: React.FC = () => {
           >
             <motion.img
               src={selectedImage}
-              alt="Enlarged view"
-              initial={{ scale: 0.8 }}
+              alt="Preview"
+              initial={{ scale: 0.85 }}
               animate={{ scale: 1 }}
-              exit={{ scale: 0.8 }}
-              className="max-w-4xl max-h-[80vh] rounded-lg shadow-lg"
+              exit={{ scale: 0.85 }}
+              className="max-w-4xl max-h-[85vh] rounded-lg shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             />
             <button
-              className="absolute top-5 right-5 text-white text-2xl font-bold hover:text-red-500"
+              className="absolute top-6 right-6 text-white text-3xl font-bold hover:text-red-500 transition-colors"
               onClick={() => setSelectedImage(null)}
             >
               ×
@@ -215,3 +246,5 @@ const Gallery: React.FC = () => {
 };
 
 export default Gallery;
+
+
