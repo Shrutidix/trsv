@@ -16,16 +16,14 @@ import owner9 from "../assets/owner9.jpeg";
 
 // Tourist Images
 import tourist1 from "../assets/tourist1.jpeg";
-import tourist2 from "../assets/tourist2.jpeg";
+
 import tourist3 from "../assets/tourist3.jpeg";
 import tourist4 from "../assets/tourist4.jpeg";
 import tourist5 from "../assets/tourist5.jpeg";
-import tourist6 from "../assets/tourist6.jpeg";
+
 import tourist7 from "../assets/tourist7.jpeg";
-import tourist8 from "../assets/tourist8.jpeg";
-import tourist9 from "../assets/tourist9.jpeg";
+;
 import tourist10 from "../assets/tourist10.jpeg";
-import tourist12 from "../assets/tourist12.jpeg";
 
 // Place Images
 import place1 from "../assets/place1.jpeg";
@@ -67,8 +65,8 @@ import ukvideo4 from "../assets/place5.mp4";
 const categoryData: Record<string, (string | { title: string; src: string })[]> = {
   Owner: [owner1, owner2, owner3, owner4, owner5, owner6, owner7, owner8, owner9],
   Tourist: [
-    tourist1, tourist2, tourist3, tourist4, tourist5, tourist6,
-    tourist7, tourist8, tourist9, tourist10, tourist12
+    tourist1,tourist3, tourist4, tourist5, 
+    tourist7,  tourist10
   ],
   Place: [
     place1, place2, place3, place4, place5, place6,
