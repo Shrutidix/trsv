@@ -107,19 +107,36 @@ const Gallery: React.FC = () => {
         </motion.div>
       </section>
 
-      {/* Constant YouTube Video */}
-      <section className="container mx-auto px-4 py-14 text-center">
-        <h2 className="text-3xl font-semibold mb-8 text-gray-800">🎬  Video</h2>
-        <div className="relative aspect-video max-w-4xl mx-auto rounded-xl overflow-hidden shadow-lg">
-          <iframe
-            className="w-full h-full"
-            src="https://www.youtube.com/embed/6M7wWia442I"
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-      </section>
+      <section className="container mx-auto px-4 py-14">
+  <h2 className="text-3xl font-semibold mb-12 text-center text-gray-800">
+    🎬 Featured YouTube Video
+  </h2>
+
+  <div className="flex flex-col md:flex-row items-center justify-center gap-10">
+    {/* Video */}
+    <div className="w-full md:w-[480px] aspect-video rounded-xl overflow-hidden shadow-lg">
+      <iframe
+        className="w-full h-full"
+        src="https://www.youtube.com/embed/6M7wWia442I"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+    </div>
+
+    {/* Description */}
+    <div className="max-w-md text-center md:text-left">
+      <h3 className="text-xl font-bold mb-4 text-gray-800">A Journey Through the Hills</h3>
+      <p className="text-gray-600 leading-relaxed">
+        Watch this immersive video capturing the serene beauty of the Himalayas,
+        thrilling adventures in Rishikesh, and peaceful moments across Uttarakhand. 
+        This featured clip highlights the essence of every traveler’s dream!
+      </p>
+    </div>
+  </div>
+</section>
+
+
 
       {/* General Gallery (Always Visible) */}
       <section className="container mx-auto px-4 pb-10 text-center">
@@ -239,6 +256,28 @@ const Gallery: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      {/* More Constant Images */}
+<section className="container mx-auto px-4 pb-16 text-center">
+
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2">
+    {[place6, tourist5, owner3, car6, place14, owner6, car11, tourist2].map((imgSrc, idx) => (
+      <motion.div
+        key={idx}
+        className="rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+        whileHover={{ scale: 1.03 }}
+        onClick={() => setSelectedImage(imgSrc)}
+      >
+        <img
+          src={imgSrc}
+          alt={`More Image ${idx + 1}`}
+          loading="lazy"
+          className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+        />
+      </motion.div>
+    ))}
+  </div>
+</section>
+
 
       <Footer />
     </div>
