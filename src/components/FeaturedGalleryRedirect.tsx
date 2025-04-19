@@ -36,7 +36,7 @@ const FeaturedGalleryRedirect: React.FC = () => {
           <div className="md:max-w-md text-gray-700 text-center md:text-left">
             <h3 className="text-xl font-semibold text-indigo-700 mb-2">Trusted by Celebrities</h3>
             <p className="mb-2">
-              🎉 We are proud to have served the renowned comedian <strong>Bharati Singh</strong> and the famous travel YouTuber <strong>Surab Joshi</strong>!
+              🎉 We are proud to have served the renowned comedian <strong>Bharati Singh</strong> and the famous travel YouTuber <strong>Sourabh Joshi</strong>!
             </p>
             <p className="mb-2">
               Our services ensure premium travel experiences — whether you're a celebrity or an everyday explorer.
