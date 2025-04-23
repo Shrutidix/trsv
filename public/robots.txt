@@ -1,19 +1,17 @@
-# Allow all crawlers
+# Allow all web crawlers
 User-agent: *
 Allow: /
+Allow: /*.json$
+Allow: /*.xml$
+Allow: /*?*
 
 # Sitemap location
 Sitemap: https://www.uttarakhandtrips.com/sitemap.xml
 
-# Disallow crawling of administrative and sensitive paths
+# Only disallow sensitive paths
 Disallow: /admin/
 Disallow: /private/
-Disallow: /api/
 Disallow: /cgi-bin/
-Disallow: /tmp/
-Disallow: /*.json$
-Disallow: /*.xml$
-Disallow: /*?*
 
-# Crawl-delay for all bots
-Crawl-delay: 10 
+# Remove crawl delay to allow faster indexing
+# Crawl-delay: 10 
