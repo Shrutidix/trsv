@@ -55,7 +55,7 @@ const Invoice = () => {
     paymentMethod: "",
     upiId: "",
     bankDetails: {
-      accountName: "UTTARAKHAND ROAD TRIPS",
+      accountName: "UTTARAKHAND TRIPS",
       accountNumber: "12345678901234",
       ifscCode: "SBIN0001234",
       bankName: "State Bank of India"
@@ -139,7 +139,7 @@ const Invoice = () => {
   };
 
   const generateUPIQRCode = () => {
-    const upiUrl = `upi://pay?pa=${invoiceData.upiId}&pn=UTTARAKHAND ROAD TRIPS&am=${calculateTotal()}&cu=INR`;
+    const upiUrl = `upi://pay?pa=${invoiceData.upiId}&pn=UTTARAKHAND TRIPS&am=${calculateTotal()}&cu=INR`;
     setQrCodeUrl(upiUrl);
     setShowQRCode(true);
   };
@@ -154,7 +154,7 @@ const Invoice = () => {
       doc.setFontSize(22);
       doc.setTextColor(0, 100, 0);
       doc.setFont("helvetica", 'bold');
-      doc.text("UTTARAKHAND ROAD TRIPS", 105, y, { align: "center" });
+      doc.text("UTTARAKHAND TRIPS", 105, y, { align: "center" });
       
       // Tagline
       doc.setFontSize(10);
@@ -186,7 +186,7 @@ const Invoice = () => {
       doc.setFont("helvetica", 'normal');
       doc.text([
         "Mobile: +91 7017691890",
-        "Email: info@uttarakhandroadtrips.com",
+        "Email: info@uttarakhandtrips.com",
         "GSTIN: 05BQWPK2436R1ZL"
       ], 120, y + 5);
 

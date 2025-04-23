@@ -1126,7 +1126,7 @@ const Index = () => {
       <section className="py-16 bg-gradient-to-br from-primary-50 via-primary-100 to-secondary-50" ref={whyChooseRef}>
         <div className={`container ${whyChooseInView ? 'fade-up-enter-active' : 'fade-up-enter'}`}>
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4 text-primary-800">Why Choose Uttarakhand Road Trip</h2>
+            <h2 className="text-3xl font-bold mb-4 text-primary-800">Why Choose Uttarakhand Trips</h2>
             <p className="text-gray-600 max-w-3xl mx-auto">
               We are committed to providing exceptional travel experiences in North India with reliable services and local expertise.
             </p>

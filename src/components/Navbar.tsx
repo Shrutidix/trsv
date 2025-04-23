@@ -53,9 +53,9 @@ const Navbar = () => {
                 <Phone className="h-4 w-4" />
                 <span>+91 8077757674</span>
               </a>
-              <a href="mailto:info@uttarakhandroadtrip.com" className="hidden md:flex items-center gap-1 text-sm text-gray-600 hover:text-primary-500">
+              <a href="mailto:info@uttarakhandtrips.com" className="hidden md:flex items-center gap-1 text-sm text-gray-600 hover:text-primary-500">
                 <Mail className="h-4 w-4" />
-                <span>uttarakhandroadtripss@gmail.com</span>
+                <span>uttarakhandtrips@gmail.com</span>
               </a>
             </div>
             <div className="flex items-center gap-4">

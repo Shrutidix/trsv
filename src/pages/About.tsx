@@ -50,7 +50,7 @@ const About = () => {
             >
               <h2 className="text-3xl font-bold text-primary-800 mt-4">Sachin Choudhary</h2>
               <p className="text-lg text-gray-600 mt-2">
-                Founder & CEO of Uttarakhand Road Trip Pvt Ltd. Passionate about delivering the best travel experiences across Dehradun and Uttarakhand.
+                Founder & CEO of Uttarakhand Trips Pvt Ltd. Passionate about delivering the best travel experiences across Dehradun and Uttarakhand.
               </p>
             </motion.div>
           </div>
@@ -75,7 +75,7 @@ const About = () => {
             >
               <h2 className="text-3xl font-bold text-primary-800 mt-4">Shubham Panwar</h2>
               <p className="text-lg text-gray-600 mt-2">
-                Co-Founder & Managing Director of Uttarakhand Road Trip Pvt Ltd. Committed to providing exceptional travel experiences and seamless logistics.
+                Co-Founder & Managing Director of Uttarakhand Trips Pvt Ltd. Committed to providing exceptional travel experiences and seamless logistics.
               </p>
             </motion.div>
           </div>
@@ -131,7 +131,7 @@ const About = () => {
         <section className="mt-12 text-center">
           <h2 className="text-3xl font-bold text-primary-700 mb-4"> Our Company</h2>
           <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-            Uttarakhand Road Trip is a private limited company based in the beautiful state of Uttarakhand, providing top-notch travel services since 2012. We specialize in offering smooth and memorable road trips across Uttarakhand, with a team of trained professionals dedicated to delivering the best travel experience. Over the years, we have managed numerous tours, both big and small, ensuring customer satisfaction at every step.
+            Uttarakhand Trips is a private limited company based in the beautiful state of Uttarakhand, providing top-notch travel services since 2012. We specialize in offering smooth and memorable trips across Uttarakhand, with a team of trained professionals dedicated to delivering the best travel experience. Over the years, we have managed numerous tours, both big and small, ensuring customer satisfaction at every step.
             <br /><br />
             With a strong network in key cities like Nainital, Mussoorie, Dehradun, and Rishikesh, we cater to the needs of both local and international travelers. Our commitment is to provide comfortable, safe, and reliable taxi services, making every journey unforgettable. Client satisfaction remains our top priority, and we constantly strive to exceed expectations with each trip.
           </p>

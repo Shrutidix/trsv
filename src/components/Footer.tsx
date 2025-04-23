@@ -13,17 +13,17 @@ const Footer = () => {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <MapPin className="h-6 w-6 text-primary-300" />
-                <span className="font-bold text-xl">Uttarakhand Road Trip</span>
+                <span className="font-bold text-xl">Uttarakhand Trips</span>
               </div>
               <p className="text-gray-400 mb-4">Your trusted partner for unforgettable adventures across North India. Explore the majestic Himalayas with our expert guides and comfortable transportation.</p>
               <div className="flex gap-4">
                 <a href="https://www.facebook.com/profile.php?id=61575153426035" className="text-primary-300 hover:text-white transition-colors">
                   <Facebook size={20} />
                 </a>
-                <a href="https://www.instagram.com/uttarakhandroadtripss/" className="text-primary-300 hover:text-white transition-colors">
+                <a href="https://www.instagram.com/uttarakhandtrips/" className="text-primary-300 hover:text-white transition-colors">
                   <Instagram size={20} />
                 </a>
-                <a href="https://x.com/URoadtrips" className="text-primary-300 hover:text-white transition-colors">
+                <a href="https://x.com/UTrips" className="text-primary-300 hover:text-white transition-colors">
                   <Twitter size={20} />
                 </a>
               </div>
@@ -69,7 +69,7 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="h-5 w-5 text-primary-300" />
-                  <span className="text-gray-400">uttarakhandroadtripss@gmail.com</span>
+                  <span className="text-gray-400">uttarakhandtrips@gmail.com</span>
                 </div>
               </div>
             </div>

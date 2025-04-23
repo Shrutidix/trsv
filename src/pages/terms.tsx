@@ -18,7 +18,7 @@ const Terms = () => {
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Terms and Conditions</h1>
           <p className="text-xl max-w-3xl mx-auto">
-            The rules and guidelines for using Uttarakhand Road Trip.
+            The rules and guidelines for using Uttarakhand Trips.
           </p>
         </motion.div>
       </section>
@@ -42,7 +42,7 @@ const Terms = () => {
         <section className="bg-white shadow-lg rounded-lg p-8 mb-12 border border-primary-100">
           <h2 className="text-3xl font-bold text-primary-800 mb-4">Intellectual Property</h2>
           <p className="text-lg text-primary-700">
-            All content on this website, including text, graphics, logos, and images, is the property of Uttarakhand Road Trip and may not be used without permission.
+            All content on this website, including text, graphics, logos, and images, is the property of Uttarakhand Trips and may not be used without permission.
           </p>
         </section>
 
@@ -58,7 +58,7 @@ const Terms = () => {
           <p className="text-lg text-gray-600">If you have any questions about our Terms and Conditions, contact us:</p>
           <ul className="list-disc ml-6 mt-4 text-lg text-gray-600">
             <li>
-              By email: <a href="mailto:uttarakhandroadtrip23@gmail.com" className="text-primary-600">uttarakhandroadtripss@gmail.com</a>
+              By email: <a href="mailto:uttarakhandtrips@gmail.com" className="text-primary-600">uttarakhandtrips@gmail.com</a>
             </li>
             <li>
               By visiting this page: <a href="/contact" className="text-primary-600">Contact Us</a>
