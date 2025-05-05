@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Mail, Facebook, Instagram, Twitter } from 'lucide-react';
+import { MapPin, Phone, Mail, Facebook, Instagram, Twitter,Youtube } from 'lucide-react';
 import { FaPhoneAlt, FaWhatsapp } from 'react-icons/fa';
 
 const Footer = () => {
@@ -20,12 +20,15 @@ const Footer = () => {
                 <a href="https://www.facebook.com/profile.php?id=61575153426035" className="text-primary-300 hover:text-white transition-colors">
                   <Facebook size={20} />
                 </a>
-                <a href="https://www.instagram.com/uttarakhandtrips/" className="text-primary-300 hover:text-white transition-colors">
+                <a href="https://www.instagram.com/uttarakhandroadtripss/" className="text-primary-300 hover:text-white transition-colors">
                   <Instagram size={20} />
                 </a>
                 <a href="https://x.com/UTrips" className="text-primary-300 hover:text-white transition-colors">
                   <Twitter size={20} />
                 </a>
+                <a href="https://www.youtube.com/@uttarakhandRoadtrips-i1l5l" className="text-primary-300 hover:text-white transition-colors">
+    <Youtube size={20} />
+  </a>
               </div>
             </div>
 

@@ -307,7 +307,7 @@ const Invoice = () => {
             if (qrElement) {
               qrDiv.innerHTML = `<svg>${qrElement.innerHTML}</svg>`;
               qrDiv.style.width = '1000px';
-              qrDiv.style.height = '100px';
+              qrDiv.style.height = '1000px';
               document.body.appendChild(qrDiv);
               
               try {
