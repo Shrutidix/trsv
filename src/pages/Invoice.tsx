@@ -56,9 +56,9 @@ const Invoice = () => {
     upiId: "",
     bankDetails: {
       accountName: "UTTARAKHAND TRIPS",
-      accountNumber: "12345678901234",
-      ifscCode: "SBIN0001234",
-      bankName: "State Bank of India"
+      accountNumber: "520101251541249",
+      ifscCode: "UBIN0556459",
+      bankName: "Union Bank"
     }
   });
 
@@ -185,9 +185,9 @@ const Invoice = () => {
       doc.text("Contact Details:", 120, y);
       doc.setFont("helvetica", 'normal');
       doc.text([
-        "Mobile: +91 7017691890",
+        "Mobile: +91 8077757674",
         "Email: info@uttarakhandtrips.com",
-        "GSTIN: 05BQWPK2436R1ZL"
+        "GSTIN: 05DHJPK8346A2ZF"
       ], 120, y + 5);
 
       // Invoice Details
@@ -306,21 +306,21 @@ const Invoice = () => {
             
             if (qrElement) {
               qrDiv.innerHTML = `<svg>${qrElement.innerHTML}</svg>`;
-              qrDiv.style.width = '800px';
-              qrDiv.style.height = '800px';
+              qrDiv.style.width = '1000px';
+              qrDiv.style.height = '100px';
               document.body.appendChild(qrDiv);
               
               try {
                 const canvas = await html2canvas(qrDiv, {
                   scale: 4,
                   backgroundColor: '#ffffff',
-                  width: 800,
-                  height: 800
+                  width: 1000,
+                  height: 1000
                 });
                 
                 const imgData = canvas.toDataURL('image/png');
                 const pageWidth = doc.internal.pageSize.getWidth();
-                const qrCodeSize = 80;
+                const qrCodeSize = 120;
                 const xPos = (pageWidth - qrCodeSize) / 2;
                 doc.addImage(imgData, 'PNG', xPos, y - 5, qrCodeSize, qrCodeSize);
                 
