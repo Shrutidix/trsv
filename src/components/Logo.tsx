@@ -172,7 +172,7 @@ const Logo: React.FC<LogoProps> = ({ className = "", showText = true }) => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              ROAD TRIP
+              TRIPS
             </motion.p>
             <motion.div className="w-5 h-0.5 bg-green-500"
               initial={{ scaleX: 0 }}

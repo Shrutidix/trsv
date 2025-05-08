@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 import RouteDetails from '@/components/RouteDetails';
+import FeaturedGalleryRedirect from '../components/FeaturedGalleryRedirect';
 
 // Add useInView hook at the top of the file
 const useInView = (options = {}) => {
@@ -170,7 +171,7 @@ const Index = () => {
   const testimonials = [
     {
       name: 'Saksham Chaudhary',
-      avatar: 'https://thumbs.dreamstime.com/b/amber-india-september-portrait-unidentified-indian-man-wearing-blue-t-shirt-streets-104351515.jpg',
+      avatar: 'https://drive.google.com/file/d/1e9beYe3ffc7ihryIhHo8eX31BQQt9Tl-/view?usp=sharing',
       rating: 5,
       text: 'Manali trip ekdum mast raha! Driver bhaiya ne bohot acche se guide kiya, har jagah ki knowledge thi unko. Taxi time pe aayi, clean thi, AC perfect tha. Rates bhi reasonable the. Full paisa vasool service! 👌',
       destination: 'Manali Trip',
@@ -1117,12 +1118,15 @@ const Index = () => {
       <div className="w-full bg-white">
         <VacationBanner />
       </div>
-
+  {/*gallery */}
+  <div className='w-full bg-white'>
+    <FeaturedGalleryRedirect/>
+  </div>
       {/* Why Choose Us Section */}
       <section className="py-16 bg-gradient-to-br from-primary-50 via-primary-100 to-secondary-50" ref={whyChooseRef}>
         <div className={`container ${whyChooseInView ? 'fade-up-enter-active' : 'fade-up-enter'}`}>
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4 text-primary-800">Why Choose Uttarakhand Road Trip</h2>
+            <h2 className="text-3xl font-bold mb-4 text-primary-800">Why Choose Uttarakhand Trips</h2>
             <p className="text-gray-600 max-w-3xl mx-auto">
               We are committed to providing exceptional travel experiences in North India with reliable services and local expertise.
             </p>
