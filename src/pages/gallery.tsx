@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import axios from "axios";
 
 // Owner Images
 import owner1 from "../assets/image5.jpeg";
@@ -64,7 +65,9 @@ import ukvideo2 from "../assets/ukvideo2.mp4";
 import ukvideo3 from "../assets/place4.mp4";
 import ukvideo4 from "../assets/place5.mp4";
 
-const categoryData: Record<string, (string | { title: string; src: string })[]> = {
+const API_URL = 'https://trsvbackend.vercel.app/api';
+
+const categoryDataRaw = {
   Owner: [owner1, owner2, owner3, owner4, owner5, owner6, owner7, owner8, owner9],
   Tourist: [
     tourist1, tourist2, tourist3, tourist4, tourist5, tourist6,
@@ -87,6 +90,106 @@ const categoryData: Record<string, (string | { title: string; src: string })[]> 
 const Gallery: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [showYoutube, setShowYoutube] = useState(false);
+  const [generalPhotos, setGeneralPhotos] = useState<string[]>([]);
+  const [loadingGeneral, setLoadingGeneral] = useState(true);
+  const youtubeRef = useRef<HTMLDivElement>(null);
+
+  // Memoize category data to avoid unnecessary re-renders
+  const categoryData = useMemo(() => categoryDataRaw, []);
+
+  // Service worker registration for offline support
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+  }
+
+  // Fetch general gallery photos from MongoDB
+  useEffect(() => {
+    // Load cached photos from localStorage first
+    const cachedPhotos = localStorage.getItem('galleryPhotos');
+    if (cachedPhotos) {
+      setGeneralPhotos(JSON.parse(cachedPhotos));
+      setLoadingGeneral(false);
+    }
+    const fetchPhotos = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/photos/all`);
+        if (res.data && Array.isArray(res.data.data)) {
+          const photoUrls = res.data.data.map(photo => `${API_URL}/photos/${photo._id}`);
+          setGeneralPhotos(photoUrls);
+          localStorage.setItem('galleryPhotos', JSON.stringify(photoUrls));
+        }
+      } catch (err) {
+        // fallback: no fetched photos
+      } finally {
+        setLoadingGeneral(false);
+      }
+    };
+    fetchPhotos();
+  }, []);
+
+  // Cache last selected category in localStorage
+  useEffect(() => {
+    const lastCategory = localStorage.getItem('lastGalleryCategory');
+    if (lastCategory) setActiveCategory(lastCategory);
+  }, []);
+  useEffect(() => {
+    if (activeCategory) localStorage.setItem('lastGalleryCategory', activeCategory);
+  }, [activeCategory]);
+
+  // Defer YouTube iframe loading until in view
+  useEffect(() => {
+    const handleScroll = () => {
+      if (youtubeRef.current) {
+        const rect = youtubeRef.current.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          setShowYoutube(true);
+        }
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Only render images/videos for the active category
+  const renderCategoryContent = () => {
+    if (!activeCategory) return null;
+    return (
+      <div className="overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2">
+          {categoryData[activeCategory]?.map((item, index) =>
+            typeof item === "string" ? (
+              <div
+                key={index}
+                className="rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 cursor-pointer gallery-img"
+                onClick={() => setSelectedImage(item)}
+              >
+                <img
+                  src={item}
+                  alt={`${activeCategory} ${index + 1}`}
+                  loading="lazy"
+                  className="w-full h-64 object-cover transition-transform duration-300 hover:scale-105"
+                />
+              </div>
+            ) : (
+              <div
+                key={index}
+                className="rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300"
+              >
+                <video controls title={item.title} className="w-full h-64 object-cover" preload="none">
+                  <source src={item.src} type="video/mp4" />
+                </video>
+                <div className="p-3 text-center font-medium text-sm text-gray-700">{item.title}</div>
+              </div>
+            )
+          )}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -94,70 +197,91 @@ const Gallery: React.FC = () => {
 
       {/* Banner */}
       <section className="bg-gradient-to-r from-indigo-700 to-purple-500 py-20 text-white text-center shadow-lg">
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          className="container mx-auto px-4"
-        >
+        <div className="container mx-auto px-4">
           <h1 className="text-5xl font-extrabold mb-3 tracking-tight">Gallery</h1>
           <p className="text-lg max-w-3xl mx-auto text-white/90">
             Dive into experiences shared by owners and tourists, scenic places, luxury rides, and more!
           </p>
-        </motion.div>
-      </section>
-
-      <section className="container mx-auto px-4 py-14">
-  <h2 className="text-3xl font-semibold mb-12 text-center text-gray-800">
-    🎬 Featured YouTube Video
-  </h2>
-
-  <div className="flex flex-col md:flex-row items-center justify-center gap-10">
-    {/* Video */}
-    <div className="w-full md:w-[480px] aspect-video rounded-xl overflow-hidden shadow-lg">
-      <iframe
-        className="w-full h-full"
-        src="https://www.youtube.com/embed/6M7wWia442I"
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      />
-    </div>
-
-    {/* Description */}
-    <div className="max-w-md text-center md:text-left">
-      <h3 className="text-xl font-bold mb-4 text-gray-800">A Journey Through the Hills</h3>
-      <p className="text-gray-600 leading-relaxed">
-        Watch this immersive video capturing the serene beauty of the Himalayas,
-        thrilling adventures in Rishikesh, and peaceful moments across Uttarakhand. 
-        This featured clip highlights the essence of every traveler’s dream!
-      </p>
-    </div>
-  </div>
-</section>
-
-
-
-      {/* General Gallery (Always Visible) */}
-      <section className="container mx-auto px-4 pb-10 text-center">
-        <h2 className="text-3xl font-semibold mb-8 text-gray-800">✨ General Gallery</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2">
-          {[owner1, owner2, tourist1, place1].map((imgSrc, idx) => (
-            <motion.div
-              key={idx}
-              className="rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-              whileHover={{ scale: 1.03 }}
-            >
-              <img
-                src={imgSrc}
-                alt={`General Image ${idx + 1}`}
-                loading="lazy"
-                className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
-              />
-            </motion.div>
-          ))}
         </div>
       </section>
+
+      {/* Featured YouTube Video (deferred load) */}
+      <section className="container mx-auto px-4 py-14">
+        <h2 className="text-3xl font-semibold mb-12 text-center text-gray-800">
+          🎬 Featured YouTube Video
+        </h2>
+        <div className="flex flex-col md:flex-row items-center justify-center gap-10" ref={youtubeRef}>
+          {/* Video */}
+          <div className="w-full md:w-[480px] aspect-video rounded-xl overflow-hidden shadow-lg">
+            {showYoutube ? (
+              <iframe
+                className="w-full h-full"
+                src="https://www.youtube.com/embed/6M7wWia442I"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                loading="lazy"
+              />
+            ) : (
+              <div className="w-full h-full bg-gray-200 animate-pulse flex items-center justify-center text-gray-400 text-2xl">
+                Loading video…
+              </div>
+            )}
+          </div>
+          {/* Description */}
+          <div className="max-w-md text-center md:text-left">
+            <h3 className="text-xl font-bold mb-4 text-gray-800">A Journey Through the Hills</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Watch this immersive video capturing the serene beauty of the Himalayas,
+              thrilling adventures in Rishikesh, and peaceful moments across Uttarakhand. 
+              This featured clip highlights the essence of every traveler's dream!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* General Gallery (Always Visible, only if no category selected) */}
+      {!activeCategory && (
+        <section className="container mx-auto px-4 pb-10 text-center">
+          <h2 className="text-3xl font-semibold mb-8 text-gray-800">✨ General Gallery</h2>
+          {loadingGeneral ? (
+            <div className="text-gray-500 text-lg py-10">Loading photos…</div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2">
+              {/* MongoDB photos first */}
+              {generalPhotos.map((imgSrc, idx) => (
+                <div
+                  key={"mongo-" + idx}
+                  className="rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 cursor-pointer gallery-img"
+                  onClick={() => setSelectedImage(imgSrc)}
+                >
+                  <img
+                    src={imgSrc}
+                    alt={`General Gallery ${idx + 1}`}
+                    loading="lazy"
+                    className="w-full h-64 object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                </div>
+              ))}
+              {/* Hardcoded fallback images always shown */}
+              {[owner1, owner2, tourist1, place1].map((imgSrc, idx) => (
+                <div
+                  key={"hard-" + idx}
+                  className="rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 cursor-pointer gallery-img"
+                  onClick={() => setSelectedImage(imgSrc)}
+                >
+                  <img
+                    src={imgSrc}
+                    alt={`General Image ${idx + 1}`}
+                    loading="lazy"
+                    className="w-full h-64 object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
 
       {/* Category Buttons */}
       <section className="container mx-auto px-4 py-14 text-center">
@@ -177,58 +301,11 @@ const Gallery: React.FC = () => {
             </button>
           ))}
         </div>
-
-        {/* Category Content */}
-        <AnimatePresence>
-          {activeCategory && (
-            <motion.div
-              key={activeCategory}
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              className="overflow-hidden"
-            >
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2">
-                {categoryData[activeCategory]?.map((item, index) =>
-                  typeof item === "string" ? (
-                    <motion.div
-                      key={index}
-                      className="rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: index * 0.03 }}
-                      onClick={() => setSelectedImage(item)}
-                    >
-                      <img
-                        src={item}
-                        alt={`${activeCategory} ${index + 1}`}
-                        loading="lazy"
-                        className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
-                      />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key={index}
-                      className="rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300"
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: index * 0.03 }}
-                    >
-                      <video controls title={item.title} className="w-full h-64 object-cover">
-                        <source src={item.src} type="video/mp4" />
-                      </video>
-                      <div className="p-3 text-center font-medium text-sm text-gray-700">{item.title}</div>
-                    </motion.div>
-                  )
-                )}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Category Content (only render when active) */}
+        <AnimatePresence>{renderCategoryContent()}</AnimatePresence>
       </section>
 
-      {/* Modal Preview */}
+      {/* Modal Preview (only Framer Motion here) */}
       <AnimatePresence>
         {selectedImage && (
           <motion.div
@@ -246,6 +323,7 @@ const Gallery: React.FC = () => {
               exit={{ scale: 0.85 }}
               className="max-w-4xl max-h-[85vh] rounded-lg shadow-2xl"
               onClick={(e) => e.stopPropagation()}
+              loading="lazy"
             />
             <button
               className="absolute top-6 right-6 text-white text-3xl font-bold hover:text-red-500 transition-colors"
@@ -256,30 +334,34 @@ const Gallery: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      {/* More Constant Images */}
-<section className="container mx-auto px-4 pb-16 text-center">
 
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2">
-    {[place6, tourist5, owner3, car6, place14, owner6, car11, tourist2].map((imgSrc, idx) => (
-      <motion.div
-        key={idx}
-        className="rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-        whileHover={{ scale: 1.03 }}
-        onClick={() => setSelectedImage(imgSrc)}
-      >
-        <img
-          src={imgSrc}
-          alt={`More Image ${idx + 1}`}
-          loading="lazy"
-          className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
-        />
-      </motion.div>
-    ))}
-  </div>
-</section>
-
+      {/* More Constant Images (only if no category selected) */}
+      {!activeCategory && (
+        <section className="container mx-auto px-4 pb-16 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2">
+            {[place6, tourist5, owner3, car6, place14, owner6, car11, tourist2].map((imgSrc, idx) => (
+              <div
+                key={idx}
+                className="rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 cursor-pointer gallery-img"
+                onClick={() => setSelectedImage(imgSrc)}
+              >
+                <img
+                  src={imgSrc}
+                  alt={`More Image ${idx + 1}`}
+                  loading="lazy"
+                  className="w-full h-64 object-cover transition-transform duration-300 hover:scale-105"
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       <Footer />
+      {/* Add a little CSS for smooth hover/scale */}
+      <style>{`
+        .gallery-img img { will-change: transform; }
+      `}</style>
     </div>
   );
 };

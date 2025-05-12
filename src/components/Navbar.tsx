@@ -59,10 +59,10 @@ const Navbar = () => {
               </a>
             </div>
             <div className="flex items-center gap-4">
-              <a href="#" className="flex items-center gap-1 text-sm text-gray-600 hover:text-primary-500">
+              <Link to="/track" className="flex items-center gap-1 text-sm text-gray-600 hover:text-primary-500">
                 <MapPin className="h-4 w-4" />
                 <span>Track Booking</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

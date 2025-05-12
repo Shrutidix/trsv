@@ -1,24 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import SearchTabs from '@/components/SearchTabs';
-import DestinationCard from '@/components/DestinationCard';
-import PackageCard from '@/components/PackageCard';
-import TestimonialCard from '@/components/TestimonialCard';
-import VacationBanner from '@/components/VacationBanner';
-import BookingForm from '@/components/BookingForm';
-import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
-import { cn } from '@/lib/utils';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import SearchTabs from '../components/SearchTabs';
+import DestinationCard from '../components/DestinationCard';
+import PackageCard from '../components/PackageCard';
+import TestimonialCard from '../components/TestimonialCard';
+import VacationBanner from '../components/VacationBanner';
+import BookingForm from '../components/BookingForm';
+import { Button } from '../components/ui/button';
+import { Calendar } from '../components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '../components/ui/popover';
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '../components/ui/select';
+import { cn } from '../lib/utils';
 import { format } from 'date-fns';
 import { 
-  Car, Phone, CheckCircle, Award, Shield, Mountain, MapPin, Tent, Calendar as CalendarIcon, Clock, Users, CheckCircle2 
+  Car, Phone, CheckCircle, Award, Shield, Mountain, MapPin, Tent, Calendar as CalendarIcon, Clock, Users, CheckCircle2, Star 
 } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
-import RouteDetails from '@/components/RouteDetails';
+import RouteDetails from '../components/RouteDetails';
 import FeaturedGalleryRedirect from '../components/FeaturedGalleryRedirect';
+import axios from "axios";
+import { Card } from '../components/ui/card';
 
 // Add useInView hook at the top of the file
 const useInView = (options = {}) => {
@@ -45,6 +47,17 @@ const useInView = (options = {}) => {
   return [ref, isInView];
 };
 
+interface Review {
+  _id: string;
+  name: string;
+  email: string;
+  phone: string;
+  rating: number;
+  message: string;
+  status: 'pending' | 'reviewed' | 'responded' | 'approved';
+  createdAt: string;
+}
+
 const Index = () => {
   // Get URL parameters
   const [searchParams] = useSearchParams();
@@ -63,6 +76,8 @@ const Index = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showMyChoiceDesign, setShowMyChoiceDesign] = useState(false);
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [loading, setLoading] = useState(true);
   
   // Scroll to booking form if URL parameters are present
   useEffect(() => {
@@ -780,163 +795,203 @@ const Index = () => {
     }
   ];
 
+  useEffect(() => {
+    // Load cached reviews from localStorage first
+    const cachedReviews = localStorage.getItem('homeReviews');
+    if (cachedReviews) {
+      setReviews(JSON.parse(cachedReviews));
+      setLoading(false);
+    }
+    const fetchReviews = async () => {
+      try {
+        const response = await axios({
+          method: 'get',
+          url: 'https://trsvbackend.vercel.app/api/feedback',
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        if (response.data.success) {
+          // Filter only approved feedbacks and take the latest 3
+          const approvedFeedbacks = response.data.data
+            .filter((feedback) => feedback.status === 'approved')
+            .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+            .slice(0, 3);
+          setReviews(approvedFeedbacks);
+          localStorage.setItem('homeReviews', JSON.stringify(approvedFeedbacks));
+        }
+      } catch (error) {
+        console.error('Error fetching reviews:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchReviews();
+  }, []);
+
+  const renderStars = (rating: number) => {
+    return Array.from({ length: 5 }).map((_, index) => (
+      <Star
+        key={index}
+        className={`h-5 w-5 ${
+          index < rating
+            ? "text-yellow-400 fill-yellow-400"
+            : "text-gray-300"
+        }`}
+      />
+    ));
+  };
+
+  // Caching for destinations
+  useEffect(() => {
+    const cachedDestinations = localStorage.getItem('homeDestinations');
+    if (cachedDestinations) {
+      // setDestinations(JSON.parse(cachedDestinations)); // Uncomment if destinations are fetched from API
+    }
+    // If you fetch destinations from API, fetch and cache here
+  }, []);
+
+  // Caching for packages
+  useEffect(() => {
+    const cachedPackages = localStorage.getItem('homePackages');
+    if (cachedPackages) {
+      // setPackages(JSON.parse(cachedPackages)); // Uncomment if packages are fetched from API
+    }
+    // If you fetch packages from API, fetch and cache here
+  }, []);
+
+  // Caching for testimonials
+  useEffect(() => {
+    const cachedTestimonials = localStorage.getItem('homeTestimonials');
+    if (cachedTestimonials) {
+      // setTestimonials(JSON.parse(cachedTestimonials)); // Uncomment if testimonials are fetched from API
+    }
+    // If you fetch testimonials from API, fetch and cache here
+  }, []);
+
   return (
     <div className="min-h-screen">
       <Navbar />
       
-      {/* Hero Section - Professional redesign with realistic car animations */}
-      <section className="relative overflow-hidden bg-[url('https://images.unsplash.com/photo-1517299321609-52687d1bc55a?q=80&w=2940&auto=format&fit=crop')] bg-cover bg-center bg-fixed py-8 before:absolute before:inset-0 before:bg-gradient-to-br before:from-blue-900/80 before:via-blue-800/70 before:to-indigo-900/60 before:backdrop-blur-[2px]">
-        {/* Snowfall Animation */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(100)].map((_, i) => (
+      {/* Hero Section - Enhanced with Vibrant Gradients */}
+      <section className="relative min-h-[90vh] overflow-hidden">
+        {/* Animated Background Base */}
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-500 to-pink-500">
+          {/* Enhanced Sparkling Stars Effect */}
+          <div className="absolute inset-0">
+            {[...Array(30)].map((_, i) => (
             <div
               key={i}
-              className="absolute top-[-20px] animate-snowfall"
+                className="absolute w-1.5 h-1.5 bg-white rounded-full animate-sparkle"
               style={{
                 left: `${Math.random() * 100}%`,
-                animationDuration: `${Math.random() * 5 + 5}s`,
+                  top: `${Math.random() * 100}%`,
                 animationDelay: `${Math.random() * 5}s`,
                 opacity: Math.random() * 0.7 + 0.3,
-                fontSize: `${Math.random() * 10 + 10}px`,
-                filter: 'blur(1px)',
-                transform: `scale(${Math.random() * 0.5 + 0.5})`,
-              }}
-            >
-              <div className="snowflake">
-                <div className="snowflake-inner"></div>
-              </div>
-            </div>
+                  boxShadow: '0 0 4px rgba(255,255,255,0.8)'
+                }}
+              />
           ))}
         </div>
 
-        {/* Car Animation Container - Will change based on selection */}
-        <div className="absolute inset-0 overflow-hidden">
-          {/* SVG Car Animation - Moving from left to right */}
-          <div id="carAnimationContainer" className="w-full h-full relative">
-            <div className="absolute bottom-20 left-0 animate-drive">
-              <svg width="120" height="60" viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg" className="w-32 h-auto">
-                {/* Car Body */}
-                <rect x="10" y="20" width="100" height="20" rx="8" fill="#1e40af" />
-                <rect x="20" y="10" width="60" height="15" rx="5" fill="#1e40af" />
-                {/* Windows */}
-                <rect x="25" y="12" width="20" height="12" rx="2" fill="#a5f3fc" />
-                <rect x="55" y="12" width="20" height="12" rx="2" fill="#a5f3fc" />
-                {/* Wheels */}
-                <circle cx="30" cy="40" r="10" fill="#000000" />
-                <circle cx="30" cy="40" r="5" fill="#4b5563" />
-                <circle cx="90" cy="40" r="10" fill="#000000" />
-                <circle cx="90" cy="40" r="5" fill="#4b5563" />
-                {/* Headlights */}
-                <rect x="110" y="25" width="5" height="10" rx="2" fill="#fef08a" />
-                {/* Taillights */}
-                <rect x="5" y="25" width="5" height="10" rx="2" fill="#ef4444" />
-              </svg>
-            </div>
+          {/* Enhanced Modular Rounded Elements */}
+          <div className="absolute inset-0">
+            <div className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-br from-pink-400/20 to-purple-400/20 rounded-full blur-3xl animate-float"></div>
+            <div className="absolute top-40 right-20 w-80 h-80 bg-gradient-to-br from-indigo-400/20 to-blue-400/20 rounded-full blur-3xl animate-float-delayed"></div>
+            <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-3xl animate-float"></div>
+            <div className="absolute top-1/2 left-1/4 w-48 h-48 bg-gradient-to-br from-blue-400/20 to-indigo-400/20 rounded-full blur-3xl animate-float-slow"></div>
           </div>
           
-          {/* Road animation with improved design */}
-          <div className="absolute bottom-0 left-0 right-0 h-40">
-            <div className="relative w-full h-full overflow-hidden">
-              {/* Road Surface */}
-              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-gray-800 to-gray-900">
-                {/* Road Markings */}
-                <div className="absolute inset-x-0 bottom-12 h-4">
-                  <div className="animate-road w-full flex">
-                    {[...Array(20)].map((_, i) => (
-                      <div key={i} className="h-2 w-20 bg-yellow-400 mx-12 rounded-full shadow-lg"></div>
-                    ))}
-                  </div>
-                </div>
-                {/* Road Texture */}
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/asfalt-dark.png')] opacity-30"></div>
-              </div>
-            </div>
-          </div>
+          {/* Enhanced Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary-400/10 to-transparent"></div>
         </div>
 
-        {/* Content Container */}
-        <div className="container mx-auto px-4 py-12 relative z-10">
-          <div className="flex flex-col items-center mb-10">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 text-center drop-shadow-lg">
-              India's Premier Taxi Booking Service
+        {/* Content Container with Enhanced Glass Effect */}
+        <div className="container mx-auto px-4 py-20 relative z-10">
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight animate-fade-in">
+              Discover North India's Hidden Treasures
             </h1>
-            <p className="text-xl text-white text-center drop-shadow-md mb-6">
-              Travel in style and comfort with our luxury fleet
+            <p className="text-xl text-white/90 mb-8 animate-fade-in-delayed">
+              Experience luxury travel with our premium taxi services. From spiritual journeys to adventure tours, we make your travel dreams come true.
             </p>
           </div>
 
-          {/* Booking form panel */}
-          <div id="booking-form" className="w-full max-w-7xl mx-auto bg-gradient-to-br from-white/95 via-primary-50/90 to-blue-50/85 backdrop-blur-2xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-white/30 overflow-visible mb-16">
-            <div className="p-4 md:p-8 relative">
-              {/* Background decoration - Simplified for mobile */}
-              <div className="absolute inset-0 bg-grid-pattern opacity-15 pointer-events-none"></div>
-              <div className="absolute -top-10 -right-10 w-48 h-48 bg-primary-400/20 rounded-full blur-3xl hidden md:block"></div>
-              <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-blue-400/20 rounded-full blur-3xl hidden md:block"></div>
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-200/10 rounded-full blur-3xl pointer-events-none hidden md:block"></div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 relative z-10">
+          {/* Enhanced Booking Form with Glass Effect */}
+          <div className="relative max-w-4xl mx-auto bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl p-6 md:p-8 border border-white/20">
+            {/* Wavy SVG Background */}
+            <svg className="absolute -top-10 -left-10 w-[120%] h-40 opacity-30 z-0" viewBox="0 0 1440 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#a5b4fc" fillOpacity="0.3" d="M0,160L60,170.7C120,181,240,203,360,197.3C480,192,600,160,720,154.7C840,149,960,171,1080,186.7C1200,203,1320,213,1380,218.7L1440,224L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
+              <path fill="#6366f1" fillOpacity="0.15" d="M0,224L60,208C120,192,240,160,360,154.7C480,149,600,171,720,186.7C840,203,960,213,1080,197.3C1200,181,1320,139,1380,117.3L1440,96L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
+            </svg>
+            <div className="relative z-10">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* From Location */}
-                <div className="col-span-1">
-                  <label className="block text-gray-700 text-sm md:text-base font-medium mb-2 md:mb-3 flex items-center">
-                    <MapPin className="h-4 w-4 md:h-5 md:w-5 mr-2 text-primary" /> From
-                  </label>
                   <div className="relative">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">From</label>
                     <select 
                       value={fromLocation} 
                       onChange={(e) => setFromLocation(e.target.value)}
-                      className="block w-full h-12 md:h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-xl md:rounded-2xl py-2 px-3 md:px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-sm md:text-base transition-all hover:bg-white/80"
+                    className="w-full h-12 bg-white/80 border border-gray-200 rounded-xl px-4 focus:ring-2 focus:ring-primary focus:border-primary"
+                    required
                     >
-                      <option value="">Select pickup point</option>
+                    <option value="">Select pickup</option>
                       <option value="Dehradun">Dehradun</option>
                       <option value="Mussoorie">Mussoorie</option>
                       <option value="Haridwar">Haridwar</option>
                       <option value="Rishikesh">Rishikesh</option>
-                      <option value="Kana Tal">Kana Tal</option>
-                      <option value="Dhanaulti">Dhanaulti</option>
-                      <option value="Saharanpur">Saharanpur</option>
-                      <option value="Delhi">Delhi (NCR)</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Chandigarh">Chandigarh</option>
+                    <option value="Jaipur">Jaipur</option>
+                    <option value="Agra">Agra</option>
+                    <option value="Varanasi">Varanasi</option>
+                    <option value="Amritsar">Amritsar</option>
                     </select>
-                  </div>
                 </div>
 
                 {/* To Location */}
-                <div className="col-span-1">
-                  <label className="block text-gray-700 text-sm md:text-base font-medium mb-2 md:mb-3 flex items-center">
-                    <MapPin className="h-4 w-4 md:h-5 md:w-5 mr-2 text-primary" /> To
-                  </label>
                   <div className="relative">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">To</label>
                     <select
                       value={toLocation}
                       onChange={(e) => setToLocation(e.target.value)}
-                      className="block w-full h-12 md:h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-xl md:rounded-2xl py-2 px-3 md:px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-sm md:text-base transition-all hover:bg-white/80"
+                    className="w-full h-12 bg-white/80 border border-gray-200 rounded-xl px-4 focus:ring-2 focus:ring-primary focus:border-primary"
+                    required
                     >
                       <option value="">Select destination</option>
                       <option value="All India">All India</option>
-                      <option value="We'll decide later">We'll decide later</option>
                       <option value="Dehradun">Dehradun</option>
                       <option value="Mussoorie">Mussoorie</option>
                       <option value="Haridwar">Haridwar</option>
                       <option value="Rishikesh">Rishikesh</option>
-                      <option value="Kana Tal">Kana Tal</option>
-                      <option value="Dhanaulti">Dhanaulti</option>
-                      <option value="Saharanpur">Saharanpur</option>
-                      <option value="Delhi">Delhi (NCR)</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Chandigarh">Chandigarh</option>
+                    <option value="Jaipur">Jaipur</option>
+                    <option value="Agra">Agra</option>
+                    <option value="Varanasi">Varanasi</option>
+                    <option value="Amritsar">Amritsar</option>
+                    <option value="Shimla">Shimla</option>
+                    <option value="Manali">Manali</option>
+                    <option value="Dharamshala">Dharamshala</option>
+                    <option value="Nainital">Nainital</option>
+                    <option value="Auli">Auli</option>
+                    <option value="Kedarnath">Kedarnath</option>
+                    <option value="Badrinath">Badrinath</option>
+                    <option value="Gangotri">Gangotri</option>
+                    <option value="Yamunotri">Yamunotri</option>
                     </select>
-                  </div>
                 </div>
 
                 {/* Date Picker */}
-                <div className="col-span-1">
-                  <label className="block text-gray-700 text-sm md:text-base font-medium mb-2 md:mb-3 flex items-center">
-                    <CalendarIcon className="h-4 w-4 md:h-5 md:w-5 mr-2 text-primary" /> Date
-                  </label>
+                <div className="relative">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Date</label>
                   <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
                     <PopoverTrigger asChild>
                       <Button
-                        variant={"outline"}
+                      variant="outline"
                         className={cn(
-                          "w-full h-12 md:h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-xl md:rounded-2xl py-2 px-3 md:px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-sm md:text-base transition-all hover:bg-white/80",
-                          !selectedDate && "text-muted-foreground"
+                        "w-full h-12 bg-white/80 border border-gray-200 rounded-xl px-4 justify-start text-left font-normal",
+                        !selectedDate && "text-gray-500"
                         )}
                       >
                         <CalendarIcon className="mr-2 h-4 w-4" />
@@ -957,17 +1012,18 @@ const Index = () => {
                     </PopoverContent>
                   </Popover>
                 </div>
+                </div>
 
-                {/* Passenger Count */}
-                <div className="col-span-1">
-                  <label className="block text-gray-700 text-sm md:text-base font-medium mb-2 md:mb-3 flex items-center">
-                    <Users className="h-4 w-4 md:h-5 md:w-5 mr-2 text-primary" /> Passengers
-                  </label>
+              {/* Secondary Options */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                {/* Passengers */}
+                <div className="relative">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Passengers</label>
                   <Select value={passengerCount} onValueChange={setPassengerCount}>
-                    <SelectTrigger className="w-full h-12 md:h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-xl md:rounded-2xl py-2 px-3 md:px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-sm md:text-base transition-all hover:bg-white/80">
+                    <SelectTrigger className="w-full h-12 bg-white/80 border border-gray-200 rounded-xl">
                       <SelectValue placeholder="Select passengers" />
                     </SelectTrigger>
-                    <SelectContent className="max-h-[200px]">
+                    <SelectContent>
                       <SelectItem value="1-3">1-3 Passengers</SelectItem>
                       <SelectItem value="4-6">4-6 Passengers</SelectItem>
                       <SelectItem value="7-12">7-12 Passengers</SelectItem>
@@ -977,139 +1033,198 @@ const Index = () => {
                 </div>
 
                 {/* Car Type */}
-                <div className="col-span-1">
-                  <label className="block text-gray-700 text-sm md:text-base font-medium mb-2 md:mb-3 flex items-center">
-                    <Car className="h-4 w-4 md:h-5 md:w-5 mr-2 text-primary" /> Car Type
-                  </label>
+                <div className="relative">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Vehicle Type</label>
                   <Select value={selectedCarType} onValueChange={handleCarTypeChange}>
-                    <SelectTrigger className="w-full h-12 md:h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-xl md:rounded-2xl py-2 px-3 md:px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-sm md:text-base transition-all hover:bg-white/80">
-                      <SelectValue placeholder="Select car type" />
+                    <SelectTrigger className="w-full h-12 bg-white/80 border border-gray-200 rounded-xl">
+                      <SelectValue placeholder="Select vehicle" />
                     </SelectTrigger>
-                    <SelectContent className="max-h-[200px]">
+                    <SelectContent>
                       <SelectItem value="sedan">Premium Sedan</SelectItem>
                       <SelectItem value="suv">Luxury SUV</SelectItem>
                       <SelectItem value="tempo">Tempo Traveller</SelectItem>
                       <SelectItem value="bus">Luxury Bus</SelectItem>
-                      <SelectItem value="myChoice">My Choice</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
-                {/* Phone Number Input */}
-                <div className="col-span-1">
-                  <label className="block text-gray-700 text-sm md:text-base font-medium mb-2 md:mb-3 flex items-center">
-                    <Phone className="h-4 w-4 md:h-5 md:w-5 mr-2 text-primary" /> Contact Number <span className="text-red-500 ml-1">*</span>
-                  </label>
+                {/* Phone Number */}
+                <div className="relative">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Contact Number</label>
                   <input 
                     type="tel" 
                     value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    placeholder="Enter contact number" 
+                    onChange={(e) => {
+                      // Only allow digits
+                      const val = e.target.value.replace(/[^0-9]/g, '');
+                      setPhoneNumber(val);
+                    }}
+                    placeholder="Enter your number" 
+                    className="w-full h-12 bg-white/80 border border-gray-200 rounded-xl px-4 focus:ring-2 focus:ring-primary focus:border-primary"
                     required
-                    className="w-full h-12 md:h-14 bg-white/60 backdrop-blur-sm border-2 border-gray-100 rounded-xl md:rounded-2xl py-2 px-3 md:px-4 shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-sm md:text-base transition-all hover:bg-white/80"
+                    minLength={10}
+                    maxLength={10}
+                    pattern="[0-9]{10}"
+                    title="Please enter a valid 10-digit phone number"
                   />
-                  {phoneNumber === "" && (
-                    <p className="text-red-500 text-xs mt-1">Phone number is required</p>
-                  )}
+                </div>
                 </div>
 
-                {/* Search Button */}
-                <div className="col-span-1 md:col-span-3 flex flex-col items-center gap-4">
+              {/* Book Now Button */}
+              <div className="mt-6">
                   <button 
                     onClick={handleSubmit}
-                    disabled={isSubmitting}
-                    className={`w-full md:w-auto px-8 md:px-12 h-12 md:h-14 text-white font-bold bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 rounded-xl md:rounded-2xl py-2 shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 text-sm md:text-base transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed`}
+                  disabled={isSubmitting || !fromLocation || !toLocation || !selectedDate || phoneNumber.length !== 10}
+                  className="w-full h-14 bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
-                      <>
-                        <svg className="animate-spin -ml-1 mr-3 h-4 w-4 md:h-5 md:w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <div className="flex items-center justify-center">
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        Submitting...
-                      </>
-                    ) : (
-                      <>
-                        <Car className="h-4 w-4 md:h-5 md:w-5 mr-2" />
-                        BOOK TAXI
-                      </>
+                      Processing...
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center">
+                      <Car className="h-5 w-5 mr-2" />
+                      Book Now
+                    </div>
                     )}
                   </button>
-                  
-                  {submitStatus === "error" && (
-                    <p className="text-red-500 text-xs md:text-sm">{errorMessage}</p>
+              </div>
+
+              {/* Error Message */}
+              {(errorMessage || (phoneNumber && phoneNumber.length !== 10)) && (
+                <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+                  {errorMessage || (phoneNumber && phoneNumber.length !== 10 ? 'Please enter a valid 10-digit phone number.' : '')}
+                </div>
                   )}
                 </div>
               </div>
 
-              {/* Vehicle Preview Section - Simplified for mobile */}
-              <div className="mt-6 md:mt-8 p-4 md:p-6 bg-gradient-to-r from-primary-50/60 via-white/60 to-blue-50/60 backdrop-blur-xl rounded-xl md:rounded-2xl border border-white/60 shadow-lg relative overflow-hidden">
-                {/* Background decoration - Hidden on mobile */}
-                <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none hidden md:block"></div>
-                <div className="absolute -top-20 -right-20 w-48 h-48 bg-primary-400/15 rounded-full blur-3xl hidden md:block"></div>
-                <div className="absolute -bottom-20 -left-20 w-48 h-48 bg-blue-400/15 rounded-full blur-3xl hidden md:block"></div>
-                
-                {showMyChoiceDesign ? (
-                  <div className="flex flex-col items-center justify-center py-4 md:py-8 relative z-10">
-                    <div className="w-full max-w-md text-center mb-4 md:mb-6">
-                      <h3 className="text-xl md:text-2xl font-bold text-primary-700 mb-2 md:mb-3">Choose Your Perfect Vehicle</h3>
-                      <p className="text-gray-600 text-sm md:text-base mb-4 md:mb-6">
-                        Browse our extensive fleet of vehicles and find the perfect match for your journey.
-                        From luxury sedans to spacious buses, we have it all!
-                      </p>
+          {/* Enhanced Trust Indicators with Glass Effect */}
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            {[
+              { value: '500+', label: 'Happy Customers' },
+              { value: '50+', label: 'Destinations' },
+              { value: '24/7', label: 'Support' },
+              { value: '4.8', label: 'Customer Rating' }
+            ].map((item, index) => (
+              <div key={index} className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 text-center border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
+                <div className="text-3xl font-bold text-white mb-2">{item.value}</div>
+                <div className="text-white/80">{item.label}</div>
                     </div>
-                    
-                    <Link to="/taxi" className="w-full">
-                      <Button className="w-full bg-primary-600 hover:bg-primary-700 text-white px-6 py-4 md:px-8 md:py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                        <Car className="h-4 w-4 md:h-5 md:w-5 mr-2" />
-                        Explore All Vehicles
-                      </Button>
-                    </Link>
-                  </div>
-                ) : (
-                  <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 relative z-10">
-                    <div className="flex-shrink-0 w-40 h-32 md:w-60 md:h-40 rounded-xl overflow-hidden bg-white/70 backdrop-blur-sm flex items-center justify-center shadow-sm border border-white/60">
-                      <img 
-                        src={vehicleInfo[selectedCarType as keyof typeof vehicleInfo].image}
-                        alt={vehicleInfo[selectedCarType as keyof typeof vehicleInfo].name}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="flex-grow">
-                      <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">
-                        {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].name}
-                      </h3>
-                      <div className="flex flex-wrap items-center gap-2 md:gap-4 mb-2 md:mb-3 text-gray-700 text-sm md:text-base">
-                        {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].features.map((feature, index) => (
-                          <span key={index} className="flex items-center">
-                            <CheckCircle className="h-3 w-3 md:h-4 md:w-4 mr-1 text-primary" /> {feature}
-                          </span>
                         ))}
                       </div>
-                      <p className="text-gray-600 text-sm md:text-base mb-2 md:mb-4">
-                        {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].description}
-                      </p>
-                      <div className="flex items-center gap-2 md:gap-4">
-                        <div className="bg-primary text-white rounded-full py-1 px-3 md:px-4 text-xs md:text-sm font-medium">
-                          {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].price}
                         </div>
-                        <div className="text-xs md:text-sm text-gray-500">
-                          Recommended for {vehicleInfo[selectedCarType as keyof typeof vehicleInfo].capacity}
+
+        {/* Enhanced Bottom Gradient Transition */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
+      </section>
+
+      {/* Add these new animations to your existing styles */}
+      <style>
+        {`
+          @keyframes sparkle {
+            0%, 100% { 
+              opacity: 0; 
+              transform: scale(0.5) rotate(0deg);
+              box-shadow: 0 0 4px rgba(255,255,255,0.8);
+            }
+            50% { 
+              opacity: 1; 
+              transform: scale(1.2) rotate(180deg);
+              box-shadow: 0 0 8px rgba(255,255,255,1);
+            }
+          }
+
+          @keyframes float {
+            0%, 100% { 
+              transform: translateY(0) rotate(0deg) scale(1);
+              opacity: 0.2;
+            }
+            50% { 
+              transform: translateY(-20px) rotate(5deg) scale(1.1);
+              opacity: 0.3;
+            }
+          }
+
+          @keyframes float-delayed {
+            0%, 100% { 
+              transform: translateY(0) rotate(0deg) scale(1);
+              opacity: 0.2;
+            }
+            50% { 
+              transform: translateY(-15px) rotate(-5deg) scale(1.1);
+              opacity: 0.3;
+            }
+          }
+
+          @keyframes float-slow {
+            0%, 100% { 
+              transform: translateY(0) rotate(0deg) scale(1);
+              opacity: 0.2;
+            }
+            50% { 
+              transform: translateY(-10px) rotate(3deg) scale(1.05);
+              opacity: 0.3;
+            }
+          }
+
+          .animate-sparkle {
+            animation: sparkle 3s ease-in-out infinite;
+          }
+
+          .animate-float {
+            animation: float 6s ease-in-out infinite;
+          }
+
+          .animate-float-delayed {
+            animation: float-delayed 6s ease-in-out infinite;
+            animation-delay: -3s;
+          }
+
+          .animate-float-slow {
+            animation: float-slow 8s ease-in-out infinite;
+          }
+
+          .animate-fade-in {
+            animation: fade-in 1s ease-out forwards;
+          }
+
+          .animate-fade-in-delayed {
+            animation: fade-in 1s ease-out forwards;
+            animation-delay: 0.3s;
+          }
+        `}
+      </style>
+
+      {/* Quick Links Section with Enhanced Design */}
+      <section className="py-12 bg-white relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              { icon: Mountain, label: 'Destinations', link: '/destinations' },
+              { icon: Tent, label: 'Tour Packages', link: '/packages' },
+              { icon: Car, label: 'Taxi Services', link: '/taxi' },
+              { icon: Phone, label: 'Contact Us', link: '/contact' }
+            ].map((item, index) => (
+              <Link key={index} to={item.link} className="group">
+                <div className="relative flex flex-col items-center justify-center bg-gradient-to-br from-purple-100 via-white to-indigo-100 rounded-2xl p-8 text-center shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  {/* Stylish Glassy Circular Icon Background */}
+                  <div className="mb-4 flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-200 via-white to-indigo-200 shadow-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl group-hover:bg-gradient-to-br group-hover:from-purple-300 group-hover:to-indigo-300">
+                      <item.icon className="h-8 w-8 text-purple-600 group-hover:text-indigo-700 transition-all duration-300" strokeWidth={2.5} />
                         </div>
                       </div>
+                  <h3 className="font-semibold text-gray-800 text-lg tracking-wide group-hover:text-indigo-700 transition-colors duration-300">{item.label}</h3>
                     </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-          
-          {/* Slogan */}
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-white drop-shadow-lg">
-              Apno ko, Sapno ko Kareeb Laaye.
-            </h2>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -1118,12 +1233,11 @@ const Index = () => {
       <div className="w-full bg-white">
         <VacationBanner />
       </div>
-  {/*gallery */}
   <div className='w-full bg-white'>
     <FeaturedGalleryRedirect/>
   </div>
       {/* Why Choose Us Section */}
-      <section className="py-16 bg-gradient-to-br from-primary-50 via-primary-100 to-secondary-50" ref={whyChooseRef}>
+      <section className="py-16 bg-gradient-to-br from-primary-50 via-primary-100 to-secondary-50" ref={typeof whyChooseRef === 'object' ? whyChooseRef : undefined}>
         <div className={`container ${whyChooseInView ? 'fade-up-enter-active' : 'fade-up-enter'}`}>
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4 text-primary-800">Why Choose Uttarakhand Trips</h2>
@@ -1180,7 +1294,7 @@ const Index = () => {
       </section>
 
       {/* Popular Destinations */}
-      <section className="py-16 bg-gradient-to-br from-white via-primary-50 to-white" ref={destinationsRef} id="destinations-section">
+      <section className="py-16 bg-gradient-to-br from-white via-primary-50 to-white" ref={typeof destinationsRef === 'object' ? destinationsRef : undefined} id="destinations-section">
         <div className={`container ${destinationsInView ? 'fade-up-enter-active' : 'fade-up-enter'}`}>
           <div className="flex flex-col md:flex-row justify-between items-center mb-10">
             <div>
@@ -1205,95 +1319,128 @@ const Index = () => {
       </section>
 
       {/* Our Services */}
-      <section className="py-16 bg-gradient-to-br from-primary-100 via-primary-50 to-secondary-100" ref={servicesRef}>
+      <section className="py-16 bg-gradient-to-br from-primary-100 via-primary-50 to-secondary-100" ref={typeof servicesRef === 'object' ? servicesRef : undefined}>
         <div className={`container ${servicesInView ? 'scale-up-enter-active' : 'scale-up-enter'}`}>
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4 text-primary-800">Our Services</h2>
-            <p className="max-w-3xl mx-auto text-primary-700">
-              Comprehensive travel services to make your North India journey memorable
+            <p className="max-w-3xl mx-auto text-primary-700 text-lg">
+              Make your North India journey memorable with our expert travel services. From customized itineraries to comfortable accommodations, we ensure a seamless travel experience.
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-primary-100 hover:shadow-xl transition-all duration-300">
-              <Car className="h-10 w-10 mb-4 text-primary-600" />
-              <h3 className="text-xl font-bold mb-3 text-primary-800">Taxi Services</h3>
-              <p className="mb-4 text-primary-700">
-                Comfortable and reliable taxi services with experienced drivers who know the best routes in North India.
+            {/* Taxi Services Card */}
+            <div className="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-primary-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                <Car className="h-8 w-8 text-primary-600" />
+              </div>
+              <h3 className="text-xl font-bold mb-4 text-primary-800">Premium Taxi Services</h3>
+              <p className="mb-6 text-primary-700">
+                Experience luxury and comfort with our well-maintained fleet of vehicles and professional drivers.
               </p>
-              <ul className="space-y-2 text-primary-700">
+              <ul className="space-y-3 mb-6 text-primary-700">
                 <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2 text-primary-600" />
-                  <span>Airport Transfers</span>
+                  <CheckCircle className="h-5 w-5 mr-3 text-primary-600" />
+                  <span>Airport & City Transfers</span>
                 </li>
                 <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2 text-primary-600" />
-                  <span>Sightseeing Tours</span>
+                  <CheckCircle className="h-5 w-5 mr-3 text-primary-600" />
+                  <span>Full-Day Sightseeing Tours</span>
                 </li>
                 <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2 text-primary-600" />
+                  <CheckCircle className="h-5 w-5 mr-3 text-primary-600" />
                   <span>Multi-day Trip Transport</span>
                 </li>
               </ul>
               <Link to="/taxi">
-                <Button className="mt-6 bg-primary-600 hover:bg-primary-700 text-white">
+                <Button className="w-full bg-primary-600 hover:bg-primary-700 text-white py-6 text-lg">
                   Book a Taxi
                 </Button>
               </Link>
             </div>
             
-            <div className="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-primary-100 hover:shadow-xl transition-all duration-300">
-              <Car className="h-10 w-10 mb-4 text-primary-600" />
-              <h3 className="text-xl font-bold mb-3 text-primary-800">Taxi Service & Local Guide Charges</h3>
-              <p className="mb-4 text-primary-700">
-                Reliable taxi services with experienced drivers and knowledgeable local guides to make your journey smooth and informative.
+            {/* Tour Packages Card */}
+            <div className="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-primary-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                <Mountain className="h-8 w-8 text-primary-600" />
+              </div>
+              <h3 className="text-xl font-bold mb-4 text-primary-800">Tour Packages</h3>
+              <p className="mb-6 text-primary-700">
+                Discover North India with our carefully curated tour packages designed for every type of traveler.
               </p>
-              <ul className="space-y-2 text-primary-700">
+              <ul className="space-y-3 mb-6 text-primary-700">
                 <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2 text-primary-600" />
-                  <span>Airport & City Transfers</span>
+                  <CheckCircle className="h-5 w-5 mr-3 text-primary-600" />
+                  <span>Adventure Tours</span>
                 </li>
                 <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2 text-primary-600" />
-                  <span>Full-Day Sightseeing Cabs</span>
+                  <CheckCircle className="h-5 w-5 mr-3 text-primary-600" />
+                  <span>Spiritual Journeys</span>
                 </li>
                 <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2 text-primary-600" />
-                  <span>Professional Local Guides</span>
+                  <CheckCircle className="h-5 w-5 mr-3 text-primary-600" />
+                  <span>Family Getaways</span>
                 </li>
               </ul>
               <Link to="/packages">
-                <Button className="mt-6 bg-primary-600 hover:bg-primary-700 text-white">
-                  Explore Services
+                <Button className="w-full bg-primary-600 hover:bg-primary-700 text-white py-6 text-lg">
+                  View Packages
                 </Button>
               </Link>
             </div>
 
-            <div className="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-primary-100 hover:shadow-xl transition-all duration-300">
-              <Award className="h-10 w-10 mb-4 text-primary-600" />
-              <h3 className="text-xl font-bold mb-3 text-primary-800">Custom Tours</h3>
-              <p className="mb-4 text-primary-700">
-                Personalized itineraries designed to match your interests, timeframe, and budget for the perfect North India experience.
+            {/* Custom Tours Card */}
+            <div className="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-primary-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                <Award className="h-8 w-8 text-primary-600" />
+              </div>
+              <h3 className="text-xl font-bold mb-4 text-primary-800">Custom Tours</h3>
+              <p className="mb-6 text-primary-700">
+                Let us create your perfect itinerary with personalized experiences and flexible scheduling.
               </p>
-              <ul className="space-y-2 text-primary-700">
+              <ul className="space-y-3 mb-6 text-primary-700">
                 <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2 text-primary-600" />
-                  <span>Personalized Itineraries</span>
+                  <CheckCircle className="h-5 w-5 mr-3 text-primary-600" />
+                  <span>Tailored Itineraries</span>
                 </li>
                 <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2 text-primary-600" />
+                  <CheckCircle className="h-5 w-5 mr-3 text-primary-600" />
                   <span>Special Experiences</span>
                 </li>
                 <li className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2 text-primary-600" />
+                  <CheckCircle className="h-5 w-5 mr-3 text-primary-600" />
                   <span>Group Tour Options</span>
                 </li>
               </ul>
               <Link to="/contact">
-                <Button className="mt-6 bg-primary-600 hover:bg-primary-700 text-white">
+                <Button className="w-full bg-primary-600 hover:bg-primary-700 text-white py-6 text-lg">
                   Request Custom Tour
                 </Button>
               </Link>
+            </div>
+          </div>
+
+          {/* Additional Services Banner */}
+          <div className="mt-12 bg-gradient-to-r from-primary-600 to-primary-400 rounded-2xl p-8 text-white">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold mb-3">Need More Services?</h3>
+                <p className="text-white/90">
+                  We also offer hotel bookings, local guides, and special event arrangements. Contact us for more information.
+                </p>
+              </div>
+              <div className="flex gap-4">
+                <Link to="/contact">
+                  <Button size="lg" className="bg-white text-primary-600 hover:bg-gray-100">
+                    Contact Us
+                  </Button>
+                </Link>
+                <a href="tel:+918077757674">
+                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                    Call Now
+                  </Button>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -1395,101 +1542,66 @@ const Index = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-16 bg-gradient-to-br from-secondary-50 via-primary-50 to-secondary-100" ref={testimonialRef}>
-        <div className={`container ${testimonialInView ? 'stagger-enter-active' : 'stagger-enter'}`}>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4 text-primary-800">What Travelers Say</h2>
-            <p className="text-gray-600 max-w-3xl mx-auto">
-              Real experiences from our satisfied customers
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((testimonial, index) => (
-              <TestimonialCard key={index} {...testimonial} />
-            ))}
+      <section className="py-16 bg-gradient-to-br from-blue-50 via-white to-purple-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-4 text-gray-800">What Travelers Say</h2>
+          <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+            Discover what our valued customers have to say about their experiences with us
+          </p>
+          <div className="grid md:grid-cols-3 gap-8">
+            {loading ? (
+              <div className="col-span-3 text-center">Loading reviews...</div>
+            ) : reviews.length > 0 ? (
+              reviews.map((review, index) => (
+                <Card key={review._id} className="group relative overflow-hidden bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                  {/* Gradient Background */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${
+                    index === 0 ? 'from-blue-50 to-indigo-50' :
+                    index === 1 ? 'from-purple-50 to-pink-50' :
+                    'from-green-50 to-teal-50'
+                  } opacity-50 group-hover:opacity-75 transition-opacity`}></div>
+                  
+                  {/* Decorative Elements */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-200 to-primary-100 rounded-full -mr-16 -mt-16 opacity-30 group-hover:opacity-50 transition-opacity"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-br from-primary-100 to-primary-50 rounded-full -ml-12 -mb-12 opacity-30 group-hover:opacity-50 transition-opacity"></div>
+                  
+                  {/* Content */}
+                  <div className="relative p-8">
+                    {/* Rating Stars */}
+                    <div className="flex gap-1 mb-6">
+                    {renderStars(review.rating)}
+                  </div>
+                    
+                    {/* Review Message */}
+                    <div className="relative mb-6">
+                      <div className="absolute -left-2 -top-2 text-4xl text-primary-300 opacity-50">"</div>
+                      <p className="text-gray-700 italic relative z-10 pl-4 text-lg leading-relaxed">"{review.message}"</p>
+                      <div className="absolute -right-2 -bottom-2 text-4xl text-primary-300 opacity-50 rotate-180">"</div>
+                    </div>
+                    
+                    {/* Reviewer Info */}
+                    <div className="flex items-center justify-between border-t border-gray-100 pt-4">
+                      <div>
+                        <span className="font-semibold text-gray-900 block text-lg">{review.name}</span>
+                        <span className="text-sm text-gray-500">{review.email}</span>
+                      </div>
+                      <div className="text-sm text-gray-500 bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm">
+                      {new Date(review.createdAt).toLocaleDateString()}
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              ))
+            ) : (
+              <div className="col-span-3 text-center">
+                <div className="bg-white rounded-2xl shadow-lg p-8 max-w-2xl mx-auto">
+                  <p className="text-gray-500 text-lg">No reviews available at the moment</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
-
-      {/* Popular Places in Uttarakhand Section - Temporarily Disabled */}
-      {false && (
-        <section className="py-16 bg-gradient-to-br from-blue-50 to-primary-50" id="uttarakhand-places">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-4 text-primary-800 relative inline-block animate-slide-down">
-                Popular Places in Uttarakhand
-                <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-blue-500"></div>
-              </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto animate-slide-up">
-                Explore the divine beauty of Devbhoomi Uttarakhand, from spiritual havens to adventure destinations
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {uttarakhandDestinations.map((destination) => (
-                <div 
-                  key={destination.id}
-                  className="destination-card group relative bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
-                  style={{
-                    animation: `slideIn 0.5s ease-out forwards ${index * 0.1}s`,
-                    opacity: 0,
-                    transform: 'translateY(20px)'
-                  }}
-                >
-                  {/* Image Container with Overlay */}
-                  <div className="relative h-48 overflow-hidden">
-                    <img
-                      src={destination.image}
-                      alt={destination.name}
-                      className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-primary-800 mb-2 transform transition-all duration-300 group-hover:translate-x-1">{destination.name}</h3>
-                    <p className="text-gray-600 text-sm mb-4">{destination.description}</p>
-                    
-                    {/* Activities */}
-                    <div className="space-y-2">
-                      {destination.activities.map((activity, idx) => (
-                        <div 
-                          key={idx} 
-                          className="activity-item flex items-center text-sm text-gray-600"
-                          style={{
-                            animation: `fadeIn 0.5s ease-out forwards ${index * 0.1 + idx * 0.1}s`,
-                            opacity: 0
-                          }}
-                        >
-                          <CheckCircle className="h-4 w-4 mr-2 text-primary-500" />
-                          {activity}
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Explore Button */}
-                    <button 
-                      className="mt-4 w-full bg-primary-600 text-white py-2 rounded-lg transform transition-all duration-300 hover:bg-primary-700 hover:scale-105 hover:shadow-lg"
-                      onClick={() => {
-                        window.location.href = '/contact ';
-                      }}
-                    >
-                      Explore More
-                    </button>
-                  </div>
-
-                  {/* Floating Location Badge */}
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium text-primary-600 shadow-lg">
-                    {destination.location}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Add these new animation keyframes */}
       <style>
@@ -1635,6 +1747,71 @@ const Index = () => {
           .snowflake-inner::after {
             transform: rotate(-45deg);
           }
+
+          @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1); }
+          }
+
+          @keyframes wave {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+          }
+
+          @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+          }
+
+          @keyframes float-slow {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(-5deg); }
+          }
+
+          @keyframes fade-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+
+          .animate-sparkle {
+            animation: sparkle 3s ease-in-out infinite;
+          }
+
+          .animate-wave {
+            animation: wave 20s linear infinite;
+          }
+
+          .animate-wave-delayed {
+            animation: wave 20s linear infinite;
+            animation-delay: -10s;
+          }
+
+          .animate-wave-slow {
+            animation: wave 25s linear infinite;
+            animation-delay: -5s;
+          }
+
+          .animate-float {
+            animation: float 6s ease-in-out infinite;
+          }
+
+          .animate-float-delayed {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: -3s;
+          }
+
+          .animate-float-slow {
+            animation: float-slow 8s ease-in-out infinite;
+          }
+
+          .animate-fade-in {
+            animation: fade-in 1s ease-out forwards;
+          }
+
+          .animate-fade-in-delayed {
+            animation: fade-in 1s ease-out forwards;
+            animation-delay: 0.3s;
+          }
         `}
       </style>
 
@@ -1665,3 +1842,10 @@ const Index = () => {
 };
 
 export default Index;
+
+// Service worker registration for offline support
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+}

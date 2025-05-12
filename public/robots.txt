@@ -5,9 +5,8 @@ Allow: /*.json$
 Allow: /*.xml$
 Allow: /*?*
 
-# Multiple Sitemap declarations for better coverage
-Sitemap: https://uttarakhandtrips.com/sitemap.xml
-Sitemap: https://www.uttarakhandtrips.com/sitemap.xml
+# Correct Sitemap declaration
+Sitemap: https://www.uttarakhandroadtrips.com/sitemap.xml
 
 # Only disallow sensitive paths
 Disallow: /admin/
