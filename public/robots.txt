@@ -1,0 +1,17 @@
+# Allow all web crawlers
+User-agent: *
+Allow: /
+Allow: /*.json$
+Allow: /*.xml$
+Allow: /*?*
+
+# Correct Sitemap declaration
+Sitemap: https://www.uttarakhandroadtrips.com/sitemap.xml
+
+# Only disallow sensitive paths
+Disallow: /admin/
+Disallow: /private/
+Disallow: /cgi-bin/
+
+# Remove crawl delay to allow faster indexing
+# Crawl-delay: 10 

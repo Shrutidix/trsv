@@ -83,19 +83,19 @@ export const popularRoutes: Route[] = [
         type: "Sedan",
         capacity: "4 passengers",
         price: 1200,
-        image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2940&auto=format&fit=crop"
+        image:"https://wallpapers.com/images/hd/suzuki-dzire-2022-sherwood-brown-y5e1vukdf48ljnb0.jpg"
       },
       {
         type: "SUV",
         capacity: "6 passengers",
         price: 1800,
-        image: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?q=80&w=2071&auto=format&fit=crop"
+        image:"https://img-ik.cars.co.za/news-site-za/images/2020/06/Fortuner8.jpg?tr=w-1200,h-800"
       },
       {
         type: "Tempo Traveller",
         capacity: "12 passengers",
         price: 3500,
-        image: "https://images.unsplash.com/photo-1515876305430-f06edab8282a?q=80&w=2070&auto=format&fit=crop"
+        image:  "https://www.mornis.in/wp-content/uploads/2019/11/Tempo-Traveller.jpeg "
       }
     ]
   },
@@ -150,21 +150,21 @@ export const popularRoutes: Route[] = [
         "capacity": "4 passengers",
         "price": 1800,
         "negotiable": true,
-        "image": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?q=80&w=2070&auto=format&fit=crop"
+        "image": "https://wallpapers.com/images/hd/suzuki-dzire-2022-sherwood-brown-y5e1vukdf48ljnb0.jpg"
       },
       {
         "type": "SUV",
         "capacity": "6 passengers",
         "price": 2500,
         "negotiable": true,
-        "image": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop"
+        "image":"https://img-ik.cars.co.za/news-site-za/images/2020/06/Fortuner8.jpg?tr=w-1200,h-800"
       },
       {
         "type": "Tempo Traveller",
         "capacity": "12 passengers",
         "price": 4300,
         "negotiable": true,
-        "image": "https://images.unsplash.com/photo-1625056280799-9114bd8f49cc?q=80&w=2071&auto=format&fit=crop"
+        "image":  "https://www.mornis.in/wp-content/uploads/2019/11/Tempo-Traveller.jpeg "
       }
     ]
   
@@ -220,19 +220,19 @@ export const popularRoutes: Route[] = [
         type: "Sedan",
         capacity: "4 passengers",
         price: 1400,
-        image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=2070&auto=format&fit=crop"
+        image: "https://wallpapers.com/images/hd/suzuki-dzire-2022-sherwood-brown-y5e1vukdf48ljnb0.jpg"
       },
       {
         type: "SUV",
         capacity: "6 passengers",
         price: 2000,
-        image: "https://images.unsplash.com/photo-1543465077-db45d34b88a5?q=80&w=2071&auto=format&fit=crop"
+         image: "https://img-ik.cars.co.za/news-site-za/images/2020/06/Fortuner8.jpg?tr=w-1200,h-800"
       },
       {
         type: "Tempo Traveller",
         capacity: "12 passengers",
         price: 3800,
-        image: "https://images.unsplash.com/photo-1609709295948-17d77cb2a69b?q=80&w=2068&auto=format&fit=crop"
+        image: "https://www.mornis.in/wp-content/uploads/2019/11/Tempo-Traveller.jpeg "
       }
     ]
   },
@@ -292,13 +292,13 @@ export const popularRoutes: Route[] = [
         type: "SUV",
         capacity: "6 passengers",
         price: 6000,
-        image: "https://images.unsplash.com/photo-1630395260276-9ed528acd163?q=80&w=2068&auto=format&fit=crop"
+        image: "https://img-ik.cars.co.za/news-site-za/images/2020/06/Fortuner8.jpg?tr=w-1200,h-800"
       },
       {
         type: "Tempo Traveller",
         capacity: "12 passengers",
         price: 10000,
-        image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?q=80&w=2074&auto=format&fit=crop"
+        image: "https://www.mornis.in/wp-content/uploads/2019/11/Tempo-Traveller.jpeg "
       }
     ]
   },
@@ -358,13 +358,13 @@ export const popularRoutes: Route[] = [
         type: "SUV",
         capacity: "6 passengers",
         price: 6500,
-        image: "https://images.unsplash.com/photo-1566204978576-5f1dae9aae18?q=80&w=2069&auto=format&fit=crop"
+        image: "https://wallpapers.com/images/hd/suzuki-dzire-2022-sherwood-brown-y5e1vukdf48ljnb0.jpg"
       },
       {
         type: "Tempo Traveller",
         capacity: "12 passengers",
         price: 11000,
-        image: "https://images.unsplash.com/photo-1625234395248-4361ee94af060?q=80&w=2070&auto=format&fit=crop"
+        image: "https://www.mornis.in/wp-content/uploads/2019/11/Tempo-Traveller.jpeg "
       }
     ]
   },
@@ -424,19 +424,20 @@ export const popularRoutes: Route[] = [
         type: "Sedan",
         capacity: "4 passengers",
         price: 5500,
-        image: "https://images.unsplash.com/photo-1546614042-7df3c24c9e5d?q=80&w=2070&auto=format&fit=crop"
+          image: "https://wallpapers.com/images/hd/suzuki-dzire-2022-sherwood-brown-y5e1vukdf48ljnb0.jpg"
       },
       {
         type: "SUV",
         capacity: "6 passengers",
         price: 7000,
-        image: "https://images.unsplash.com/photo-1590510744826-549a39a16f1a?q=80&w=2072&auto=format&fit=crop"
+        image: "https://img-ik.cars.co.za/news-site-za/images/2020/06/Fortuner8.jpg?tr=w-1200,h-800"
+
       },
       {
         type: "Tempo Traveller",
         capacity: "12 passengers",
         price: 12000,
-        image: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=2071&auto=format&fit=crop"
+         image: "https://www.mornis.in/wp-content/uploads/2019/11/Tempo-Traveller.jpeg "
       }
     ]
   },
@@ -479,13 +480,13 @@ export const popularRoutes: Route[] = [
         type: "Sedan",
         capacity: "4 passengers",
         price: 800,
-        image: "/images/vehicles/sedan.jpg"
+          image: "https://wallpapers.com/images/hd/suzuki-dzire-2022-sherwood-brown-y5e1vukdf48ljnb0.jpg"
       },
       {
         type: "SUV",
         capacity: "6 passengers",
         price: 1200,
-        image: "/images/vehicles/suv.jpg"
+         image: "https://img-ik.cars.co.za/news-site-za/images/2020/06/Fortuner8.jpg?tr=w-1200,h-800"
       }
     ]
   },
@@ -539,13 +540,13 @@ export const popularRoutes: Route[] = [
         type: "Sedan",
         capacity: "4 passengers",
         price: 2000,
-        image: "/images/vehicles/sedan.jpg"
+     image: "https://wallpapers.com/images/hd/suzuki-dzire-2022-sherwood-brown-y5e1vukdf48ljnb0.jpg"
       },
       {
         type: "SUV",
         capacity: "6 passengers",
         price: 2800,
-        image: "/images/vehicles/suv.jpg"
+         image: "https://wallpapers.com/images/hd/suzuki-dzire-2022-sherwood-brown-y5e1vukdf48ljnb0.jpg"
       }
     ]
   },
@@ -605,13 +606,13 @@ export const popularRoutes: Route[] = [
         type: "SUV",
         capacity: "6 passengers",
         price: 4000,
-        image: "/images/vehicles/suv.jpg"
+       image: "https://wallpapers.com/images/hd/suzuki-dzire-2022-sherwood-brown-y5e1vukdf48ljnb0.jpg"
       },
       {
         type: "Tempo Traveller",
         capacity: "12 passengers",
         price: 7000,
-        image: "/images/vehicles/tempo.jpg"
+        image: "https://www.mornis.in/wp-content/uploads/2019/11/Tempo-Traveller.jpeg "
       }
     ]
   },
@@ -660,13 +661,13 @@ export const popularRoutes: Route[] = [
         type: "Sedan",
         capacity: "4 passengers",
         price: 3000,
-        image: "/images/vehicles/sedan.jpg"
+       image: "https://wallpapers.com/images/hd/suzuki-dzire-2022-sherwood-brown-y5e1vukdf48ljnb0.jpg"
       },
       {
         type: "SUV",
         capacity: "6 passengers",
         price: 4000,
-        image: "/images/vehicles/suv.jpg"
+       image: "https://wallpapers.com/images/hd/suzuki-dzire-2022-sherwood-brown-y5e1vukdf48ljnb0.jpg"
       }
     ]
   },
@@ -720,13 +721,13 @@ export const popularRoutes: Route[] = [
         type: "SUV",
         capacity: "6 passengers",
         price: 3500,
-        image: "/images/vehicles/suv.jpg"
+         image: "https://wallpapers.com/images/hd/suzuki-dzire-2022-sherwood-brown-y5e1vukdf48ljnb0.jpg"
       },
       {
         type: "Tempo Traveller",
         capacity: "12 passengers",
         price: 6000,
-        image: "/images/vehicles/tempo.jpg"
+        image: "https://www.mornis.in/wp-content/uploads/2019/11/Tempo-Traveller.jpeg "
       }
     ]
   },
@@ -780,13 +781,13 @@ export const popularRoutes: Route[] = [
         type: "SUV",
         capacity: "6 passengers",
         price: 4500,
-        image: "/images/vehicles/suv.jpg"
+         image: "https://img-ik.cars.co.za/news-site-za/images/2020/06/Fortuner8.jpg?tr=w-1200,h-800"
       },
       {
         type: "Tempo Traveller",
         capacity: "12 passengers",
         price: 7500,
-        image: "/images/vehicles/tempo.jpg"
+        image: "https://www.mornis.in/wp-content/uploads/2019/11/Tempo-Traveller.jpeg "
       }
     ]
   },
@@ -840,13 +841,13 @@ export const popularRoutes: Route[] = [
         type: "SUV",
         capacity: "6 passengers",
         price: 5000,
-        image: "/images/vehicles/suv.jpg"
+        image: "https://wallpapers.com/images/hd/suzuki-dzire-2022-sherwood-brown-y5e1vukdf48ljnb0.jpg"
       },
       {
         type: "Tempo Traveller",
         capacity: "12 passengers",
         price: 8500,
-        image: "/images/vehicles/tempo.jpg"
+       image: "https://www.mornis.in/wp-content/uploads/2019/11/Tempo-Traveller.jpeg "
       }
     ]
   },
@@ -900,13 +901,13 @@ export const popularRoutes: Route[] = [
         type: "SUV",
         capacity: "6 passengers",
         price: 5500,
-        image: "/images/vehicles/suv.jpg"
+         image: "https://img-ik.cars.co.za/news-site-za/images/2020/06/Fortuner8.jpg?tr=w-1200,h-800"
       },
       {
         type: "Tempo Traveller",
         capacity: "12 passengers",
         price: 9000,
-        image: "/images/vehicles/tempo.jpg"
+       image: "https://www.mornis.in/wp-content/uploads/2019/11/Tempo-Traveller.jpeg "
       }
     ]
   },
@@ -965,19 +966,19 @@ export const popularRoutes: Route[] = [
         type: "Sedan",
         capacity: "4 passengers",
         price: 2500,
-        image: "/images/vehicles/sedan.jpg"
+        image: "https://wallpapers.com/images/hd/suzuki-dzire-2022-sherwood-brown-y5e1vukdf48ljnb0.jpg"
       },
       {
         type: "SUV",
         capacity: "6 passengers",
         price: 3500,
-        image: "/images/vehicles/suv.jpg"
+        image: "https://img-ik.cars.co.za/news-site-za/images/2020/06/Fortuner8.jpg?tr=w-1200,h-800"
       },
       {
         type: "Tempo Traveller",
         capacity: "12 passengers",
         price: 6000,
-        image: "/images/vehicles/tempo.jpg"
+        image: "https://www.mornis.in/wp-content/uploads/2019/11/Tempo-Traveller.jpeg "
       }
     ]
   }

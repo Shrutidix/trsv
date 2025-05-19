@@ -16,6 +16,9 @@ import Packages from "./pages/Packages";
 import Gallery from "./pages/gallery";
 import Feedback from "./pages/Feedback";
 import Invoice from "./pages/Invoice";
+import Track from "./pages/Track";
+import TrackPhotos from "./pages/track/Photos";
+import TrackReview from "./pages/track/Review";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +40,9 @@ const App = () => (
           <Route path="/privacy" element={<Policy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/invoice" element={<Invoice />} />
+          <Route path="/track" element={<Track />} />
+          <Route path="/track/photos" element={<TrackPhotos />} />
+          <Route path="/track/review" element={<TrackReview />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

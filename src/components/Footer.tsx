@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Mail, Facebook, Instagram, Twitter } from 'lucide-react';
+import { MapPin, Phone, Mail, Facebook, Instagram, Twitter,Youtube } from 'lucide-react';
 import { FaPhoneAlt, FaWhatsapp } from 'react-icons/fa';
 
 const Footer = () => {
@@ -13,19 +13,22 @@ const Footer = () => {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <MapPin className="h-6 w-6 text-primary-300" />
-                <span className="font-bold text-xl">Uttarakhand Road Trip</span>
+                <span className="font-bold text-xl">Uttarakhand Trips</span>
               </div>
               <p className="text-gray-400 mb-4">Your trusted partner for unforgettable adventures across North India. Explore the majestic Himalayas with our expert guides and comfortable transportation.</p>
               <div className="flex gap-4">
-                <a href="https://www.facebook.com/" className="text-primary-300 hover:text-white transition-colors">
+                <a href="https://www.facebook.com/profile.php?id=61575153426035" className="text-primary-300 hover:text-white transition-colors">
                   <Facebook size={20} />
                 </a>
-                <a href="https://www.instagram.com/uttarakhandroadtrip/" className="text-primary-300 hover:text-white transition-colors">
+                <a href="https://www.instagram.com/uttarakhandroadtripss/" className="text-primary-300 hover:text-white transition-colors">
                   <Instagram size={20} />
                 </a>
-                <a href="https://x.com/?lang=en-in" className="text-primary-300 hover:text-white transition-colors">
+                <a href="https://x.com/UTrips" className="text-primary-300 hover:text-white transition-colors">
                   <Twitter size={20} />
                 </a>
+                <a href="https://www.youtube.com/@uttarakhandRoadtrips-i1l5l" className="text-primary-300 hover:text-white transition-colors">
+    <Youtube size={20} />
+  </a>
               </div>
             </div>
 
@@ -69,7 +72,7 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="h-5 w-5 text-primary-300" />
-                  <span className="text-gray-400">uttrakhandroadtrip@gmail.com</span>
+                  <span className="text-gray-400">uttarakhandroadtripss@gmail.com</span>
                 </div>
               </div>
             </div>
@@ -81,6 +84,7 @@ const Footer = () => {
               <div className="flex gap-6">
                 <Link to="/terms" className="text-gray-400 hover:text-primary-300 text-sm transition-colors">Terms & Conditions</Link>
                 <Link to="/privacy" className="text-gray-400 hover:text-primary-300 text-sm transition-colors">Privacy Policy</Link>
+                <a href="https://www.uttarakhandroadtrips.com/sitemap.xml" className="text-gray-400 hover:text-primary-300 text-sm transition-colors">Sitemap</a>
               </div>
             </div>
           </div>

@@ -1,0 +1,17 @@
+# Redirect domain aliases to primary domain
+http://uttarakhandtrips.com/* https://www.uttarakhandroadtrips.com/:splat 301!
+https://uttarakhandtrips.com/* https://www.uttarakhandroadtrips.com/:splat 301!
+
+# Handle sitemap files
+/sitemap.xml /sitemap.xml 200
+/sitemap.xsl /sitemap.xsl 200
+
+# Optional: Redirect old URLs to new ones (add as needed)
+/old-page /new-page 301
+/tours/* /packages/:splat 301
+
+# Handle trailing slashes
+/* /:splat 301!
+
+# Error page
+/* /index.html 200 

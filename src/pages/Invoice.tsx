@@ -55,10 +55,10 @@ const Invoice = () => {
     paymentMethod: "",
     upiId: "",
     bankDetails: {
-      accountName: "UTTARAKHAND ROAD TRIPS",
-      accountNumber: "12345678901234",
-      ifscCode: "SBIN0001234",
-      bankName: "State Bank of India"
+      accountName: "UTTARAKHAND TRIPS",
+      accountNumber: "520101251541249",
+      ifscCode: "UBIN0556459",
+      bankName: "Union Bank"
     }
   });
 
@@ -139,7 +139,7 @@ const Invoice = () => {
   };
 
   const generateUPIQRCode = () => {
-    const upiUrl = `upi://pay?pa=${invoiceData.upiId}&pn=UTTARAKHAND ROAD TRIPS&am=${calculateTotal()}&cu=INR`;
+    const upiUrl = `upi://pay?pa=${invoiceData.upiId}&pn=UTTARAKHAND TRIPS&am=${calculateTotal()}&cu=INR`;
     setQrCodeUrl(upiUrl);
     setShowQRCode(true);
   };
@@ -154,7 +154,7 @@ const Invoice = () => {
       doc.setFontSize(22);
       doc.setTextColor(0, 100, 0);
       doc.setFont("helvetica", 'bold');
-      doc.text("UTTARAKHAND ROAD TRIPS", 105, y, { align: "center" });
+      doc.text("UTTARAKHAND TRIPS", 105, y, { align: "center" });
       
       // Tagline
       doc.setFontSize(10);
@@ -185,9 +185,9 @@ const Invoice = () => {
       doc.text("Contact Details:", 120, y);
       doc.setFont("helvetica", 'normal');
       doc.text([
-        "Mobile: +91 7017691890",
-        "Email: info@uttarakhandroadtrips.com",
-        "GSTIN: 05BQWPK2436R1ZL"
+        "Mobile: +91 8077757674",
+        "Email: info@uttarakhandtrips.com",
+        "GSTIN: 05DHJPK8346A2ZF"
       ], 120, y + 5);
 
       // Invoice Details
@@ -306,21 +306,22 @@ const Invoice = () => {
             
             if (qrElement) {
               qrDiv.innerHTML = `<svg>${qrElement.innerHTML}</svg>`;
-              qrDiv.style.width = '800px';
-              qrDiv.style.height = '800px';
+              qrDiv.style.width = '1000px';
+              qrDiv.style.height = '1000px';
               document.body.appendChild(qrDiv);
               
               try {
                 const canvas = await html2canvas(qrDiv, {
                   scale: 4,
                   backgroundColor: '#ffffff',
-                  width: 800,
-                  height: 800
+                  width: 1000,
+                  height: 1000
                 });
                 
                 const imgData = canvas.toDataURL('image/png');
+                const pageWidth = doc.internal.pageSize.getWidth();
                 const qrCodeSize = 120;
-                const xPos = 85;
+                const xPos = (pageWidth - qrCodeSize) / 2;
                 doc.addImage(imgData, 'PNG', xPos, y - 5, qrCodeSize, qrCodeSize);
                 
                 doc.setFontSize(11);
@@ -437,84 +438,79 @@ const Invoice = () => {
             </div>
           </div>
 
-          {/* Trip Details */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">Trip Details</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  From <span className="text-red-500">*</span>
-                </label>
-                <select
-                  name="from"
-                  value={invoiceData.from}
-                  onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-md shadow-sm p-2"
-                >
-                  <option value="">Select Location</option>
-                  {destinations.map((dest) => (
-                    <option key={dest} value={dest}>{dest}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  To <span className="text-red-500">*</span>
-                </label>
-                <select
-                  name="to"
-                  value={invoiceData.to}
-                  onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-md shadow-sm p-2"
-                >
-                  <option value="">Select Location</option>
-                  {destinations.map((dest) => (
-                    <option key={dest} value={dest}>{dest}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Travel Date <span className="text-red-500">*</span>
-                </label>
-                <Input
-                  type="date"
-                  name="travelDate"
-                  value={invoiceData.travelDate}
-                  min={new Date().toISOString().split('T')[0]}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Return Date <span className="text-red-500">*</span>
-                </label>
-                <Input
-                  type="date"
-                  name="returnDate"
-                  value={invoiceData.returnDate}
-                  min={invoiceData.travelDate || new Date().toISOString().split('T')[0]}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Vehicle Type <span className="text-red-500">*</span>
-                </label>
-                <select
-                  name="vehicleType"
-                  value={invoiceData.vehicleType}
-                  onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-md shadow-sm p-2"
-                >
-                  <option value="">Select Vehicle</option>
-                  {vehicleTypes.map((type) => (
-                    <option key={type} value={type}>{type}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </div>
+{/* Trip Details */}
+<div className="mb-8">
+  <h3 className="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">Trip Details</h3>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        From <span className="text-red-500">*</span>
+      </label>
+      <input
+        type="text"
+        name="from"
+        value={invoiceData.from}
+        onChange={handleInputChange}
+        className="w-full border border-gray-300 rounded-md shadow-sm p-2"
+        placeholder="Enter departure location"
+      />
+    </div>
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        To <span className="text-red-500">*</span>
+      </label>
+      <input
+        type="text"
+        name="to"
+        value={invoiceData.to}
+        onChange={handleInputChange}
+        className="w-full border border-gray-300 rounded-md shadow-sm p-2"
+        placeholder="Enter destination location"
+      />
+    </div>
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        Travel Date <span className="text-red-500">*</span>
+      </label>
+      <Input
+        type="date"
+        name="travelDate"
+        value={invoiceData.travelDate}
+        min={new Date().toISOString().split('T')[0]}
+        onChange={handleInputChange}
+      />
+    </div>
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        Return Date <span className="text-red-500">*</span>
+      </label>
+      <Input
+        type="date"
+        name="returnDate"
+        value={invoiceData.returnDate}
+        min={invoiceData.travelDate || new Date().toISOString().split('T')[0]}
+        onChange={handleInputChange}
+      />
+    </div>
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        Vehicle Type <span className="text-red-500">*</span>
+      </label>
+      <select
+        name="vehicleType"
+        value={invoiceData.vehicleType}
+        onChange={handleInputChange}
+        className="w-full border border-gray-300 rounded-md shadow-sm p-2"
+      >
+        <option value="">Select Vehicle</option>
+        {vehicleTypes.map((type) => (
+          <option key={type} value={type}>{type}</option>
+        ))}
+      </select>
+    </div>
+  </div>
+</div>
+
 
           {/* Charges Section */}
           <div className="space-y-4 mb-6">
